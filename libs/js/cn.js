@@ -1,8 +1,8 @@
 $(function () {
     var cw = document.body.clientWidth;
     if ( cw < 356 ) return;
-    var maskEl = '<div class="mask"></div>';
-    var popEl = '<div class="pop">' +
+    var maskHtml = '<div class="mask"></div>';
+    var popHtml = '<div class="pop">' +
                 '<div class="pop-body">' +
                     '<div class="text"></div>' + 
                     '<table>' + 
@@ -21,5 +21,8 @@ $(function () {
                     '</table>'
                 '</div>' +
                 '</div>';
-    console.log(popEl);
+    var maskEl = $(maskHtml);
+    var popEl = $(popHtml);
+    maskEl.append(popEl);
+    $("body").append(maskEl);
 });
