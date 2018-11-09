@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<?php 
+$title = "Julia 下载";
+$keywords = "julia发行版下载,julia稳定版下载";
+$description = "julia发行版下载,julia稳定版下载";
+$active_menu = "downloads";
+require_once('../_common/head.html'); ?>
+<body>
+
+    <?php require_once('../_common/nav.html'); ?>
+
+    <br /><br />
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <h1>下载 Julia</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <p>
+                    如果你喜欢Julia，请帮助给予我们star，帮助我们<a href="https://github.com/JuliaLang/julia">在GitHub</a>上冲上榜首，并且帮我们扩散它！
+                    <br><br>
+                    <a class="github-button" href="https://github.com/JuliaLang/julia" data-size="large"
+                        data-show-count="true" aria-label="Star JuliaLang/julia on GitHub">Star</a>
+                </p>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                我们提供了几种运行Julia的方法：
+                <ul>
+                    <li> 在终端中使用内置的Julia命令行。</li>
+                    <li> 上<a href="https://www.juliabox.com">JuliaBox.com</a>网站，在浏览器中使用Jupyter笔记本。无需安装 -
+                        只需将浏览器地址栏指向该位置，登录并开始计算即可。</li>
+                    <li> <a href="http://juliacomputing.com/products/juliapro.html">JuliaPro</a>由<a href="http://juliacomputing.com/">Julia计算公司</a>提供，包括Julia和<a
+                            href="http://junolab.org/">Juno IDE</a>，以及用于绘图、优化、机器学习、数据库等的精选套件（需要注册）。</li>
+                </ul>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <h2>当前稳定发行版 (v1.0.1)</h2>
+                <table class="downloads table table-hover table-responsive table-bordered">
+                    <tbody>
+                        <tr>
+                            <th rowspan="2"> Windows可执行文件(.exe) <a href="platform.html#windows">[帮助]</a></th>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/winnt/x86/1.0/julia-1.0.1-win32.exe">32位程序</a>
+                            </td>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0.1-win64.exe">64位程序</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                Windows 7/Windows Server 2012用户还需要<a href="https://docs.microsoft.com/en-us/powershell/wmf/overview">Windows
+                                    Management Framework 3.0或更高版本</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> mac系统包(.dmg) <a href="platform.html#macos">[帮助]</a></th>
+                            <td colspan="6"> <a href="https://julialang-s3.julialang.org/bin/mac/x64/1.0/julia-1.0.1-mac64.dmg">10.8+
+                                    64位程序</a> </td>
+                        </tr>
+                        <tr>
+                            <th> 适用于x86的通用Linux二进制文件<a href="platform.html#generic-binaries">[帮助]</a></th>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/linux/x86/1.0/julia-1.0.1-linux-i686.tar.gz">32位程序</a>
+                                (<a href="https://julialang-s3.julialang.org/bin/linux/x86/1.0/julia-1.0.1-linux-i686.tar.gz.asc">GPG</a>)
+                            </td>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.1-linux-x86_64.tar.gz">64位程序</a>
+                                (<a href="https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.1-linux-x86_64.tar.gz.asc">GPG</a>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> ARM的通用Linux二进制文件<a href="platform.html#generic-binaries">[帮助]</a></th>
+                            <td colspan="6"> <a href="https://julialang-s3.julialang.org/bin/linux/armv7l/1.0/julia-1.0.0-linux-armv7l.tar.gz">32位程序
+                                    (ARMv7-a hard float)</a>
+                                (<a href="https://julialang-s3.julialang.org/bin/linux/armv7l/1.0/julia-1.0.0-linux-armv7l.tar.gz.asc">GPG</a>)
+                                注意：这是1.0.0下载。 我们目前在使用ARM基础架构时遇到问题，一旦新版本可用，此页面将会更新。
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> x86的通用FreeBSD二进制文件 <a href="platform.html#generic-binaries">[帮助]</a></th>
+                            <td colspan="6"> <a href="https://julialang-s3.julialang.org/bin/freebsd/x64/1.0/julia-1.0.1-freebsd-x86_64.tar.gz">64位程序</a>
+                                (<a href="https://julialang-s3.julialang.org/bin/freebsd/x64/1.0/julia-1.0.1-freebsd-x86_64.tar.gz.asc">GPG</a>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> 源码 </th>
+                            <td colspan="2"> <a href="https://github.com/JuliaLang/julia/releases/download/v1.0.1/julia-1.0.1.tar.gz">Tarball</a>
+                                (<a href="https://github.com/JuliaLang/julia/releases/download/v1.0.1/julia-1.0.1.tar.gz.asc">GPG</a>)
+                            </td>
+                            <td colspan="2"> <a href="https://github.com/JuliaLang/julia/releases/download/v1.0.1/julia-1.0.1-full.tar.gz">带依赖项的Tarball</a>
+                                (<a href="https://github.com/JuliaLang/julia/releases/download/v1.0.1/julia-1.0.1-full.tar.gz.asc">GPG</a>)
+                            </td>
+                            <td colspan="2"> <a href="https://github.com/JuliaLang/julia/tree/v1.0.1">GitHub</a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+
+                <p>
+                    如果您在安装Julia时遇到问题，请参阅<a href="/platform.html">平台特定说明</a>。 此版本的校验和有<a href="https://julialang-s3.julialang.org/bin/checksums/julia-1.0.1.md5">MD5</a>和<a
+                        href="https://julialang-s3.julialang.org/bin/checksums/julia-1.0.1.sha256">SHA256</a>格式。
+                </p>
+
+                <p>
+                    如果提供的下载文件不适合您，请在<a href="https://github.com/JuliaLang/julia/issues">Julia项目中提交问题</a>。
+                </p>
+
+                <p>
+                    您可能更想下载Julia
+                    v0.7.0版本，特别是作为现有的包作者或维护者，如下所示。版本1.0.0和0.7.0在很大程度上是等价的，主要区别在于0.7.0包含了针对以前版本和1.0.0版本之间更改的功能和行为的弃用警告。例如，调用弃用的方法将在0.7.0中发出警告，但在1.0.0中将导致(有意的)运行时错误。
+
+                    请注意：1.0.x版本可能包含0.7版本中没有修复的缺陷。
+                </p>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <h2>之前的稳定发行版 (v0.7.0)</h2>
+                <table class="downloads table table-hover table-responsive table-bordered">
+                    <tbody>
+                        <tr>
+                            <th rowspan="2"> Windows可执行文件(.exe) <a href="platform.html#windows">[帮助]</a></th>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/winnt/x86/0.7/julia-0.7.0-win32.exe">32位程序</a>
+                            </td>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/winnt/x64/0.7/julia-0.7.0-win64.exe">64位程序</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Windows 7/Windows Server 2012用户还需要
+                                <a href="https://docs.microsoft.com/en-us/powershell/wmf/overview">
+                                    Windows Management Framework 3.0或更高版本
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> mac系统包(.dmg) <a href="platform.html#macos">[帮助]</a></th>
+                            <td colspan="6"> <a href="https://julialang-s3.julialang.org/bin/mac/x64/0.7/julia-0.7.0-mac64.dmg">10.8+
+                                    64位程序</a> </td>
+                        </tr>
+                        <tr>
+                            <th> 适用于x86的通用Linux二进制文件 <a href="platform.html#generic-binaries">[帮助]</a></th>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/linux/x86/0.7/julia-0.7.0-linux-i686.tar.gz">32位程序</a>
+                                (<a href="https://julialang-s3.julialang.org/bin/linux/x86/0.7/julia-0.7.0-linux-i686.tar.gz.asc">GPG</a>)
+                            </td>
+                            <td colspan="3"> <a href="https://julialang-s3.julialang.org/bin/linux/x64/0.7/julia-0.7.0-linux-x86_64.tar.gz">64位程序</a>
+                                (<a href="https://julialang-s3.julialang.org/bin/linux/x64/0.7/julia-0.7.0-linux-x86_64.tar.gz.asc">GPG</a>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> x86的通用FreeBSD二进制文件 <a href="platform.html#generic-binaries">[帮助]</a></th>
+                            <td colspan="6"> <a href="https://julialang-s3.julialang.org/bin/freebsd/x64/0.7/julia-0.7.0-freebsd-x86_64.tar.gz">64位程序</a>
+                                (<a href="https://julialang-s3.julialang.org/bin/freebsd/x64/0.7/julia-0.7.0-freebsd-x86_64.tar.gz.asc">GPG</a>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> 源码 </th>
+                            <td colspan="2"> <a href="https://github.com/JuliaLang/julia/releases/download/v0.7.0/julia-0.7.0.tar.gz">Tarball</a>
+                                (<a href="https://github.com/JuliaLang/julia/releases/download/v0.7.0/julia-0.7.0.tar.gz.asc">GPG</a>)
+                            </td>
+                            <td colspan="2"> <a href="https://github.com/JuliaLang/julia/releases/download/v0.7.0/julia-0.7.0-full.tar.gz">带依赖项的Tarball</a>
+                                (<a href="https://github.com/JuliaLang/julia/releases/download/v0.7.0/julia-0.7.0-full.tar.gz.asc">GPG</a>)
+                            </td>
+                            <td colspan="2"> <a href="https://github.com/JuliaLang/julia/tree/v0.7.0">GitHub</a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <h2>更旧的发行版</h2>
+                <p>
+                    所有平台的旧版Julia都可以在<a href="oldreleases.html">旧版本页面</a>上找到。现在没有维护低于0.6的版本。
+                </p>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <h2>每日构建</h2>
+                <p>
+                    <a href="nightlies.html">每日页面</a>上提供了当前不稳定开发版Julia的每日构建版本。这些是开发人员为新的功能所开发的预览版本，不适合正常使用。建议大家使用上面的Julia的稳定发行版。
+                </p>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <h2>下载验证</h2>
+                <p>
+                    在每个操作系统平台上，使用传统方法对所有的Julia二进制版本进行加密保护。MacOS和Windows版本由证书共同设计，这些证书在安装之前由操作系统进行验证。一般的Linuxtarball和源tarball是通过GPG使用<a
+                        href="../juliareleases.asc">这个密钥</a>进行签名的。Ubuntu和Fedora/RHEL/CentOS/SL发行版由它们自己的密钥签名，这些密钥在安装时由包管理器验证。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <?php require_once('../_common/foot.html'); ?>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<?php
+$active_menu = isset($active_menu) ? $active_menu : '';
+?>
+<!-- main menu -->
+<div class="container py-3 py-lg-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+        <a class="navbar-brand" href="/" id="logo">
+            <img src="/libs/images/logo.svg" height="55" width="85" />
+        </a>
+        <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item <?=$active_menu=='downloads'?'active':''?> flex-md-fill text-md-center">
+                    <a class="nav-link" href="/downloads/">下载</a>
+                </li>
+                <li class="nav-item <?=$active_menu=='documentation'?'active':''?> flex-md-fill text-md-center">
+                    <a class="nav-link" href="https://docs.julialangcn.org/">中文教程文档</a>
+                </li>
+                <li class="nav-item <?=$active_menu=='blog'?'active':''?> flex-md-fill text-md-center">
+                    <a class="nav-link" href="/blog/">博客</a>
+                </li>
+                <li class="nav-item <?=$active_menu=='community'?'active':''?> flex-md-fill text-md-center">
+                    <a class="nav-link" href="/community/">社区</a>
+                </li>
+                <li class="nav-item <?=$active_menu=='learning'?'active':''?> flex-md-fill text-md-center">
+                    <a class="nav-link" href="/learning/">学习</a>
+                </li>
+                <li class="nav-item <?=$active_menu=='research'?'active':''?> flex-md-fill text-md-center">
+                    <a class="nav-link" href="/publications/">研究</a>
+                </li>
+                <li class="nav-item donate flex-md-fill text-md-center">
+                    <a class="btn btn-success" href="javascript:void(0);">打赏捐赠中文网</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- end main menu -->
