@@ -29,7 +29,10 @@ $(function () {
     maskEl.append(popEl);
     $("body").append(maskEl);
     $(closeEl).on("click", function() {
-        $(maskEl).remove();
+        popEl.removeClass("show");
+        setTimeout(function() {
+            $(maskEl).remove();
+        }, 400);
     });
     setTimeout(function() {
         popEl.addClass("show");
