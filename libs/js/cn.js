@@ -1,7 +1,8 @@
 $(function () {
     var cw = document.body.clientWidth;
     if ( cw < 356 ) return;
-    var maskHtml = '<div class="mask"><span class="close">×</span></div>';
+    var closeHtml = '<span class="close">×</span>';
+    var maskHtml = '<div class="mask"></div>';
     var popHtml = '<div class="pop">' +
                 '<div class="pop-body">' +
                     '<div class="text">中文资料维护不易，我国人工智能/数据科学的发展离不开你们的支持，你们的支持是我们的动力。</div>' + 
@@ -23,6 +24,7 @@ $(function () {
                 '</div>';
     var maskEl = $(maskHtml);
     var popEl = $(popHtml);
+    maskEl.append(closeHtml);
     maskEl.append(popEl);
     $("body").append(maskEl);
     setTimeout(function() {
