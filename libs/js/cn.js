@@ -27,7 +27,6 @@ $(function () {
     var closeEl = $(closeHtml);
     popEl.append(closeEl);
     maskEl.append(popEl);
-    $(".close").
     $(closeEl).on("click", function() {
         $(maskEl).remove();
     });
