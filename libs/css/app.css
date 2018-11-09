@@ -537,6 +537,7 @@ pre {
 .mask .close {
   position: absolute;
   top: 5px;
-  right: 5px;
-  font-size: 16px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: 300;
 }
