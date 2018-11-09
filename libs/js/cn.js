@@ -21,5 +21,5 @@ $(function () {
                     '</table>'
                 '</div>' +
                 '</div>';
-    console.log(pop);
+    console.log(popEl);
 });
