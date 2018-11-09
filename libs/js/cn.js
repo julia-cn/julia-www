@@ -24,6 +24,8 @@ $(function () {
     var maskEl = $(maskHtml);
     var popEl = $(popHtml);
     maskEl.append(popEl);
-    popEl.addClass("show");
     $("body").append(maskEl);
+    setTimeout(function() {
+        popEl.addClass("show");
+    }, 200);
 });
