@@ -24,10 +24,11 @@ $(function () {
                 '</div>';
     var maskEl = $(maskHtml);
     var popEl = $(popHtml);
-    popEl.append(closeHtml);
+    var closeEl = $(closeHtml);
+    popEl.append(closeEl);
     maskEl.append(popEl);
     $(".close").
-    $(popEl).find(".close").on("click", function() {
+    $(closeEl).on("click", function() {
         $(maskEl).remove();
     });
     setTimeout(function() {
