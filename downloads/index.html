@@ -51,6 +51,14 @@ require_once('../_common/head.html'); ?>
         <div class="row">
             <div class="col-12">
                 <h2>当前稳定发行版 (v1.0.1)</h2>
+                <p> 
+                    <a href="#0.7.0">
+                    如果从Julia 0.6.0过渡，强烈考虑使用过渡性Julia v0.7.0版本，而不是直接完全移动到v1.0.0。 版本1.0.0和0.7.0在很大程度上是等效的，主要区别在于0.7.0包括在先前版本和1.0.0之间更改的功能和行为的弃用警告。 例如，调用不推荐使用的方法将在0.7.0中发出警告，但会在1.0.0中导致MethodError，因为它们已被删除。 因此，即使在1.0中工作，也可以获得julia 0.7的副本，以便检查0.6方法已被弃用的内容。
+
+                    请注意，1.0.x版本包含0.7版本中没有的缺陷修复。
+                    </a>
+                </a>
+                </p>
                 <table class="downloads table table-hover table-responsive table-bordered">
                     <tbody>
                         <tr>
@@ -115,14 +123,7 @@ require_once('../_common/head.html'); ?>
                 </p>
 
                 <p>
-                    如果提供的下载文件不适合您，请在<a href="https://github.com/JuliaLang/julia/issues">Julia项目中提交问题</a>。
-                </p>
-
-                <p>
-                    您可能更想下载Julia
-                    v0.7.0版本，特别是作为现有的包作者或维护者，如下所示。版本1.0.0和0.7.0在很大程度上是等价的，主要区别在于0.7.0包含了针对以前版本和1.0.0版本之间更改的功能和行为的弃用警告。例如，调用弃用的方法将在0.7.0中发出警告，但在1.0.0中将导致(有意的)运行时错误。
-
-                    请注意：1.0.x版本可能包含0.7版本中没有修复的缺陷。
+                    如果提供的下载程序不适合您，请在<a href="https://github.com/JuliaLang/julia/issues">Julia项目中提交问题</a>。
                 </p>
             </div>
         </div>
