@@ -40,7 +40,7 @@ $(function () {
         }, 200);
     }
 
-    $("li.donate a").on("click", function() {
+    $("a.btn-donate").on("click", function() {
         showPop();
     });
 });
