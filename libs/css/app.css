@@ -524,6 +524,11 @@ pre {
   transform: translate(-50%, -50%);
 }
 
+.mask .pop .text {
+  font-size: 14px;
+  padding: 6px;
+}
+
 .mask .pop.show {
   opacity: 1;
 }

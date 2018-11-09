@@ -4,7 +4,7 @@ $(function () {
     var maskHtml = '<div class="mask"></div>';
     var popHtml = '<div class="pop">' +
                 '<div class="pop-body">' +
-                    '<div class="text"></div>' + 
+                    '<div class="text">中文资料维护不易，我国人工智能/数据科学的发展离不开你们的支持，你们的支持是我们的动力。</div>' + 
                     '<table>' + 
                         '<thead>' +
                             '<tr>' +
