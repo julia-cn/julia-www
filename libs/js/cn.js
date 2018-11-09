@@ -24,7 +24,7 @@ $(function () {
                 '</div>';
     var maskEl = $(maskHtml);
     var popEl = $(popHtml);
-    maskEl.append(closeHtml);
+    popEl.append(closeHtml);
     maskEl.append(popEl);
     $("body").append(maskEl);
     setTimeout(function() {
