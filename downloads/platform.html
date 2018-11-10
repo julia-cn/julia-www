@@ -20,7 +20,7 @@ require_once('../_common/head.html'); ?>
 
                 <br />
 
-                <h2>Windows 系统</h2>
+                <h2 id="windows">Windows 系统</h2>
                 <p>
                     Julia适用于32位和64位Windows 7及更高版本。
 
@@ -66,7 +66,7 @@ require_once('../_common/head.html'); ?>
                     从下载的.dmg安装Julia的替代方法是使用<a href="https://brew.sh/">Homebrew包管理器</a>。在您的终端中，运行
                     <pre>
                         <code class="bash">
-                            brew cask install julia
+    brew cask install julia
                         </code>
                     </pre>
                 </p>
@@ -95,7 +95,7 @@ require_once('../_common/head.html'); ?>
                     例如，要在 <code>/usr/local/bin</code> 文件夹中创建指向 <code>julia</code> 的符号链接，可以执行以下操作：
                     <pre>
                         <code class="bash">
-                            sudo ln -s <where you extracted the julia archive>/bin/julia /usr/local/bin/julia
+    sudo ln -s <where you extracted the julia archive>/bin/julia /usr/local/bin/julia
                         </code>
                     </pre>
                 </p>
@@ -131,8 +131,8 @@ require_once('../_common/head.html'); ?>
 
                     <pre>
                         <code class="bash">
-                            sudo dnf copr enable nalimilan/julia
-                            sudo yum install julia
+    sudo dnf copr enable nalimilan/julia
+    sudo yum install julia
                         </code>
                     </pre>
                 </p>
@@ -142,8 +142,8 @@ require_once('../_common/head.html'); ?>
 
                     <pre>
                         <code class="bash">
-                            sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/nalimilan/julia/repo/epel-7/nalimilan-julia-epel-7.repo
-                            sudo yum install julia
+    sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/nalimilan/julia/repo/epel-7/nalimilan-julia-epel-7.repo
+    sudo yum install julia
                         </code>
                     </pre>
                 </p>
@@ -172,58 +172,52 @@ require_once('../_common/head.html'); ?>
 
                     <pre>
                         <code class="bash">
-                            sudo dnf copr enable nalimilan/julia-nightlies
-                            sudo yum install julia
+    sudo dnf copr enable nalimilan/julia-nightlies
+    sudo yum install julia
                         </code>
                     </pre>
                 </p>
 
                 <p>
-                    If <code>dnf</code> is not available for your distribution, download the relevant <code>.repo</code>
-                    file from the Copr webpage, copy it to <code>/etc/yum.repos</code>, and run the second command.
+                    如果<code>dnf</code>不适用于您的发行版，请从Copr网页下载相关的<code>.repo</code>文件，将其复制到<code>/etc/yum.repos</code>，然后运行第二个命令。
                 </p>
 
                 <p>
-                    New versions are built every night. If you have already installed julia and you want to upgrade to
-                    the latest version, do:
+                    每晚都会构建新版本。如果您已经安装了julia并且想要升级到最新版本，请执行以下操作：
 
                     <pre>
-          <code class="bash">
+                        <code class="bash">
     sudo yum upgrade julia
-          </code>
-        </pre>
+                        </code>
+                    </pre>
                 </p>
 
                 <h3>FreeBSD Ports</h3>
                 <p>
-                    Julia is available in the <a href="https://svnweb.freebsd.org/ports/head/lang/julia/">Ports
-                        Collection</a>.<br />
-                    To install from the FreeBSD binary package manager, <code>pkg</code>, run
+                    Julia可在<a href="https://svnweb.freebsd.org/ports/head/lang/julia/">Ports Collection</a>中找到。
+                    <br />
+                    要从FreeBSD二进制包管理器安装，请运行<code>pkg</code>
                     <pre>
-          <code class="bash">
+                        <code class="bash">
     pkg install julia
-          </code>
-        </pre>
+                        </code>
+                    </pre>
                 </p>
 
                 <p>
-                    To build and install Julia from source within the Ports framework, run
+                    要在Ports框架内从源代码构建和安装Julia，请运行
                     <pre>
-          <code class="bash">
+                        <code class="bash">
     cd /usr/ports/lang/julia
     make clean
     make install
-          </code>
-        </pre>
+                        </code>
+                    </pre>
                 </p>
 
-                <h2>Uninstalling Julia</h2>
+                <h2>卸载Julia</h2>
                 <p>
-                    Uninstallation depends on the method you used to install Julia. If you installed from a package
-                    manager such as <code>apt-get</code> or <code>yum</code>, use the package manager to remove julia,
-                    for example <code>apt-get remove julia</code> or <code>yum remove julia</code>. If you did a source
-                    build, you can remove it by deleting your julia source folder.
-                    If you would also like to remove your preferences files, they are <code>~/.julia</code> and <code>~/.juliarc.jl</code>.
+                    卸载取决于您用于安装Julia的方法。 如果您从包管理器（如<code>apt-get</code>或<code>yum</code>）安装，请使用包管理器删除julia，例如<code>apt-get remove julia</code>或<code>yum remove julia</code>。如果您执行了源代码构建，则可以通过删除julia源文件夹来删除它。 如果您还想删除首选项文件，则它们是<code>~/.julia</code> 和 <code>~/.juliarc.jl</code>。
                 </p>
             </div>
         </div>
