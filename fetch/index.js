@@ -35,3 +35,14 @@ const main = async function() {
     }
 }
 main();
+
+/**
+
+let items = $(".col-lg-4.col-md-12.blog");
+$.each(items, function() {
+    let href = $(this).find("a").attr("href");
+    let newFileName = href.substring(6).split("/").join("-");
+    $(this).find("a").attr("href", "/blog/" + newFileName);
+});
+
+ */
