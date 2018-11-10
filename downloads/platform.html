@@ -16,208 +16,166 @@ require_once('../_common/head.html'); ?>
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Platform Specific Instructions</h1>
+                <h1>平台特定说明</h1>
 
                 <br />
 
-                <h2>Windows</h2>
+                <h2>Windows 系统</h2>
                 <p>
-                    Julia is available for Windows 7 and later, both 32 bit and 64 bit.
+                    Julia适用于32位和64位Windows 7及更高版本。
 
                     <ol>
-                        <li>Download the Windows julia.exe installer for your platform. 32-bit julia works on both x86
-                            and x86_64. 64-bit julia will only run on 64-bit Windows (x86_64).
-                        <li>Run the downloaded program to extract julia
-                        <li>Double-click the julia shortcut in the unpacked folder to start julia
+                        <li>下载适用于您的平台的Windows julia.exe安装程序。32位julia适用于x86和x86_64。64位julia只能在64位Windows（x86_64）上运行。</li>
+                        <li>运行下载的程序以解压缩julia。 </li>
+                        <li>双击解压缩文件夹中的julia快捷方式以启动julia。 </li>
                     </ol>
                 </p>
 
                 <p>
-                    Windows 7/Windows Server 2012 users will also need to install:
+                    Windows 7 / Windows Server 2012用户还需要安装：
                     <ul>
-                        <li>the <a href="https://support.microsoft.com/en-us/help/3140245/update-to-enable-tls-1-1-and-tls-1-2-as-a-default-secure-protocols-in">TLS
-                                easy_fix</a> for the package manager to work,
-                            see <a href="https://discourse.julialang.org/t/errors-for-git-pkg/9351">this Discourse
-                                thread</a> for more details.
-                        <li><a href="https://docs.microsoft.com/en-us/powershell/wmf/overview">Windows Management
-                                Framework 3.0 or later</a> to include PowerShell 3.0 or later.
+                        <li>
+                            他将 <a href="https://support.microsoft.com/en-us/help/3140245/update-to-enable-tls-1-1-and-tls-1-2-as-a-default-secure-protocols-in">TLS easy_fix</a> 用于包管理器，有关详细信息，请参阅此<a href="https://support.microsoft.com/en-us/help/3140245/update-to-enable-tls-1-1-and-tls-1-2-as-a-default-secure-protocols-in">Discourse主题</a>。
+                        </li>
+                        <li>
+                            <a href="https://docs.microsoft.com/en-us/powershell/wmf/overview"> Windows Management Framework 3.0或更高版本</a> ，包括PowerShell 3.0或更高版本。
+                        </li>
                     </ul>
                 </p>
 
                 <p>
-                    The <a href="https://github.com/JuliaLang/julia/blob/master/README.windows.md">Windows README</a>
-                    contains information on dependencies.
+                    <a href="https://github.com/JuliaLang/julia/blob/master/README.windows.md">Windows自述文件</a>包含有关的依赖项的信息。
                 </p>
 
                 <p>
-                    Uninstallation is performed by deleting the extracted directory and the packages directory in <code>%HOME%/.julia</code>.
-                    If you would also like to remove your preferences files, remove <code>%HOME%/.juliarc.jl</code> and
-                    <code>%HOME%/.julia_history</code>.
+                    通过删除 <code>％HOME％/.julia</code> 中提取的目录和packages目录来执行卸载。如果您还想删除首选项文件，请删除 <code>％HOME％/.juliarc.jl</code> 和 <code>％HOME％/.julia_history</code>。
                 </p>
 
                 <br />
 
-                <h2>macOS</h2>
+                <h2>macOS 系统</h2>
                 <p>
-                    On Mac, a <code>Julia-&lt;version&gt;.dmg</code> file is provided, which contains Julia.app.
-                    Installation is the same as any other Mac software --
-                    copy the <code>Julia-&lt;version&gt;.app</code> to your hard-drive (anywhere) or run from the disk
-                    image. Julia runs on macOS 10.8 and later releases.
+                    在Mac上，提供了<code>Julia-&lt;version&gt;.dmg</code>文件，其中包含Julia.app。安装与任何其他Mac软件相同 - 将<code>Julia-&lt;version&gt;.app</code>复制到硬盘驱动器（任何位置）或从磁盘映像运行。Julia在macOS 10.8和更高版本上运行。
                 </p>
 
                 <p>
-                    Uninstall Julia by deleting Julia.app and the packages directory in <code>~/.julia</code>. Multiple
-                    Julia.app binaries can co-exist without interfering with each other.
-                    If you would also like to remove your preferences files, remove <code>~/.juliarc.jl</code>.
+                    通过删除 <code>~/.julia</code> 中的Julia.app和packages目录来卸载Julia。多个Julia.app二进制文件可以共存而不会相互干扰。如果您还想删除首选项文件，请删除<code>~/.juliarc.jl</code>。
                 </p>
 
                 <p>
-                    An alternative to installing Julia from the downloaded .dmg is by using the <a href="https://brew.sh/">Homebrew
-                        package manager</a>.
-                    In your terminal, run
-
+                    从下载的.dmg安装Julia的替代方法是使用<a href="https://brew.sh/">Homebrew包管理器</a>。在您的终端中，运行
                     <pre>
-          <code class="bash">
-    brew cask install julia
-          </code>
-        </pre>
+                        <code class="bash">
+                            brew cask install julia
+                        </code>
+                    </pre>
                 </p>
 
                 <br />
 
-                <h2>Linux and FreeBSD</h2>
+                <h2>Linux 和 FreeBSD 系统</h2>
                 <p>
-                    It is strongly recommended that the official generic binaries from the downloads page be used to
-                    install Julia on Linux and FreeBSD.
+                    强烈建议使用下载页面中的官方通用二进制文件在Linux和FreeBSD上安装Julia。
                 </p>
 
                 <br />
 
-                <h3>Generic Binaries</h3>
+                <h3>通用二进制文件</h3>
                 <p>
-                    The generic Linux and FreeBSD binaries do not require any special installation steps, but you will
-                    need to ensure that your system can find
-                    the <code>julia</code> executable. First, extract the <code>.tar.gz</code> file downloaded from the
-                    <a href="index.html">downloads page</a> to a folder on your computer.
-                    To run Julia, you can do any of the following:
+                    通用Linux和FreeBSD二进制文件不需要任何特殊的安装步骤，但您需要确保您的系统可以找到<code>julia</code>可执行文件。首先，将从<a href="index.html">下载页面</a>下载的<code>.tar.gz</code>文件解压缩到计算机上的文件夹中。要运行Julia，您可以执行以下任何操作：
 
                     <ul>
-                        <li>Create a symbolic link to <code>julia</code> inside a folder which is on your system <code>PATH</code>
-                        <li>Add Julia's <code>bin</code> folder to your system <code>PATH</code> environment variable
-                        <li>Invoke the <code>julia</code> executable by using its full path, as in <code><where you extracted Julia>/bin/julia</code>
+                        <li>在系统<code>PATH</code>上的文件夹中创建指向<code>julia</code>的符号链接。</li>
+                        <li>将Julia的<code>bin</code>文件夹添加到系统<code>PATH</code>环境变量中。</li>
+                        <li>使用其完整路径调用<code>julia</code>可执行文件，如 <code>/bin/julia</code>。 </li>
                     </ul>
                 </p>
 
                 <p>
-                    For example, to create a symbolic link to <code>julia</code> inside the <code>/usr/local/bin</code>
-                    folder, you can do the following:
-
+                    例如，要在 <code>/usr/local/bin</code> 文件夹中创建指向 <code>julia</code> 的符号链接，可以执行以下操作：
                     <pre>
-          <code class="bash">
-    sudo ln -s <where you extracted the julia archive>/bin/julia /usr/local/bin/julia
-          </code>
-        </pre>
+                        <code class="bash">
+                            sudo ln -s <where you extracted the julia archive>/bin/julia /usr/local/bin/julia
+                        </code>
+                    </pre>
                 </p>
 
                 <p>
-                    On some Linux distributions, you may need to use a folder other than <code>/usr/local/bin</code>.
-                    To check which folders are on your <code>PATH</code>, you can run <code>echo $PATH</code>.
+                    在某些Linux发行版上，您可能需要使用 <code>/usr/local/bin</code> 以外的文件夹。要检查<code>PATH</code>上的文件夹，可以运行<code>echo $PATH</code>。
                 </p>
 
                 <br />
 
-                <h3>Distribution-Specific Packages</h3>
+                <h3>特俗的分发包</h3>
                 <p>
-                    The following distribution-specific packages are community contributed. They may not use the right
-                    versions of Julia dependencies or include important patches that the official binaries ship with.
-                    In general, bug reports will only be accepted if they are reproducible on the official generic
-                    binaries on the downloads page.
+                    以下特定于发行版的包是社区贡献的。他们可能不会使用正确版本的Julia依赖项，也不会包含官方二进制文件附带的重要补丁。 通常，只有在下载页面上的官方通用二进制文件中可以重现错误报告时，才会接受错误报告。
                 </p>
 
                 <p>
-                    Instructions will be added here as more linux distributions start including julia. If your Linux
-                    distribution is not listed here, you should still be able to run julia by building from source.
-                    See the <a href="https://github.com/JuliaLang/julia/blob/master/README.md">Julia README</a> for
-                    more detailed information.
+                    随着更多的Linux发行版开始内置julia，这里将作出说明。如果此处没有列出您的Linux发行版，您仍然可以通过从源代码构建来运行julia。有关更多详细信息，请参阅<a href="https://github.com/JuliaLang/julia/blob/master/README.md">Julia README</a>。
                 </p>
 
                 <br />
 
                 <h3>Fedora/RHEL/CentOS/SL/OEL</h3>
                 <p>
-                    A <a href="https://copr.fedoraproject.org/coprs/nalimilan/julia/">Copr repository</a> is provided
-                    for Fedora, RHEL, CentOS, Scientific Linux and Oracle Enterprise Linux systems to allow for
-                    automatic
-                    updating to the latest stable version of Julia.
+                    为Fedora，RHEL，CentOS，Scientific Linux 和 Oracle Enterprise Linux 系统提供了<a href="https://copr.fedoraproject.org/coprs/nalimilan/julia/">Copr存储库</a>，以允许自动更新到最新的稳定版Julia。
                 </p>
 
                 <p>
-                    If you are using RHEL, CentOS, Scientific Linux or Oracle Enterprise Linux (version 5 or higher),
-                    first <a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F">enable
-                        EPEL</a> for your distribution version. Then follow the steps below.
+                    如果您使用的是RHEL，CentOS，Scientific Linux或Oracle Enterprise Linux（版本5或更高版本），请首先为您的分发版本<a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F">启用EPEL</a>。然后按照以下步骤操作。
                 </p>
 
                 <p>
-                    If you are using Fedora (version 19 or higher), directly run:
+                    如果您使用的是Fedora（版本19或更高版本），请直接运行：
 
                     <pre>
-          <code class="bash">
-    sudo dnf copr enable nalimilan/julia
-    sudo yum install julia
-          </code>
-        </pre>
+                        <code class="bash">
+                            sudo dnf copr enable nalimilan/julia
+                            sudo yum install julia
+                        </code>
+                    </pre>
                 </p>
 
                 <p>
-                    If you are using CentOS (version 7 or higher), directly run:
+                    如果您使用的是CentOS（版本7或更高版本），请直接运行：
 
                     <pre>
-          <code class="bash">
-    sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/nalimilan/julia/repo/epel-7/nalimilan-julia-epel-7.repo
-    sudo yum install julia
-          </code>
-        </pre>
+                        <code class="bash">
+                            sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/nalimilan/julia/repo/epel-7/nalimilan-julia-epel-7.repo
+                            sudo yum install julia
+                        </code>
+                    </pre>
                 </p>
 
                 <p>
-                    If both <code>dnf</code> and <code>yum-config-manager</code> are not available for your
-                    distribution, download the relevant <code>.repo</code> file from the Copr webpage, copy it to <code>/etc/yum.repos</code>,
-                    and run the second command.
+                    如果<code>dnf</code>和<code>yum-config-manager</code>都不适用于您的发行版，请从Copr网页下载相关的<code>.repo</code>文件，将其复制到<code>/etc/yum.repos</code>，然后运行第二个命令。
                 </p>
 
                 <p>
-                    Note that Fedora guidelines advise against uploading new breaking releases to official
-                    repositories: therefore your distribution will not provide the new major versions of Julia which
-                    were published after it.
-                    When reporting issues, please ensure you are using the latest available release by using one of the
-                    Copr repositories displayed on this page.
+                    请注意，Fedora指南建议不要将新的发布版本上传到官方存储库：因此，您的发行版不会提供随后发布的新主要版本的Julia。报告问题时，请确保使用此页面上显示的其中一个Copr存储库来使用最新的可用版本。
                 </p>
 
                 <br />
 
-                <h3>Fedora/RHEL/CentOS/SL/OEL nightlies installation instructions</h3>
+                <h3>Fedora/RHEL/CentOS/SL/OEL nightlies 版本安装说明</h3>
                 <p>
-                    A <a href="https://copr.fedoraproject.org/coprs/nalimilan/julia-nightlies/">Copr repository</a> is
-                    provided for Fedora, RHEL, CentOS, Scientific Linux and Oracle Enterprise Linux systems to allow
-                    for
-                    automatic updating to the latest development version of Julia.
+                    为Fedora，RHEL，CentOS，Scientific Linux和Oracle Enterprise Linux系统提供了<a href="https://copr.fedoraproject.org/coprs/nalimilan/julia-nightlies/">Copr存储库</a>，以允许自动更新到Julia的最新开发版本。
                 </p>
 
                 <p>
-                    If you are using RHEL, CentOS, Scientific Linux or Oracle Enterprise Linux (version 5 or higher),
-                    first <a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F">enable
-                        EPEL</a> for your distribution version. Then follow the steps below.
+                    如果您使用的是RHEL，CentOS，Scientific Linux或Oracle Enterprise Linux（版本5或更高版本），请首先为您的分发版本<a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F">启用EPEL</a>。然后按照以下步骤操作。
                 </p>
 
                 <p>
-                    If you are using Fedora (version 19 or higher), directly run:
+                    如果您使用的是Fedora（版本19或更高版本），请直接运行：
 
                     <pre>
-          <code class="bash">
-    sudo dnf copr enable nalimilan/julia-nightlies
-    sudo yum install julia
-          </code>
-        </pre>
+                        <code class="bash">
+                            sudo dnf copr enable nalimilan/julia-nightlies
+                            sudo yum install julia
+                        </code>
+                    </pre>
                 </p>
 
                 <p>
