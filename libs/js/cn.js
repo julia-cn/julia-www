@@ -10,8 +10,8 @@ $(function () {
                         '<table>' + 
                             '<thead>' +
                                 '<tr>' +
-                                    '<th style="text-align: center;border: 1px solid #404c58;background: #fff;">支付宝</th>' +
                                     '<th style="text-align: center;border: 1px solid #404c58;background: #fff;">微信</th>' +
+                                    '<th style="text-align: center;border: 1px solid #404c58;background: #fff;">支付宝</th>' +
                                 '</tr>' +
                             '</thead>' +
                             '<tbody>' +
