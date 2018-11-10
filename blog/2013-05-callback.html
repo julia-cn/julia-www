@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Passing Julia Callback Functions to C</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "Passing Julia Callback Functions to C";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">10 May 2013</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author"><a href="http://math.mit.edu/~stevenj">Steven G. Johnson</a></span>
     
   </p>
@@ -141,7 +87,7 @@ function that works for some arbitrary type <code class="highlighter-rouge">T</c
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function mycompare{T}(a_::Ptr{T}, b_::Ptr{T})
     a = unsafe_load(a_)
     b = unsafe_load(b_)
-    return a &lt; b ? cint(-1) : a &gt; b ? cint(+1) : cint(0)
+    return a < b ? cint(-1) : a > b ? cint(+1) : cint(0)
 end
 cint(n) = convert(Cint, n)
 </code></pre></div></div>
@@ -206,7 +152,7 @@ C routines, it won’t be long before you discover that <code class="highlighter
 always work.  For example, suppose we tried to declare our comparison
 function inline, via:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mycomp = cfunction((a_,b_) -&gt; unsafe_load(a_) &lt; unsafe_load(b_) ?
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mycomp = cfunction((a_,b_) -> unsafe_load(a_) < unsafe_load(b_) ?
                               cint(-1) : cint(+1),
                    Cint, (Ptr{Cdouble}, Ptr{Cdouble}))
 </code></pre></div></div>
@@ -214,7 +160,7 @@ function inline, via:</p>
 <p>Julia barfs on this, printing <code class="highlighter-rouge">ERROR: function is not yet c-callable</code>.  In
 general, <code class="highlighter-rouge">cfunction</code> only works for “top-level” functions: named
 functions defined in the top-level (global or module) scope, but <em>not</em>
-anonymous (<code class="highlighter-rouge">args -&gt; value</code>) functions and not functions defined within
+anonymous (<code class="highlighter-rouge">args -> value</code>) functions and not functions defined within
 other functions (“nested” functions).  The reason for this stems from
 one important concept in computer science: a
 <a href="http://en.wikipedia.org/wiki/Closure_%28computer_science%29">closure</a>.</p>
@@ -238,8 +184,8 @@ pointers, <code class="highlighter-rouge">Cint</code>, and so on.  We might <em>
 end
 </code></pre></div></div>
 
-<p>Then we could simply call <code class="highlighter-rouge">qsort!([1.3, -2.7, 4.4, 3.1], &lt;)</code> to sort
-in ascending order using the built-in <code class="highlighter-rouge">&lt;</code> comparison, or any other
+<p>Then we could simply call <code class="highlighter-rouge">qsort!([1.3, -2.7, 4.4, 3.1], <)</code> to sort
+in ascending order using the built-in <code class="highlighter-rouge"><</code> comparison, or any other
 comparison function we wanted.  Unfortunately <code class="highlighter-rouge">cfunction</code> will again
 barf when you try to call <code class="highlighter-rouge">qsort!</code>, and it is no longer so difficult
 to understand why.  Notice that the nested <code class="highlighter-rouge">mycompare</code> function is no
@@ -336,7 +282,7 @@ argument:</p>
     return lessthan(a, b) ? cint(-1) : cint(+1)
 end
 
-function qsort!{T}(A::Vector{T}, lessthan::Function=&lt;)
+function qsort!{T}(A::Vector{T}, lessthan::Function=<)
     compare_c = cfunction(qsort!_compare, Cint, (Ptr{Void}, Ptr{T}, Ptr{T}))
     ccall(:qsort_r, Void, (Ptr{T}, Csize_t, Csize_t, Any, Ptr{Void}),
           A, length(A), sizeof(T), lessthan, compare_c)
@@ -350,13 +296,13 @@ sorted (rather than once per call to <code class="highlighter-rouge">qsort!</cod
 function).  We use the explicit <code class="highlighter-rouge">::Function</code> assertion to tell
 the compiler that we will only pass <code class="highlighter-rouge">Function</code> pointers in
 <code class="highlighter-rouge">lessthan_</code>. Note that we gave the <code class="highlighter-rouge">lessthan</code> argument a default value
-of <code class="highlighter-rouge">&lt;</code> (default arguments being a <a href="https://github.com/JuliaLang/julia/issues/1817">recent
+of <code class="highlighter-rouge"><</code> (default arguments being a <a href="https://github.com/JuliaLang/julia/issues/1817">recent
 feature</a> added to
 Julia).</p>
 
 <p>We can now do <code class="highlighter-rouge">qsort!([1.3, -2.7, 4.4, 3.1])</code> and it will
 return the array sorted in ascending order, or <code class="highlighter-rouge">qsort!([1.3, -2.7,
-4.4, 3.1], &gt;)</code> to sort in descending order.</p>
+4.4, 3.1], >)</code> to sort in descending order.</p>
 
 <h4 id="warning-qsort_r-is-not-portable">Warning: <code class="highlighter-rouge">qsort_r</code> is not portable</h4>
 
@@ -391,7 +337,7 @@ GNU/Linux systems should be:</p>
     return lessthan(a, b) ? cint(-1) : cint(+1)
 end
 
-function qsort!{T}(A::Vector{T}, lessthan::Function=&lt;)
+function qsort!{T}(A::Vector{T}, lessthan::Function=<)
     compare_c = cfunction(qsort!_compare, Cint, (Ptr{T}, Ptr{T}, Ptr{Void}))
     ccall(:qsort_r, Void, (Ptr{T}, Csize_t, Csize_t, Ptr{Void}, Any),
           A, length(A), sizeof(T), compare_c, lessthan)
@@ -470,13 +416,13 @@ routines in a wrapper function <code class="highlighter-rouge">gsl_integration_q
     ccall((:gsl_integration_qag,:libgsl), Cint,
           (Ptr{GSL_Function}, Cdouble,Cdouble, Cdouble, Csize_t, Cint, Ptr{Void},
            Ptr{Cdouble}, Ptr{Cdouble}),
-          &amp;GSL_Function(f), a, b, epsrel, maxintervals, 1, s, result, abserr)
+          &GSL_Function(f), a, b, epsrel, maxintervals, 1, s, result, abserr)
     ccall((:gsl_integration_workspace_free,:libgsl), Void, (Ptr{Void},), s)
     return (result[1], abserr[1])
 end
 </code></pre></div></div>
 
-<p>Note that <code class="highlighter-rouge">&amp;GSL_Function(f)</code> passes a pointer to a <code class="highlighter-rouge">GSL_Function</code>
+<p>Note that <code class="highlighter-rouge">&GSL_Function(f)</code> passes a pointer to a <code class="highlighter-rouge">GSL_Function</code>
 “struct” containing a pointer to <code class="highlighter-rouge">gsl_function_wrap_c</code> and <code class="highlighter-rouge">f</code>, corresponding
 to the <code class="highlighter-rouge">gsl_function*</code> argument in C.  The return value is a tuple of the estimated
 integral and an estimated error.</p>
@@ -521,7 +467,7 @@ reference to the Julia function, like this:</p>
     function GSL_Minimizer(t)
        m = ccall((:gsl_min_fminimizer_alloc,:libgsl), Ptr{Void}, (Ptr{Void},), t)
        p = new(m, nothing)
-       finalizer(p, p -&gt; ccall((:gsl_min_fminimizer_free,:libgsl),
+       finalizer(p, p -> ccall((:gsl_min_fminimizer_free,:libgsl),
                                Void, (Ptr{Void},), p.m))
        p
     end
@@ -551,7 +497,7 @@ using the <code class="highlighter-rouge">GSL_Function</code> type defined above
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function gsl_minimizer_set!(m::GSL_Minimizer, f, x0, xmin, xmax)
     ccall((:gsl_min_fminimizer_set,:libgsl), Cint,
           (Ptr{Void}, Ptr{GSL_Function}, Cdouble, Cdouble, Cdouble),
-          m.m, &amp;GSL_Function(f), x0, xmin, xmax)
+          m.m, &GSL_Function(f), x0, xmin, xmax)
     m.f = f
     m
 end
@@ -580,7 +526,7 @@ the interval [-3,1], with a starting guess -1, via:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m = GSL_Minimizer()
 gsl_minimizer_set!(m, sin, -1, -3, 1)
-while gsl_minimizer_xmax(m) - gsl_minimizer_xmin(m) &gt; 1e-6
+while gsl_minimizer_xmax(m) - gsl_minimizer_xmin(m) > 1e-6
     println("iterating at x = $(gsl_minimizer_x(m))")
     gsl_minimizer_iterate!(m)
 end
@@ -622,120 +568,10 @@ building on the above techniques.</p>
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

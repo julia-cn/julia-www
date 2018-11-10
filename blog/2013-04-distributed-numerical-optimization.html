@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Distributed Numerical Optimization</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "Distributed Numerical Optimization";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">05 Apr 2013</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author">
       
         <a href="http://www.mit.edu/~mlubin/">Miles Lubin</a>
@@ -163,7 +109,7 @@ often the case with cloud computing.</p>
 issue. The key point is</p>
 
 <ul>
-  <li>When proportion \(0 &lt; \alpha \le 1 \) of subproblems for a given candidate
+  <li>When proportion \(0 < \alpha \le 1 \) of subproblems for a given candidate
 have been solved, generate a new candidate and corresponding set of
 subproblems by using whatever information is presently available.</li>
 </ul>
@@ -208,7 +154,7 @@ this post. Instead, we’ll dig into and extend one of the examples it presents.
                 @spawnlocal begin
                     while true
                         idx = next_idx()
-                        if idx &gt; n
+                        if idx > n
                             break
                         end
                         results[idx] = remotecall_fetch(p, f, lst[idx])
@@ -235,7 +181,7 @@ poll for results from each worker process.</em></p>
 <p>Implementing our asynchronous algorithm is not much more than a modification of
 the above code:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># given constants n and 0 &lt; alpha &lt;= 1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># given constants n and 0 < alpha <= 1
 # functions initialize and solvesubproblem defined elsewhere
 np = nprocs()
 state, subproblems = initialize()
@@ -246,7 +192,7 @@ function updatemodel(mysubproblem, result)
     ...
     # decide whether to generate new subproblems
     state.numback[mysubproblem.parent] += 1
-    if state.numback[mysubproblem.parent] &gt;= alpha*n &amp;&amp; !state.didtrigger[mysubproblem.parent]
+    if state.numback[mysubproblem.parent] >= alpha*n && !state.didtrigger[mysubproblem.parent]
         state.didtrigger[mysubproblem.parent] = true
         # generate newsubproblems by solving linear optimization problem
         ...
@@ -334,7 +280,7 @@ additional refinement which was not described above). Results from various runs
 are presented in the table below.</p>
 
 <table style="text-align:right;margin-left:auto;margin-right:auto" cellspacing="5">
-<tr style="text-align:center">
+<tbody><tr style="text-align:center">
 	<td> </td>
 	<td colspan="2" style="border-bottom-style:solid;border-bottom-width:2px">Synchronous</td>
 	<td colspan="2" style="border-bottom-style:solid;border-bottom-width:2px">Asynchronous</td>
@@ -343,9 +289,9 @@ are presented in the table below.</p>
 	<td style="border-bottom-style:solid;border-bottom-width:2px">No. Workers</td>
 	<td style="border-bottom-style:solid;border-bottom-width:2px">Speed</td>
 	<td style="border-bottom-style:solid;border-bottom-width:2px">Efficiency
-	<td style="border-bottom-style:solid;border-bottom-width:2px">Speed</td>
+	</td><td style="border-bottom-style:solid;border-bottom-width:2px">Speed</td>
 	<td style="border-bottom-style:solid;border-bottom-width:2px">Efficiency
-</td></td></tr>
+</td></tr>
 <tr>
 	<td style="text-align:center">10</td>
 	<td>154</td>
@@ -374,7 +320,7 @@ are presented in the table below.</p>
 	<td>918</td>
 	<td>92%</td>
 </tr>
-</table>
+</tbody></table>
 
 <p class="caption" style="text-align:center"><b>Table:</b>
 Results on a shared-memory 8x Xeon E7-8850 server. Workers correspond to
@@ -398,7 +344,7 @@ m3.xlarge instance for the master and m1.medium instances for the workers.
 through the <code class="highlighter-rouge">--machinefile</code> option. We can generate this easily enough by
 using the EC2 API Tools (Ubuntu package <code class="highlighter-rouge">ec2-api-tools</code>) with the command</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ec2-describe-instances | grep running | awk '{ print $5; }' &gt; mfile
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ec2-describe-instances | grep running | awk '{ print $5; }' > mfile
 </code></pre></div></div>
 
 <p>On the master instance we can then run</p>
@@ -409,7 +355,7 @@ using the EC2 API Tools (Ubuntu package <code class="highlighter-rouge">ec2-api-
 <p>Results from various runs are presented in the table below.</p>
 
 <table style="text-align:right;margin-left:auto;margin-right:auto" cellspacing="5">
-<tr style="text-align:center">
+<tbody><tr style="text-align:center">
 	<td> </td>
 	<td colspan="2" style="border-bottom-style:solid;border-bottom-width:2px">Synchronous</td>
 	<td colspan="2" style="border-bottom-style:solid;border-bottom-width:2px">Asynchronous</td>
@@ -418,9 +364,9 @@ using the EC2 API Tools (Ubuntu package <code class="highlighter-rouge">ec2-api-
 	<td style="border-bottom-style:solid;border-bottom-width:2px">No. Workers</td>
 	<td style="border-bottom-style:solid;border-bottom-width:2px">Speed</td>
 	<td style="border-bottom-style:solid;border-bottom-width:2px">Efficiency
-	<td style="border-bottom-style:solid;border-bottom-width:2px">Speed</td>
+	</td><td style="border-bottom-style:solid;border-bottom-width:2px">Speed</td>
 	<td style="border-bottom-style:solid;border-bottom-width:2px">Efficiency
-</td></td></tr>
+</td></tr>
 <tr>
 	<td style="text-align:center">10</td>
 	<td>149</td>
@@ -442,7 +388,7 @@ using the EC2 API Tools (Ubuntu package <code class="highlighter-rouge">ec2-api-
 	<td>602</td>
 	<td>99.5%</td>
 </tr>
-</table>
+</tbody></table>
 
 <p class="caption" style="text-align:center"><b>Table:</b>
 Results on Amazon EC2. Workers correspond to individual m1.medium instances. The
@@ -460,7 +406,7 @@ architecture. Anyway, with Julia we can easily experiment on both.</p>
 <p>A more detailed <a href="https://github.com/JuliaLang/julia-tutorial/blob/master/NumericalOptimization/tutorial.pdf?raw=true">tutorial</a>
 was prepared for the Julia <a href="https://github.com/JuliaLang/julia-tutorial">IAP session</a> at MIT in January 2013.</p>
 
-<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Distributed Numerical Optimization</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Miles Lubin</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Distributed Numerical Optimization</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Miles Lubin</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 
 
 </div>
@@ -471,120 +417,10 @@ was prepared for the Julia <a href="https://github.com/JuliaLang/julia-tutorial"
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

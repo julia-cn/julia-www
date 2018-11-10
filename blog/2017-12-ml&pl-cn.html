@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>机器学习与编程语言 (Simplified Chinese)</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "机器学习与编程语言 (Simplified Chinese)";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -118,7 +64,7 @@
 
 <p>话虽如此，有一个小问题不能忽略。卓有成效的优化依赖于能够简化问题的假设（机器学习模型里不会出现递归，也不需要自定义梯度，对吧？）。正是这些假设使得模型的优化更简单，也更易于部署到小型设备上。可惜研究员们沉醉于破坏这些假设的乐趣中，工程师们面对的模型也越来越复杂。一个模型现在会用到条件分支（不算什么，小菜一碟），循环（不怎么容易，但应该可以搞定），甚至<a href="https://arxiv.org/pdf/1503.00075.pdf">树的递归</a>（好吧，基本上做不到）。 在机器学习的很多分支中，包括<a href="https://blog.keras.io/the-future-of-deep-learning.html">神经网络</a>和<a href="https://eng.uber.com/pyro/">概率编程</a>，模型越来越像程序：有些模型可以推导<em>其它</em>程序（例如<a href="https://arxiv.org/pdf/1705.03633.pdf">程序生成器</a>和<a href="https://arxiv.org/abs/1605.06640">解释器</a>）；有些则包括像蒙特卡罗树搜索这样的不可导组件。在保证最高性能的同时提供充分的灵活性，这对运行时的构建提出了极高的挑战，然而两者的兼顾却是最强大的模型和突破性的成果所越来越倚重的。</p>
 
-<p><img src="/images/sentiment-treebank.png" /></p>
+<p><img src="/images/sentiment-treebank.png"></p>
 <div class="desc">
   用机器学习处理复杂的树结构数据，如<a href="https://nlp.stanford.edu/sentiment/treebank.html">斯坦福情绪树库</a>，用到了可微的，递归的算法。
 </div>
@@ -154,7 +100,7 @@
 
 <div style="text-align:center">
 <a href="https://xkcd.com/1838/">
-<img height="350px" src="https://imgs.xkcd.com/comics/machine_learning_2x.png" />
+<img height="350px" src="https://imgs.xkcd.com/comics/machine_learning_2x.png">
 </a>
 </div>
 <div class="desc">
@@ -175,19 +121,19 @@
 <div class="footnotes">
   <ol>
     <li id="fn:greenspun">
-      <p>引申自 <a href="https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule">Philip Greenspun</a> <a href="#fnref:greenspun" class="reversefootnote">&#8617;</a></p>
+      <p>引申自 <a href="https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule">Philip Greenspun</a> <a href="#fnref:greenspun" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:tf">
-      <p>本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。 <a href="#fnref:tf" class="reversefootnote">&#8617;</a></p>
+      <p>本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。 <a href="#fnref:tf" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:ast">
-      <p>TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。 <a href="#fnref:ast" class="reversefootnote">&#8617;</a></p>
+      <p>TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。 <a href="#fnref:ast" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:types">
-      <p>不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。 <a href="#fnref:types" class="reversefootnote">&#8617;</a></p>
+      <p>不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。 <a href="#fnref:types" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:chris">
-      <p>一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 <a href="https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/">Chris Lattner</a>。 <a href="#fnref:chris" class="reversefootnote">&#8617;</a></p>
+      <p>一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 <a href="https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/">Chris Lattner</a>。 <a href="#fnref:chris" class="reversefootnote">↩</a></p>
     </li>
   </ol>
 </div>
@@ -201,120 +147,10 @@
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

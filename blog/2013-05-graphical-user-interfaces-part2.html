@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Building GUIs with Julia, Tk, and Cairo, Part II</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "Building GUIs with Julia, Tk, and Cairo, Part II";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">23 May 2013</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author"><a href="http://holylab.wustl.edu">Timothy E. Holy</a></span>
     
   </p>
@@ -122,7 +68,7 @@ The call to <code class="highlighter-rouge">pack</code> specifies that this canv
 <p>Note that the window is currently blank, because we haven’t drawn anything to it yet, so you can see whatever was lying underneath.
 In my case it captured a small region of my desktop:</p>
 
-<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_example2.jpg?raw=true" alt="cairo snapshot" /></p>
+<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_example2.jpg?raw=true" alt="cairo snapshot"></p>
 
 <p>Now let’s do some drawing.
 Cairo doesn’t know anything about Tk Canvases, so we have to pull out the part of it that works directly with  Cairo:</p>
@@ -155,7 +101,7 @@ paint(ctx)                     # paint the entire clip region
 The reason is that the Tk Canvas implements a technique called <a href="http://en.wikipedia.org/wiki/Multiple_buffering#Double_buffering_in_computer_graphics">double buffering</a>, which means that you do all your drawing to a back (hidden) surface, and then blit the completed result to the front (visible) surface.
 We can see this in action simply by bringing another window over the top of the window we’re using to draw, and then bringing our window back to the top; suddenly you’ll see a nice blue rectangle within the window, surrounded by whatever is in the background window(s):</p>
 
-<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_example3.jpg?raw=true" alt="cairo snapshot" /></p>
+<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_example3.jpg?raw=true" alt="cairo snapshot"></p>
 
 <p>Fortunately, to display your graphics you don’t have to rely on users changing the stacking order of windows: call <code class="highlighter-rouge">reveal(c)</code> to update the front surface with the contents of the back surface, followed by <code class="highlighter-rouge">update()</code> (or perhaps better, <code class="highlighter-rouge">Tk.update()</code> since <code class="highlighter-rouge">update</code> is a fairly generic name) to give Tk a chance to expose the front surface to the OS’s window manager.</p>
 
@@ -191,7 +137,7 @@ Tk.update()
 
 <p>Here is our masterpiece, where the “background” may differ for you (mine was positioned over the bottom of a wikipedia page):</p>
 
-<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_example.jpg?raw=true" alt="cairo snapshot" /></p>
+<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_example.jpg?raw=true" alt="cairo snapshot"></p>
 
 <h3 id="rendering-an-image">Rendering an image</h3>
 
@@ -219,7 +165,7 @@ Here <code class="highlighter-rouge">x</code>, <code class="highlighter-rouge">y
 
 <p>The image should now be displayed within your window (squashed, because we haven’t worried about aspect ratio):</p>
 
-<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_image1.jpg?raw=true" alt="cairo snapshot" /></p>
+<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_image1.jpg?raw=true" alt="cairo snapshot"></p>
 
 <p>It fills only part of the window because of the coordinate system we’ve established, where the range <code class="highlighter-rouge">0:10</code> corresponds to an inset region in the center of the window.</p>
 
@@ -228,7 +174,7 @@ Here <code class="highlighter-rouge">x</code>, <code class="highlighter-rouge">y
 Here we do a transpose in preparation to have it be converted back to its original shape by <code class="highlighter-rouge">CairoRGBSurface</code>.
 If performance is critical, you can avoid the default behavior of <code class="highlighter-rouge">CairoRGBSurface</code> by calling <code class="highlighter-rouge">CairoImageSurface</code> directly (see the <code class="highlighter-rouge">Cairo.jl</code> code).</p>
 
-<h3 id="redrawing--resize-support">Redrawing &amp; resize support</h3>
+<h3 id="redrawing--resize-support">Redrawing & resize support</h3>
 
 <p>A basic feature of windows is that they should behave properly under resizing operations.
 This doesn’t come entirely for free, although the grid (and pack) managers of Tk take care of many details for us.
@@ -239,7 +185,7 @@ Canvases make this easy by having a field, <code class="highlighter-rouge">resiz
 This function will receive a single argument, the canvas itself, but as always you can provide more information.
 Taking our image example, we could set</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>c.resize = c-&gt;redraw(c, buf)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>c.resize = c->redraw(c, buf)
 </code></pre></div></div>
 
 <p>and then define</p>
@@ -264,7 +210,7 @@ Obviously, you can use this <code class="highlighter-rouge">redraw</code> functi
 
 <p>If you grab the window handle and resize it, now you should see something like this:</p>
 
-<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_image2.jpg?raw=true" alt="cairo snapshot" /></p>
+<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/cairo_image2.jpg?raw=true" alt="cairo snapshot"></p>
 
 <p>Voila! We’re really getting somewhere now.</p>
 
@@ -280,8 +226,8 @@ For this reason, you shouldn’t ever store a ctx object on its own; always begi
 <p>A Canvas already comes with a set of fields prepared for mouse events.
 For example, in the complete GUI we have the equivalent of the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>selectiondonefunc = (c, bb) -&gt; zoombb(imgc, img2, bb)
-c.mouse.button1press = (c, x, y) -&gt; rubberband_start(c, x, y, selectiondonefunc)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>selectiondonefunc = (c, bb) -> zoombb(imgc, img2, bb)
+c.mouse.button1press = (c, x, y) -> rubberband_start(c, x, y, selectiondonefunc)
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">rubberband_start</code>, a function defined in <code class="highlighter-rouge">rubberband.jl</code>, will now be called whenever the user presses the left mouse button.
@@ -295,9 +241,9 @@ However, a few cases (which happen to be relevant to this GUI) are not available
 Here are some examples of how to configure these actions:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Bind double-clicks
-bind(c.c, "&lt;Double-Button-1&gt;", (path,x,y)-&gt;zoom_reset(imgc, img2))
+bind(c.c, "<Double-Button-1>", (path,x,y)->zoom_reset(imgc, img2))
 # Bind Shift-scroll (using the wheel mouse)
-bindwheel(c.c, "Shift", (path,delta)-&gt;panhorz(imgc,img2,int(delta)))
+bindwheel(c.c, "Shift", (path,delta)->panhorz(imgc,img2,int(delta)))
 </code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">delta</code> argument for the wheel mouse will encode the direction of scrolling.</p>
@@ -375,7 +321,7 @@ reveal(c)
 Tk.update()
 </code></pre></div></div>
 
-<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/winston.jpg?raw=true" alt="Winston snapshot" /></p>
+<p><img src="https://github.com/JuliaLang/www.julialang.org/blob/master/blog/_posts/GUI_figures/winston.jpg?raw=true" alt="Winston snapshot"></p>
 
 <p>You’ll note that you can resize this window, and the plot grows or shrinks accordingly.</p>
 
@@ -401,120 +347,10 @@ Happy hacking!</p>
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

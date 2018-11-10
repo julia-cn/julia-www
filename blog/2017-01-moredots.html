@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>More Dots: Syntactic Loop Fusion in Julia</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "More Dots: Syntactic Loop Fusion in Julia";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">21 Jan 2017</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author"><a href="http://math.mit.edu/~stevenj">Steven G. Johnson</a></span>
     
   </p>
@@ -372,10 +318,10 @@ term <strong>syntactic loop fusion</strong>, described in more detail below.</p>
 <h3 id="a-halfway-solution-loop-fusion-for-a-few-operationstypes">A halfway solution: Loop fusion for a few operations/types</h3>
 
 <p>One approach that may occur to you, and which has been implemented in a
-variety of languages (e.g. <a href="http://dl.acm.org/citation.cfm?id=665526">Kennedy &amp; McKinley, 1993</a>;
+variety of languages (e.g. <a href="http://dl.acm.org/citation.cfm?id=665526">Kennedy & McKinley, 1993</a>;
 <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.46.6627">Lewis et al., 1998</a>;
-<a href="http://dl.acm.org/citation.cfm?id=507661">Chakravarty &amp; Keller, 2001</a>;
-<a href="http://ieeexplore.ieee.org.libproxy.mit.edu/document/577265/">Manjikian &amp; Abdelrahman, 2002</a>;
+<a href="http://dl.acm.org/citation.cfm?id=507661">Chakravarty & Keller, 2001</a>;
+<a href="http://ieeexplore.ieee.org.libproxy.mit.edu/document/577265/">Manjikian & Abdelrahman, 2002</a>;
 <a href="http://ieeexplore.ieee.org/document/5389392/">Sarkar, 2010</a>;
 <a href="http://dl.acm.org/citation.cfm?id=1993517">Prasad et al., 2011</a>;
 <a href="http://dl.acm.org/citation.cfm?id=2457490">Wu et al., 2012</a>), is to only
@@ -433,9 +379,9 @@ the types of the variables etc.), and transforms them into calls to
 
 <p>Put another way, <code class="highlighter-rouge">f.(g.(x .+ 1))</code> is treated by Julia as merely
 <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for
-<code class="highlighter-rouge">broadcast(x -&gt; f(g(x + 1)), x)</code>.   An assignment <code class="highlighter-rouge">y .= f.(g.(x .+ 1))</code>
+<code class="highlighter-rouge">broadcast(x -> f(g(x + 1)), x)</code>.   An assignment <code class="highlighter-rouge">y .= f.(g.(x .+ 1))</code>
 is treated as sugar for the in-place operation
-<code class="highlighter-rouge">broadcast!(x -&gt; f(g(x + 1)), y, x)</code>.   The compiler need not prove
+<code class="highlighter-rouge">broadcast!(x -> f(g(x + 1)), y, x)</code>.   The compiler need not prove
 that this produces the same result as a corresponding non-fused operation,
 because the fusion is a mandatory transformation defined as part
 of the language, rather than an optional optimization.</p>
@@ -458,7 +404,7 @@ is sugar for <code class="highlighter-rouge">broadcast(⊗, x, y)</code>.</p>
 <p>Note that “side-by-side” binary operations are actually equivalent
 to nested calls, and hence they fuse for dotted operations.   For
 example <code class="highlighter-rouge">3 .* x .+ y</code> is equivalent to <code class="highlighter-rouge">(+).((*).(3, x), y)</code>, and
-hence it fuses into <code class="highlighter-rouge">broadcast((x,y) -&gt; 3*x+y, x, y)</code>.   Note
+hence it fuses into <code class="highlighter-rouge">broadcast((x,y) -> 3*x+y, x, y)</code>.   Note
 also that the fusion stops only when a “non-dot” call is encountered,
 e.g. <code class="highlighter-rouge">sqrt.(abs.(sort!(x.^2)))</code> fuses the <code class="highlighter-rouge">sqrt</code> and <code class="highlighter-rouge">abs</code> operations
 into a single loop, but <code class="highlighter-rouge">x.^2</code> occurs in a separate loop (producing
@@ -501,14 +447,14 @@ languages as discussed above; would you then be able to
 implement the same fusing semantics efficiently?</p>
 
 <p>There is a catch: <code class="highlighter-rouge">2 .* x .+ x .^ 2</code> is sugar for
-<code class="highlighter-rouge">broadcast(x -&gt; 2*x + x^2, x)</code> in Julia, but for this to be
+<code class="highlighter-rouge">broadcast(x -> 2*x + x^2, x)</code> in Julia, but for this to be
 fast we need the <a href="https://en.wikipedia.org/wiki/Higher-order_function">higher-order function</a>
 <code class="highlighter-rouge">broadcast</code> to be very fast as well.  First, this
 requires that arbitrary user-defined scalar (non-vectorized!) functions like
-<code class="highlighter-rouge">x -&gt; 2*x + x^2</code> be compiled to fast code, which is often a challenge
+<code class="highlighter-rouge">x -> 2*x + x^2</code> be compiled to fast code, which is often a challenge
 in high-level dynamic languages.   Second, it ideally requires that
 higher-order functions like <code class="highlighter-rouge">broadcast</code> be able to <a href="https://en.wikipedia.org/wiki/Inline_expansion">inline</a>
-the function argument <code class="highlighter-rouge">x -&gt; 2*x + x^2</code>, and this facility is even
+the function argument <code class="highlighter-rouge">x -> 2*x + x^2</code>, and this facility is even
 less common.  (It wasn’t available in Julia until version 0.5.)</p>
 
 <p>Also, the ability of <code class="highlighter-rouge">broadcast</code> to combine arrays and scalars or
@@ -603,7 +549,7 @@ adds <code class="highlighter-rouge">[1,2,3]</code> to <em>each column</em> of a
 example is to combine a row vector (or a 1×<em>n</em> array) and a column vector to make a matrix
 (2d array):</p>
 
-<div class="language-jl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">julia</span><span class="o">&gt;</span> <span class="x">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="x">]</span> <span class="o">.+</span> <span class="x">[</span><span class="mi">10</span><span class="x">,</span><span class="mi">20</span><span class="x">,</span><span class="mi">30</span><span class="x">]</span>
+<div class="language-jl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">julia</span><span class="o">></span> <span class="x">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="x">]</span> <span class="o">.+</span> <span class="x">[</span><span class="mi">10</span><span class="x">,</span><span class="mi">20</span><span class="x">,</span><span class="mi">30</span><span class="x">]</span>
 <span class="mi">3</span><span class="n">×3</span> <span class="n">Array</span><span class="x">{</span><span class="kt">Int64</span><span class="x">,</span><span class="mi">2</span><span class="x">}:</span>
  <span class="mi">11</span>  <span class="mi">12</span>  <span class="mi">13</span>
  <span class="mi">21</span>  <span class="mi">22</span>  <span class="mi">23</span>
@@ -628,9 +574,9 @@ at compile-time for each caller.</p>
 neither the <code class="highlighter-rouge">broadcast</code> function nor the dot-call fusion syntax is limited
 to numeric data.  For example:</p>
 
-<div class="language-jl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">julia</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="x">[</span><span class="s">"The QUICK Brown"</span><span class="x">,</span> <span class="s">"fox     jumped"</span><span class="x">,</span> <span class="s">"over the LAZY dog."</span><span class="x">];</span>
+<div class="language-jl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">julia</span><span class="o">></span> <span class="n">s</span> <span class="o">=</span> <span class="x">[</span><span class="s">"The QUICK Brown"</span><span class="x">,</span> <span class="s">"fox     jumped"</span><span class="x">,</span> <span class="s">"over the LAZY dog."</span><span class="x">];</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">.=</span> <span class="n">replace</span><span class="o">.</span><span class="x">(</span><span class="n">lowercase</span><span class="o">.</span><span class="x">(</span><span class="n">s</span><span class="x">),</span> <span class="n">r</span><span class="s">"\s+"</span><span class="x">,</span> <span class="s">"-"</span><span class="x">)</span>
+<span class="n">julia</span><span class="o">></span> <span class="n">s</span> <span class="o">.=</span> <span class="n">replace</span><span class="o">.</span><span class="x">(</span><span class="n">lowercase</span><span class="o">.</span><span class="x">(</span><span class="n">s</span><span class="x">),</span> <span class="n">r</span><span class="s">"\s+"</span><span class="x">,</span> <span class="s">"-"</span><span class="x">)</span>
 <span class="mi">3</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="x">{</span><span class="kt">String</span><span class="x">,</span><span class="mi">1</span><span class="x">}:</span>
  <span class="s">"the-quick-brown"</span>   
  <span class="s">"fox-jumped"</span>        
@@ -672,7 +618,7 @@ approximation of a user-defined function (essentially, a <code class="highlighte
 polynomial fit). By defining <a href="https://github.com/JuliaApproximation/ApproxFun.jl/issues/356"><code class="highlighter-rouge">broadcast</code> methods for
 <code class="highlighter-rouge">Fun</code></a>, you can
 now take an <code class="highlighter-rouge">f::Fun</code> and do, for example, <code class="highlighter-rouge">exp.(f.^2 .+ f.^3)</code> and it will
-translate to <code class="highlighter-rouge">broadcast(y -&gt; exp(y^2 + y^3), f)</code>.  This <code class="highlighter-rouge">broadcast</code> call, in
+translate to <code class="highlighter-rouge">broadcast(y -> exp(y^2 + y^3), f)</code>.  This <code class="highlighter-rouge">broadcast</code> call, in
 turn, will evaluate <code class="highlighter-rouge">exp(y^2 + y^3)</code> for <code class="highlighter-rouge">y = f(x)</code> at cleverly selected <code class="highlighter-rouge">x</code>
 points, construct a polynomial fit, and return a new <code class="highlighter-rouge">Fun</code> object representing
 the fit. (Conceptually, this replaces <em>elementwise</em> operations on containers
@@ -723,120 +669,10 @@ the other cannot.</p>
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

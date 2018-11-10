@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Some &pi;-ography</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "Some π-ography";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -74,19 +20,19 @@
       <h1></h1>
 
 <div id="blogpost">
-  <h1>Some &pi;-ography</h1>
+  <h1>Some π-ography</h1>
 
   <p class="metadata">
     <span class="timestamp">14 Mar 2018</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author">Cormullion</span>
     
   </p>
 
   <p>Although we’ve known about “Archimedes’ constant” for a few millennia, we’ve been referring to it as the Greek letter π only since the 1700s. Patricia Rothman <a href="https://www.historytoday.com/patricia-rothman/william-jones-and-his-circle-man-who-invented-pi">suggested</a> that the following page <em>could</em> contain one of the earliest uses of the Greek character to indicate the concept. It’s from a mathematics text book written by William Jones and published in 1706:</p>
 
-<p><img src="/images/blog/2018-04-13-pifonts/jones.png" alt="William Jones 1706" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/jones.png" alt="William Jones 1706"></p>
 
 <p>Jones used the Greek letter in various places both to indicate the number and, like some of his predecessors, to refer to the periphery or perimeter (Greek περιφέρεια) of a circle, and to label points in diagrams, as we would use <code class="highlighter-rouge">P</code> and <code class="highlighter-rouge">Q</code> today. Jones also refers to it as <em>Van Ceulen’s Number</em>, after the Dutch mathematician Ludolph van Ceulen, who spent a major part of his life calculating the value. (He managed 35 decimal places, and asked for it to be engraved on his tombstone.)</p>
 
@@ -94,13 +40,13 @@
 
 <p>But although Jones was one of the first, he wasn’t influential enough to inspire many followers, and it was the more famous Leonhard Euler and his use of the π symbol later in the century that did more to establish the Greek letter’s primary mathematical meaning for posterity:</p>
 
-<p><img src="/images/blog/2018-04-13-pifonts/euler.png" alt="Euler 1746" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/euler.png" alt="Euler 1746"></p>
 
 <p>(Original online <a href="https://archive.org/details/euler-e059">here</a>.)</p>
 
 <p>Julia embraces the Unicode standard <a href="https://docs.julialang.org/en/latest/manual/unicode-input/">enthusiastically</a>, so it’s very easy to use the appropriate Greek (and other Unicode) letters in your code. In the REPL, for example, type <code class="highlighter-rouge">\pi TAB</code> to insert the Unicode character <code class="highlighter-rouge">U+03C0</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; π
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> π
 π = 3.1415926535897...
 </code></pre></div></div>
 
@@ -113,7 +59,7 @@
 
 <p>As always in Julia, you can usually see how the magic is performed:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; Base.REPLCompletions.latex_symbols["\\pi"]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> Base.REPLCompletions.latex_symbols["\\pi"]
 "π"
 </code></pre></div></div>
 
@@ -130,14 +76,14 @@
 (0x1d77f,  "\\bsanspi",      "MATHEMATICAL SANS-SERIF BOLD SMALL PI") # v0.7
 (0x1d7b9,   "\\mbfitsanspi", "MATHEMATICAL SANS-SERIF BOLD ITALIC SMALL PI")];
 
-foreach(p -&gt; println(" $(Char(p[1])) U+$(lpad(hex(p[1]), 5, "0")) $(rpad(p[2], 15)) $(p[3])"), morepi)
+foreach(p -> println(" $(Char(p[1])) U+$(lpad(hex(p[1]), 5, "0")) $(rpad(p[2], 15)) $(p[3])"), morepi)
 </code></pre></div></div>
 
 <p>The two tab completions commented as <code class="highlighter-rouge">v0.7</code> have been added for Julia version 0.7.</p>
 
 <p>The output you see will depend a lot on your computer, operating system, and various other settings. This is a good introduction to the adventure game that is the Wonderful World of Fonts. Here, for example, is what I see if I evaluate this snippet in my Julia REPL today (version 0.6.2), using the Terminal app on macOS:</p>
 
-<p><img src="/images/blog/2018-04-13-pifonts/terminal-1.png" alt="Terminal app before" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/terminal-1.png" alt="Terminal app before"></p>
 
 <p>As you can see, not all the π symbols were rendered. The OS looks in the current font (I’m trying out <a href="https://github.com/tonsky/FiraCode">Fira Code</a>) for the Unicode characters <code class="highlighter-rouge">U+3c0</code>, <code class="highlighter-rouge">U+213c</code>, <code class="highlighter-rouge">U+1d6d1</code>, <code class="highlighter-rouge">U+1d70b</code>, <code class="highlighter-rouge">U+1d745</code>, <code class="highlighter-rouge">U+1d77f</code>, and <code class="highlighter-rouge">U+1d7b9</code>. For each one it fails to find, it searches through other activated fonts looking for one that has a symbol at that code point. The OS doesn’t check to see whether the symbol it finds is suitable.</p>
 
@@ -145,18 +91,18 @@ foreach(p -&gt; println(" $(Char(p[1])) U+$(lpad(hex(p[1]), 5, "0")) $(rpad(p[2]
 
 <p>Now, if I activate a font such as <a href="https://en.wikipedia.org/wiki/Asana-Math">Asana-Math</a>, <a href="http://evertype.com/emono/">Everson Mono</a>, or <a href="http://stixfonts.org/">STIX</a>, or some other mathematically-endowed font, the OS will immediately start to find matches and update the display, constantly switching between fonts as necessary to satisfy demands for Unicode code points:</p>
 
-<p><img src="/images/blog/2018-04-13-pifonts/terminal-2.png" alt="Terminal app after" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/terminal-2.png" alt="Terminal app after"></p>
 
 <p>With Asana Math installed, all the other πs can be found, and now the double-struck small π looks more like the blackboard-written character it’s supposed to resemble, although it’s difficult to see at small point sizes. And I think there are better designs:</p>
 
-<p><img src="/images/blog/2018-04-13-pifonts/double-struck.png" alt="double-struck pi" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/double-struck.png" alt="double-struck pi"></p>
 
 <p>Some tedious experimentation suggests that the search is to some extent alphabetic, because if Asana Math is unavailable, the OS moves on and tries Code2000, then Deja Vu, then Everson, then FreeSans, and so on. This at least is what I <em>think</em> happens on the current macOS with my particular setup. I suspect that it would be different on yours. And similar (but different) things will happen in your browser.</p>
 
 <p>By the way, these alternative symbols for π such as <code class="highlighter-rouge">\mitpi</code> don’t evaluate as 3.14…, so you can use them—as William Jones did—as general purpose symbols. For example, if you work with prime numbers you could use one of them to indicate the <a href="https://en.wikipedia.org/wiki/Prime-counting_function">prime-counting function</a>. Or you could just confuse yourself with the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; 𝜋 = 3
-julia&gt; 2𝜋
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> 𝜋 = 3
+julia> 2𝜋
 6
 </code></pre></div></div>
 
@@ -182,7 +128,7 @@ function buildfontlist()
             push!(fonts, family)
         end
     end
-    filter!(f -&gt; !ismatch(r".LastResort|Agenda|Topaz|Bodoni Ornaments|System",
+    filter!(f -> !ismatch(r".LastResort|Agenda|Topaz|Bodoni Ornaments|System",
         f), fonts)
     return sort(unique(fonts))
 end
@@ -200,7 +146,7 @@ function tabulatepi()
         for n in 1:length(fonts)
             fontface(fonts[n])
             te = textextents("π")
-            if te[3] &gt; 0.0
+            if te[3] > 0.0
                 fontsize(18)
                 text("π", t[cellnumber], halign=:center)
                 setfont("Lucida-Sans", 3)
@@ -218,13 +164,13 @@ tabulatepi()
 
 <!-- ![tabulating pi - PNG fallback](/images/blog/2018-04-13-pifonts/tabulate-pi.png) -->
 
-<p><img src="/images/blog/2018-04-13-pifonts/tabulate-pi.svg" alt="tabulating pi - SVG image" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/tabulate-pi.svg" alt="tabulating pi - SVG image"></p>
 
 <p>It would be better if I manually curated the candidates rather than used this automatically-generated font list: there are way too many “default” designs from various system and language-specific fonts that simply fill the slot with a basic design, rather than interpret the shape according to the font’s theme. And the font list produced by <code class="highlighter-rouge">fontconfig</code> doesn’t look in all the font libraries, so it’s an incomplete list.</p>
 
 <p>Here are a few of the more interesting designs: the portly Cooper Black and Tiffany Heavy, the minimalist Verdana and Tahoma (looking almost like “n”s?), the eccentric Gill “Kayo” Sans, and the silly Chalkduster.</p>
 
-<p><img src="/images/blog/2018-04-13-pifonts/piversity.png" alt="piversity" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/piversity.png" alt="piversity"></p>
 
 <p>I like the small version from Dalliance; it’s nicely old-school, where “old-school” here means based on an original from 1799, not long after Euler’s death.</p>
 
@@ -254,7 +200,7 @@ function accumulatepi()
         for n in 1:length(fonts)
             fontface(fonts[n])
             te = textextents("π")
-            if te[3] &gt; 0.0
+            if te[3] > 0.0
                 textstroke("π", O, :stroke)
             end
         end
@@ -263,7 +209,7 @@ end
 accumulatepi()
 </code></pre></div></div>
 
-<p><img src="/images/blog/2018-04-13-pifonts/accumulate-pi.png" alt="accumulating pi" /></p>
+<p><img src="/images/blog/2018-04-13-pifonts/accumulate-pi.png" alt="accumulating pi"></p>
 
 <p>For a complete font based on the average shapes of many other fonts, have a look at <a href="http://www.iotic.com/averia/">Averia</a>.</p>
 
@@ -278,120 +224,10 @@ accumulatepi()
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

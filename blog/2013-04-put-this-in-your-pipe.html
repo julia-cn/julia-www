@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Put This In Your Pipe</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "Put This In Your Pipe";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">08 Apr 2013</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author"><a href="http://karpinski.org/">Stefan Karpinski</a></span>
     
   </p>
@@ -108,9 +54,9 @@ After fixing this bug, we go into details of how Julia’s external command exec
 <p>Here’s how you write the example of counting the number of lines in a directory containing the string “foo” in Julia
 (you can follow along at home if you have Julia installed from source by changing directories into the Julia source directory and doing <code class="highlighter-rouge">cp -a src "source code"; mkdir tmp</code> and then firing up the Julia repl):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "src";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dir = "src";
 
-julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
+julia> int(readchomp(`find $dir -type f -print0` |> `xargs -0 grep foo` |> `wc -l`))
 5
 </code></pre></div></div>
 
@@ -121,14 +67,14 @@ julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&
 
 <p>However, it isn’t susceptible to the same problems:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "source code";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dir = "source code";
 
-julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
+julia> int(readchomp(`find $dir -type f -print0` |> `xargs -0 grep foo` |> `wc -l`))
 5
 
-julia&gt; dir = "nonexistent";
+julia> dir = "nonexistent";
 
-julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
+julia> int(readchomp(`find $dir -type f -print0` |> `xargs -0 grep foo` |> `wc -l`))
 find: `nonexistent': No such file or directory
 ERROR: failed processes:
   Process(`find nonexistent -type f -print0`, ProcessExited(1)) [1]
@@ -137,9 +83,9 @@ ERROR: failed processes:
  in readall at process.jl:365
  in readchomp at io.jl:172
 
-julia&gt; dir = "foo'; echo MALICIOUS ATTACK; echo '";
+julia> dir = "foo'; echo MALICIOUS ATTACK; echo '";
 
-julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
+julia> int(readchomp(`find $dir -type f -print0` |> `xargs -0 grep foo` |> `wc -l`))
 find: `foo\'; echo MALICIOUS ATTACK; echo \'': No such file or directory
 ERROR: failed processes:
   Process(`find "foo'; echo MALICIOUS ATTACK; echo '" -type f -print0`, ProcessExited(1)) [1]
@@ -172,14 +118,14 @@ Why <em>does</em> <code class="highlighter-rouge">xargs</code> fail?</p>
 <p>One possibility to check for is that the <code class="highlighter-rouge">xargs</code> program fails with no input.
 We can use Julia’s <code class="highlighter-rouge">success</code> predicate to try it out:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`cat /dev/null` |&gt; `xargs true`)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> success(`cat /dev/null` |> `xargs true`)
 true
 </code></pre></div></div>
 
 <p>Ok, so <code class="highlighter-rouge">xargs</code> seems perfectly happy with no input.
 Maybe grep doesn’t like not getting any input?</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`cat /dev/null` |&gt; `grep foo`)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> success(`cat /dev/null` |> `grep foo`)
 false
 </code></pre></div></div>
 
@@ -188,19 +134,19 @@ Good to know.
 It turns out that <code class="highlighter-rouge">grep</code> indicates whether it matched anything or not with its return status.
 Most programs use their return status to indicate success or failure, but some, like <code class="highlighter-rouge">grep</code>, use it to indicate some other boolean condition – in this case “found something” versus “didn’t find anything”:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`echo foo` |&gt; `grep foo`)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> success(`echo foo` |> `grep foo`)
 true
 
-julia&gt; success(`echo bar` |&gt; `grep foo`)
+julia> success(`echo bar` |> `grep foo`)
 false
 </code></pre></div></div>
 
 <p>Now we know why <code class="highlighter-rouge">grep</code> is “failing” – and <code class="highlighter-rouge">xargs</code> too, since it returns a non-zero status if the program it runs returns non-zero.
 This means that our Julia pipeline and the “responsible” Ruby version are both susceptible to bogus failures when we search an existing directory that happens not to contain the string “foo” anywhere:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "tmp";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dir = "tmp";
 
-julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
+julia> int(readchomp(`find $dir -type f -print0` |> `xargs -0 grep foo` |> `wc -l`))
 ERROR: failed process: Process(`xargs -0 grep foo`, ProcessExited(123)) [123]
  in error at error.jl:22
  in pipeline_error at process.jl:394
@@ -214,9 +160,9 @@ In this case, this default behavior is undesirable:
 we want the expression to just return <code class="highlighter-rouge">0</code> without raising an error.
 The simple fix in Julia is this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "tmp";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dir = "tmp";
 
-julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; ignorestatus(`xargs -0 grep foo`) |&gt; `wc -l`))
+julia> int(readchomp(`find $dir -type f -print0` |> ignorestatus(`xargs -0 grep foo`) |> `wc -l`))
 0
 </code></pre></div></div>
 
@@ -230,10 +176,10 @@ Without such detailed error reporting, this bug would be pretty difficult to tra
 Unlike in these predecessors, however, in Julia backticks don’t immediately run commands, nor do they necessarily indicate that you want to capture the output of the command.
 Instead, backticks just construct an object representing a command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; `echo Hello`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> `echo Hello`
 `echo Hello`
 
-julia&gt; typeof(ans)
+julia> typeof(ans)
 Cmd
 </code></pre></div></div>
 
@@ -241,19 +187,19 @@ Cmd
 In order to actually run a command, you have to <em>do</em> something with a command object.
 To run a command and capture its output into a string – what other languages do with backticks automatically – you can apply the <code class="highlighter-rouge">readall</code> function:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; readall(`echo Hello`)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> readall(`echo Hello`)
 "Hello\n"
 </code></pre></div></div>
 
 <p>Since it’s very common to want to discard the trailing line break at the end of a command’s output, Julia provides the <code class="highlighter-rouge">readchomp(x)</code> command which is equivalent to writing <code class="highlighter-rouge">chomp(readall(x))</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; readchomp(`echo Hello`)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> readchomp(`echo Hello`)
 "Hello"
 </code></pre></div></div>
 
 <p>To run a command without capturing its output, letting it just print to the same <code class="highlighter-rouge">stdout</code> stream as the main process – i.e. what the <code class="highlighter-rouge">system</code> function does when given a command as a string in other languages – use the <code class="highlighter-rouge">run</code> function:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(`echo Hello`)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> run(`echo Hello`)
 Hello
 </code></pre></div></div>
 
@@ -261,13 +207,13 @@ Hello
 (If your terminal supports color, these are colored differently so that you can easily distinguish them visually.)
 Nothing is returned by the <code class="highlighter-rouge">run</code> command, but if something goes wrong, an exception is raised:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(`false`)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> run(`false`)
 ERROR: failed process: Process(`false`, ProcessExited(1)) [1]
  in error at error.jl:22
  in pipeline_error at process.jl:394
  in run at process.jl:384
 
-julia&gt; run(`notaprogram`)
+julia> run(`notaprogram`)
 execvp(): No such file or directory
 ERROR: failed process: Process(`notaprogram`, ProcessExited(-1)) [-1]
  in error at error.jl:22
@@ -278,9 +224,9 @@ ERROR: failed process: Process(`notaprogram`, ProcessExited(-1)) [-1]
 <p>As with <code class="highlighter-rouge">xargs</code> and <code class="highlighter-rouge">grep</code> above, this may not always be desirable.
 In such cases, you can use <code class="highlighter-rouge">ignorestatus</code> to indicate that the command returning a non-zero value should not be considered an error:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(ignorestatus(`false`))
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> run(ignorestatus(`false`))
 
-julia&gt; run(ignorestatus(`notaprogram`))
+julia> run(ignorestatus(`notaprogram`))
 execvp(): No such file or directory
 ERROR: failed process: Process(`notaprogram`, ProcessExited(-1)) [-1]
  in error at error.jl:22
@@ -295,10 +241,10 @@ the command string is never passed to a shell to be interpreted and executed;
 instead it is parsed in Julia code, using the same rules the shell uses to determine what the command and arguments are.
 Command objects allow you to see what the program and arguments were determined to be by accessing the <code class="highlighter-rouge">.exec</code> field:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; cmd = `perl -e 'print "Hello\n"'`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> cmd = `perl -e 'print "Hello\n"'`
 `perl -e 'print "Hello\n"'`
 
-julia&gt; cmd.exec
+julia> cmd.exec
 3-element Union(UTF8String,ASCIIString) Array:
  "perl"
  "-e"
@@ -314,9 +260,9 @@ To that end, quotes and spaces work just as they do in the shell.
 The real power of backtick syntax doesn’t emerge, however, until we begin constructing commands programmatically.
 Just as in the shell (and in Julia strings), you can interpolate values into commands using the dollar sign (<code class="highlighter-rouge">$</code>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "src";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dir = "src";
 
-julia&gt; `find $dir -type f`.exec
+julia> `find $dir -type f`.exec
 4-element Union(UTF8String,ASCIIString) Array:
  "find"
  "src"
@@ -326,18 +272,18 @@ julia&gt; `find $dir -type f`.exec
 
 <p>Unlike in the shell, however, Julia values interpolated into commands are interpolated as a single verbatim argument – no characters inside the value are interpreted as special after the value has been interpolated:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "two words";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dir = "two words";
 
-julia&gt; `find $dir -type f`.exec
+julia> `find $dir -type f`.exec
 4-element Union(UTF8String,ASCIIString) Array:
  "find"
  "two words"
  "-type"
  "f"
 
-julia&gt; dir = "foo'bar";
+julia> dir = "foo'bar";
 
-julia&gt; `find $dir -type f`.exec
+julia> `find $dir -type f`.exec
 4-element Union(UTF8String,ASCIIString) Array:
  "find"
  "foo'bar"
@@ -345,27 +291,27 @@ julia&gt; `find $dir -type f`.exec
  "f"
 </code></pre></div></div>
 
-<p>This works no matter what the contents of the interpolated value is, allowing simple interpolation of characters that are quite difficult to pass as parts of command-line arguments even in the shell (for the following examples, <code class="highlighter-rouge">tmp/a.tsv</code> and <code class="highlighter-rouge">tmp/b.tsv</code> can be created in the shell with <code class="highlighter-rouge">echo -e "foo\tbar\nbaz\tqux" &gt; tmp/a.tsv; echo -e "foo\t1\nbaz\t2" &gt; tmp/b.tsv</code>):</p>
+<p>This works no matter what the contents of the interpolated value is, allowing simple interpolation of characters that are quite difficult to pass as parts of command-line arguments even in the shell (for the following examples, <code class="highlighter-rouge">tmp/a.tsv</code> and <code class="highlighter-rouge">tmp/b.tsv</code> can be created in the shell with <code class="highlighter-rouge">echo -e "foo\tbar\nbaz\tqux" > tmp/a.tsv; echo -e "foo\t1\nbaz\t2" > tmp/b.tsv</code>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; tab = "\t";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> tab = "\t";
 
-julia&gt; cmd = `join -t$tab tmp/a.tsv tmp/b.tsv`;
+julia> cmd = `join -t$tab tmp/a.tsv tmp/b.tsv`;
 
-julia&gt; cmd.exec
+julia> cmd.exec
 4-element Union(UTF8String,ASCIIString) Array:
  "join"
  "-t\t"
  "tmp/a.tsv"
  "tmp/b.tsv"
 
-julia&gt; run(cmd)
+julia> run(cmd)
 foo     bar     1
 baz     qux     2
 </code></pre></div></div>
 
 <p>Moreover, what comes after the <code class="highlighter-rouge">$</code> can actually be any valid Julia expression, not just a variable name:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; `join -t$"\t" tmp/a.tsv tmp/b.tsv`.exec
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> `join -t$"\t" tmp/a.tsv tmp/b.tsv`.exec
 4-element Union(UTF8String,ASCIIString) Array:
  "join"
  "-t\t"
@@ -388,9 +334,9 @@ In languages with first-class array types, however, there’s a much better opti
 consistently interpolate single values as single arguments and interpolate arrays as multiple values.
 This is precisely what Julia’s backtick interpolation does:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dirs = ["foo", "bar", "baz"];
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dirs = ["foo", "bar", "baz"];
 
-julia&gt; `find $dirs -type f`.exec
+julia> `find $dirs -type f`.exec
 6-element Union(UTF8String,ASCIIString) Array:
  "find"
  "foo"
@@ -404,27 +350,27 @@ julia&gt; `find $dirs -type f`.exec
 Julia’s backticks have one more fancy trick up their sleeve.
 We saw earlier (without really remarking on it) that you could interpolate single values into a larger argument:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; x = "bar";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> x = "bar";
 
-julia&gt; `echo foo$x`
+julia> `echo foo$x`
 `echo foobar`
 </code></pre></div></div>
 
 <p>What happens if <code class="highlighter-rouge">x</code> is an array?
 Only one way to find out:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; x = ["bar", "baz"];
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> x = ["bar", "baz"];
 
-julia&gt; `echo foo$x`
+julia> `echo foo$x`
 `echo foobar foobaz`
 </code></pre></div></div>
 
 <p>Julia does what the shell would do if you wrote <code class="highlighter-rouge">echo foo{bar,baz}</code>.
 This even works correctly for multiple values interpolated into the same shell word:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "/data"; names = ["foo","bar"]; exts=["csv","tsv"];
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> dir = "/data"; names = ["foo","bar"]; exts=["csv","tsv"];
 
-julia&gt; `cat $dir/$names.$exts`
+julia> `cat $dir/$names.$exts`
 `cat /data/foo.csv /data/foo.tsv /data/bar.csv /data/bar.tsv`
 </code></pre></div></div>
 
@@ -445,120 +391,10 @@ The end result is that starting and interacting with external processes in Julia
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

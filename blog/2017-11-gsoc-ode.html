@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>GSoC 2017: Native Julia second order ODE and BVP solvers</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "GSoC 2017: Native Julia second order ODE and BVP solvers";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">01 Nov 2017</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author">Yingbo Ma, Chris Rackauckas, Jiahao Chen, Christoph Ortner</span>
     
   </p>
@@ -122,8 +68,8 @@ L = q_1\dot{q_2} - \dot{q_1}q_2.</script>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">OrdinaryDiffEq</span><span class="x">,</span> <span class="n">ForwardDiff</span><span class="x">,</span> <span class="n">LinearAlgebra</span>
 <span class="n">H</span><span class="x">(</span><span class="n">q</span><span class="x">,</span><span class="n">p</span><span class="x">)</span> <span class="o">=</span> <span class="n">norm</span><span class="x">(</span><span class="n">p</span><span class="x">)</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">inv</span><span class="x">(</span><span class="n">norm</span><span class="x">(</span><span class="n">q</span><span class="x">))</span>
 <span class="n">L</span><span class="x">(</span><span class="n">q</span><span class="x">,</span><span class="n">p</span><span class="x">)</span> <span class="o">=</span> <span class="n">q</span><span class="x">[</span><span class="mi">1</span><span class="x">]</span><span class="o">*</span><span class="n">p</span><span class="x">[</span><span class="mi">2</span><span class="x">]</span> <span class="o">-</span> <span class="n">p</span><span class="x">[</span><span class="mi">1</span><span class="x">]</span><span class="o">*</span><span class="n">q</span><span class="x">[</span><span class="mi">2</span><span class="x">]</span>
-<span class="n">pdot</span><span class="x">(</span><span class="n">dp</span><span class="x">,</span><span class="n">p</span><span class="x">,</span><span class="n">q</span><span class="x">,</span><span class="n">params</span><span class="x">,</span><span class="n">t</span><span class="x">)</span> <span class="o">=</span> <span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient!</span><span class="x">(</span><span class="n">dp</span><span class="x">,</span> <span class="n">q</span><span class="o">-&gt;-</span><span class="n">H</span><span class="x">(</span><span class="n">q</span><span class="x">,</span> <span class="n">p</span><span class="x">),</span> <span class="n">q</span><span class="x">)</span>
-<span class="n">qdot</span><span class="x">(</span><span class="n">dq</span><span class="x">,</span><span class="n">p</span><span class="x">,</span><span class="n">q</span><span class="x">,</span><span class="n">params</span><span class="x">,</span><span class="n">t</span><span class="x">)</span> <span class="o">=</span> <span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient!</span><span class="x">(</span><span class="n">dq</span><span class="x">,</span> <span class="n">p</span><span class="o">-&gt;</span> <span class="n">H</span><span class="x">(</span><span class="n">q</span><span class="x">,</span> <span class="n">p</span><span class="x">),</span> <span class="n">p</span><span class="x">)</span>
+<span class="n">pdot</span><span class="x">(</span><span class="n">dp</span><span class="x">,</span><span class="n">p</span><span class="x">,</span><span class="n">q</span><span class="x">,</span><span class="n">params</span><span class="x">,</span><span class="n">t</span><span class="x">)</span> <span class="o">=</span> <span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient!</span><span class="x">(</span><span class="n">dp</span><span class="x">,</span> <span class="n">q</span><span class="o">->-</span><span class="n">H</span><span class="x">(</span><span class="n">q</span><span class="x">,</span> <span class="n">p</span><span class="x">),</span> <span class="n">q</span><span class="x">)</span>
+<span class="n">qdot</span><span class="x">(</span><span class="n">dq</span><span class="x">,</span><span class="n">p</span><span class="x">,</span><span class="n">q</span><span class="x">,</span><span class="n">params</span><span class="x">,</span><span class="n">t</span><span class="x">)</span> <span class="o">=</span> <span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient!</span><span class="x">(</span><span class="n">dq</span><span class="x">,</span> <span class="n">p</span><span class="o">-></span> <span class="n">H</span><span class="x">(</span><span class="n">q</span><span class="x">,</span> <span class="n">p</span><span class="x">),</span> <span class="n">p</span><span class="x">)</span>
 </code></pre></div></div>
 
 <p>Then, we solve this problem by <code class="highlighter-rouge">Ruth3</code> symplectic integrator with appropriate initial conditions.</p>
@@ -137,7 +83,7 @@ L = q_1\dot{q_2} - \dot{q_1}q_2.</script>
 
 <p>Finally, we analyze the solution by computing the first integrals and plotting them.</p>
 
-<p><img src="/images/blog/2017-11-01-gsoc-ode/symplectic_ruth3.svg" alt="first integrals" /></p>
+<p><img src="/images/blog/2017-11-01-gsoc-ode/symplectic_ruth3.svg" alt="first integrals"></p>
 
 <p>Note that symplectic integrator doesn’t mean that it has exact conservation. The solutions of a symplectic integrator are on a symplectic manifold, but don’t necessarily conserve the Hamiltonian (energy). The energy can have fluctuations in a (quasi-)periodic manner, so that the first integrals have small variations. In the above case, the energy varies at most <code class="highlighter-rouge">6e-6</code>, and it tends to come back. The variations also decrease as <code class="highlighter-rouge">dt</code> is smaller. The angular momentum is conserved perfectly. More details are in this <a href="http://nbviewer.jupyter.org/github/JuliaDiffEq/DiffEqTutorials.jl/blob/master/PhysicalModels/KeplerProblem.ipynb">notebook</a>.</p>
 
@@ -161,7 +107,7 @@ L = q_1\dot{q_2} - \dot{q_1}q_2.</script>
   <span class="k">end</span>
   <span class="n">prob</span> <span class="o">=</span> <span class="n">SecondOrderODEProblem</span><span class="x">(</span><span class="n">driven_pendulum</span><span class="x">,</span> <span class="x">[</span><span class="mf">1.5</span><span class="x">],</span> <span class="x">[</span><span class="mf">0.</span><span class="x">],</span> <span class="x">(</span><span class="mf">5000.</span><span class="x">,</span> <span class="mf">35000.</span><span class="x">),</span> <span class="x">(</span><span class="n">Γ</span><span class="x">,</span> <span class="n">α</span><span class="x">,</span> <span class="n">β</span><span class="x">,</span> <span class="n">δ</span><span class="x">,</span> <span class="n">ω</span><span class="x">))</span>
   <span class="n">sol</span> <span class="o">=</span> <span class="n">solve</span><span class="x">(</span><span class="n">prob</span><span class="x">,</span> <span class="n">DPRKN6</span><span class="x">(),</span> <span class="n">saveat</span><span class="o">=</span><span class="mi">2</span><span class="nb">pi</span><span class="o">/</span><span class="n">prob</span><span class="o">.</span><span class="n">p</span><span class="x">[</span><span class="k">end</span><span class="x">])</span>
-  <span class="n">y1</span><span class="x">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="x">[</span><span class="n">map</span><span class="x">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="x">[</span><span class="n">i</span><span class="x">],</span> <span class="n">sol</span><span class="o">.</span><span class="n">u</span><span class="x">[</span><span class="k">end</span><span class="o">-</span><span class="mi">2000</span><span class="x">:</span><span class="k">end</span><span class="x">])</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="mi">2</span><span class="x">]</span>
+  <span class="n">y1</span><span class="x">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="x">[</span><span class="n">map</span><span class="x">(</span><span class="n">x</span><span class="o">-></span><span class="n">x</span><span class="x">[</span><span class="n">i</span><span class="x">],</span> <span class="n">sol</span><span class="o">.</span><span class="n">u</span><span class="x">[</span><span class="k">end</span><span class="o">-</span><span class="mi">2000</span><span class="x">:</span><span class="k">end</span><span class="x">])</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="mi">2</span><span class="x">]</span>
   <span class="n">scatter</span><span class="x">(</span><span class="n">x1</span><span class="x">,</span> <span class="n">y1</span><span class="x">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.8</span><span class="x">,</span> <span class="n">leg</span><span class="o">=</span><span class="n">false</span><span class="x">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"Poincaré surface of duffing oscillator"</span><span class="x">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">"\</span><span class="si">$</span><span class="s">x\</span><span class="si">$</span><span class="s">"</span><span class="x">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">"\</span><span class="si">$</span><span class="se">\\</span><span class="s">dot{x}\</span><span class="si">$</span><span class="s">"</span><span class="x">,</span> <span class="n">color</span><span class="o">=</span><span class="x">:</span><span class="n">black</span><span class="x">,</span> <span class="n">xlims</span><span class="o">=</span><span class="x">(</span><span class="mf">0.5</span><span class="x">,</span><span class="mf">1.7</span><span class="x">))</span>
 <span class="k">end</span>
 <span class="n">draw_duffing</span><span class="x">(</span><span class="mi">8</span><span class="x">,</span> <span class="mi">1</span><span class="x">,</span> <span class="mi">5</span><span class="x">,</span> <span class="mf">0.02</span><span class="x">,</span> <span class="mf">0.5</span><span class="x">)</span>
@@ -169,7 +115,7 @@ L = q_1\dot{q_2} - \dot{q_1}q_2.</script>
 
 <p>Then, we need to get the solution at $\omega t \mod 2\pi=0$ to plot the Poincaré section, and we can achieve this by using <a href="http://docs.juliadiffeq.org/latest/basics/common_solver_opts.html#Output-Control-1"><code class="highlighter-rouge">saveat</code></a>.</p>
 
-<p><img src="/images/blog/2017-11-01-gsoc-ode/duffing_poincare_0.svg" alt="duffing Poincaré section" /></p>
+<p><img src="/images/blog/2017-11-01-gsoc-ode/duffing_poincare_0.svg" alt="duffing Poincaré section"></p>
 
 <h4 id="driven-pendulum">Driven pendulum</h4>
 
@@ -187,13 +133,13 @@ L = q_1\dot{q_2} - \dot{q_1}q_2.</script>
   <span class="k">end</span>
   <span class="n">prob</span> <span class="o">=</span> <span class="n">SecondOrderODEProblem</span><span class="x">(</span><span class="n">driven_pendulum</span><span class="x">,</span> <span class="x">[</span><span class="mf">0.</span><span class="x">],</span> <span class="x">[</span><span class="mi">2</span><span class="nb">pi</span><span class="x">],</span> <span class="x">(</span><span class="mf">0.</span><span class="x">,</span><span class="mf">50000.</span><span class="x">),</span> <span class="x">(</span><span class="n">f₀</span><span class="x">,</span><span class="n">q</span><span class="x">,</span><span class="n">ω</span><span class="x">))</span>
   <span class="n">sol</span> <span class="o">=</span> <span class="n">solve</span><span class="x">(</span><span class="n">prob</span><span class="x">,</span> <span class="n">DPRKN6</span><span class="x">(),</span> <span class="n">saveat</span><span class="o">=</span><span class="mi">2</span><span class="nb">pi</span><span class="o">/</span><span class="n">prob</span><span class="o">.</span><span class="n">p</span><span class="x">[</span><span class="k">end</span><span class="x">])</span>
-  <span class="n">y1</span><span class="x">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="x">[</span><span class="n">map</span><span class="x">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="x">[</span><span class="n">i</span><span class="x">],</span> <span class="n">sol</span><span class="o">.</span><span class="n">u</span><span class="x">[</span><span class="mi">500</span><span class="x">:</span><span class="k">end</span><span class="x">])</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="mi">2</span><span class="x">]</span>
+  <span class="n">y1</span><span class="x">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="x">[</span><span class="n">map</span><span class="x">(</span><span class="n">x</span><span class="o">-></span><span class="n">x</span><span class="x">[</span><span class="n">i</span><span class="x">],</span> <span class="n">sol</span><span class="o">.</span><span class="n">u</span><span class="x">[</span><span class="mi">500</span><span class="x">:</span><span class="k">end</span><span class="x">])</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="mi">2</span><span class="x">]</span>
   <span class="n">scatter</span><span class="x">(</span><span class="n">x1</span><span class="o">.%</span><span class="nb">pi</span><span class="x">,</span> <span class="n">y1</span><span class="x">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.8</span><span class="x">,</span> <span class="n">leg</span><span class="o">=</span><span class="n">false</span><span class="x">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"Poincaré surface of driven pendulum"</span><span class="x">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">"\</span><span class="si">$</span><span class="se">\\</span><span class="s">theta\</span><span class="si">$</span><span class="s">"</span><span class="x">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">"\</span><span class="si">$</span><span class="se">\\</span><span class="s">dot{</span><span class="se">\\</span><span class="s">theta}\</span><span class="si">$</span><span class="s">"</span><span class="x">,</span> <span class="n">color</span><span class="o">=</span><span class="x">:</span><span class="n">black</span><span class="x">)</span>
 <span class="k">end</span>
 <span class="n">draw_driven_pendulum</span><span class="x">(</span><span class="mf">1.12456789</span><span class="x">,</span> <span class="mf">0.23456789</span><span class="x">,</span> <span class="mf">0.7425755501794571</span><span class="x">)</span>
 </code></pre></div></div>
 
-<p><img src="/images/blog/2017-11-01-gsoc-ode/driven_poincare_0.svg" alt="driven pendulum Poincaré section" /></p>
+<p><img src="/images/blog/2017-11-01-gsoc-ode/driven_poincare_0.svg" alt="driven pendulum Poincaré section"></p>
 
 <h2 id="boundary-value-problem">Boundary Value Problem</h2>
 
@@ -219,7 +165,7 @@ L = q_1\dot{q_2} - \dot{q_1}q_2.</script>
 <span class="n">sol1</span> <span class="o">=</span> <span class="n">solve</span><span class="x">(</span><span class="n">bvp1</span><span class="x">,</span> <span class="n">GeneralMIRK4</span><span class="x">(),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.05</span><span class="x">)</span>
 </code></pre></div></div>
 
-<p><img src="/images/blog/2017-11-01-gsoc-ode/bvp.svg" alt="bvp" /></p>
+<p><img src="/images/blog/2017-11-01-gsoc-ode/bvp.svg" alt="bvp"></p>
 
 <p>More details can be found in <a href="http://docs.juliadiffeq.org/latest/tutorials/bvp_example.html">here</a>.</p>
 
@@ -236,120 +182,10 @@ L = q_1\dot{q_2} - \dot{q_1}q_2.</script>
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

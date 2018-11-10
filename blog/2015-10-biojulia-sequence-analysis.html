@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>JSoC 2015 project: Efficient data structures and algorithms for sequence analysis in BioJulia</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "JSoC 2015 project: Efficient data structures and algorithms for sequence analysis in BioJulia";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">21 Oct 2015</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author">Kenta Sato</span>
     
   </p>
@@ -110,7 +56,7 @@ is implemented in many bioinformatics tools, most notably
 <a href="http://bio-bwa.sourceforge.net/">BWA</a>, whose papers are cited thousands of
 times.</p>
 
-<p><img src="/images/blog/2015-10-03-sequence-analysis/mapping.png" alt="Mapping" /></p>
+<p><img src="/images/blog/2015-10-03-sequence-analysis/mapping.png" alt="Mapping"></p>
 
 <p>The main focus of my project was creating a full-text search index in Julia
 that is easy to use and efficient in practical applications.  In the course
@@ -127,8 +73,7 @@ For example, if each element is an integer between 0 and 3, you only need to use
 These 2-bit integers are packed into a buffer and therefore the array consumes only one fourth of the space compared to the usual array.
 The following is a case of a byte sequence of <code class="highlighter-rouge">[0x01, 0x03, 0x02, 0x00]</code>:</p>
 
-<pre>
-    index:                           1          2          3          4
+<pre>    index:                           1          2          3          4
     byte sequence (hex):          0x01       0x03       0x02       0x00
     byte sequence (bin):    0b00000001 0b00000011 0b00000010 0b00000000
     packed sequence (w=2):          01         11         10         00
@@ -144,12 +89,12 @@ supported.  <code class="highlighter-rouge">IntVector</code> and <code class="hi
 
 <p>Here is an example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; IntArray{2,UInt8}(2, 3)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> IntArray{2,UInt8}(2, 3)
 2x3 IntArrays.IntArray{2,UInt8,2}:
  0x00  0x00  0x01
  0x00  0x00  0x03
 
-julia&gt; array = IntVector{2,UInt8}(6)
+julia> array = IntVector{2,UInt8}(6)
 6-element IntArrays.IntArray{2,UInt8,1}:
  0x00
  0x00
@@ -158,10 +103,10 @@ julia&gt; array = IntVector{2,UInt8}(6)
  0x02
  0x00
 
-julia&gt; array[1] = 0x02
+julia> array[1] = 0x02
 0x02
 
-julia&gt; array
+julia> array
 6-element IntArrays.IntArray{2,UInt8,1}:
  0x02
  0x00
@@ -170,7 +115,7 @@ julia&gt; array
  0x02
  0x00
 
-julia&gt; sort!(array)
+julia> sort!(array)
 6-element IntArrays.IntArray{2,UInt8,1}:
  0x00
  0x00
@@ -182,10 +127,10 @@ julia&gt; sort!(array)
 
 <p>And the memory footprint of <code class="highlighter-rouge">IntArray</code> is much smaller:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; sizeof(IntVector{2,UInt8}(1_000_000))
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> sizeof(IntVector{2,UInt8}(1_000_000))
 250000
 
-julia&gt; sizeof(Vector{UInt8}(1_000_000))
+julia> sizeof(Vector{UInt8}(1_000_000))
 1000000
 </code></pre></div></div>
 
@@ -194,14 +139,14 @@ there are overheads in operations and <code class="highlighter-rouge">IntArray</
 I’ve tried to keep this discrepancy as small as possible, but the <code class="highlighter-rouge">IntArray</code> is
 about 4-5 times slower when sorting it:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; array = rand(0x00:0x03, 2^24);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> array = rand(0x00:0x03, 2^24);
 
-julia&gt; sort(array); @time sort(array);
+julia> sort(array); @time sort(array);
   0.488779 seconds (8 allocations: 16.000 MB)
 
-julia&gt; iarray = IntVector{2}(array);
+julia> iarray = IntVector{2}(array);
 
-julia&gt; sort(iarray); @time sort(iarray);
+julia> sort(iarray); @time sort(iarray);
   2.290878 seconds (18 allocations: 4.001 MB)
 </code></pre></div></div>
 
@@ -221,11 +166,11 @@ In <code class="highlighter-rouge">SucVector</code>, the extra space is about 1/
 
 <p>The most important query operation over these data structures would be the <code class="highlighter-rouge">rank1(bv, i)</code> query, which counts the number of 1 bits within <code class="highlighter-rouge">bv[1:i]</code>. Owing to the cached bit counts, we can finish the rank operation in constant time:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using IndexableBitVectors
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> using IndexableBitVectors
 
-julia&gt; bv = bitrand(2^30);
+julia> bv = bitrand(2^30);
 
-julia&gt; function myrank1(bv, i)  # count ones by loop
+julia> function myrank1(bv, i)  # count ones by loop
            r = 0
            for j in 1:i
                r += bv[j]
@@ -234,17 +179,17 @@ julia&gt; function myrank1(bv, i)  # count ones by loop
        end
 myrank1 (generic function with 1 method)
 
-julia&gt; myrank1(bv, 2^29); @time myrank1(bv, 2^29);
+julia> myrank1(bv, 2^29); @time myrank1(bv, 2^29);
   0.714866 seconds (6 allocations: 192 bytes)
 
-julia&gt; sbv = SucVector(bv);
+julia> sbv = SucVector(bv);
 
-julia&gt; rank1(sbv, 2^29); @time rank1(sbv, 2^29);  # much faster!
+julia> rank1(sbv, 2^29); @time rank1(sbv, 2^29);  # much faster!
   0.000003 seconds (6 allocations: 192 bytes)
 
-julia&gt; rrr = RRR(bv);
+julia> rrr = RRR(bv);
 
-julia&gt; rank1(rrr, 2^29); @time rank1(rrr, 2^29);  # much faster, too!
+julia> rank1(rrr, 2^29); @time rank1(rrr, 2^29);  # much faster, too!
   0.000004 seconds (6 allocations: 192 bytes)
 </code></pre></div></div>
 
@@ -256,7 +201,7 @@ integers is represented in this bit vector, you can efficiently query the
 <p>Let’s see the internal representation of <code class="highlighter-rouge">SucVector</code> to understand the magic.
 A bit vector is separated into large blocks:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type SucVector &lt;: AbstractIndexableBitVector
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type SucVector <: AbstractIndexableBitVector
     blocks::Vector{Block}
     len::Int
 end
@@ -280,7 +225,7 @@ four bit chunks corresponding to small blocks:</p>
 end
 </code></pre></div></div>
 
-<p><img src="/images/blog/2015-10-03-sequence-analysis/sucvector.png" alt="Block" /></p>
+<p><img src="/images/blog/2015-10-03-sequence-analysis/sucvector.png" alt="Block"></p>
 
 <p>Since the bit count of the first small block is always zero, we can exploit
 this space to extend the cache of the large block (red frame).  When running
@@ -309,32 +254,32 @@ simpler to query, and faster in practice than the levelwise wavelet tree”.</p>
 and <code class="highlighter-rouge">T</code> are analogous to those of <code class="highlighter-rouge">IntArray{w,T,n}</code>, and <code class="highlighter-rouge">B</code> is a type of
 indexable bit vector.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using WaveletMatrices
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> using WaveletMatrices
 
-julia&gt; wm = WaveletMatrix{2}([0x00, 0x01, 0x02, 0x03])
+julia> wm = WaveletMatrix{2}([0x00, 0x01, 0x02, 0x03])
 4-element WaveletMatrices.WaveletMatrix{2,UInt8,IndexableBitVectors.SucVector}:
  0x00
  0x01
  0x02
  0x03
 
-julia&gt; wm[3]
+julia> wm[3]
 0x02
 
-julia&gt; rank(0x02, wm, 2)
+julia> rank(0x02, wm, 2)
 0
 
-julia&gt; rank(0x02, wm, 3)
+julia> rank(0x02, wm, 3)
 1
 
-julia&gt; xs = rand(0x00:0x03, 2^16);
+julia> xs = rand(0x00:0x03, 2^16);
 
-julia&gt; wm = WaveletMatrix{2}(xs);  # 2-bit encoding
+julia> wm = WaveletMatrix{2}(xs);  # 2-bit encoding
 
-julia&gt; sum(xs[1:2^15] .== 0x03)
+julia> sum(xs[1:2^15] .== 0x03)
 8171
 
-julia&gt; rank(0x03, wm, 2^15)
+julia> rank(0x03, wm, 2^15)
 8171
 </code></pre></div></div>
 
@@ -360,7 +305,7 @@ purpose):</p>
     sp, ep = 1, length(index)
     # backward search
     i = length(query)
-    while sp ≤ ep &amp;&amp; i ≥ 1
+    while sp ≤ ep && i ≥ 1
         char = convert(UInt8, query[i])
         c = index.count[char+1]
         sp = c + rank(char, index.bwt, sp - 1) + 1
@@ -387,9 +332,9 @@ text can be restored from an index.</p>
 <p>Building an index for full-text search is ridiculously simple: just passing a
 sequence to a constructor:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using FMIndexes
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> using FMIndexes
 
-julia&gt; fmindex = FMIndex("abracadabra");
+julia> fmindex = FMIndex("abracadabra");
 </code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">FMIndex</code> type supports two main queries: <code class="highlighter-rouge">count</code> and <code class="highlighter-rouge">locate</code>.  The
@@ -398,13 +343,13 @@ julia&gt; fmindex = FMIndex("abracadabra");
 <code class="highlighter-rouge">query</code>.  In order to restore the original text, you can use the <code class="highlighter-rouge">restore</code>
 function.  Here is a simple usage:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; count("a", fmindex)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> count("a", fmindex)
 5
 
-julia&gt; count("abra", fmindex)
+julia> count("abra", fmindex)
 2
 
-julia&gt; locate("a", fmindex) |&gt; collect
+julia> locate("a", fmindex) |> collect
 5-element Array{Any,1}:
  11
   8
@@ -412,12 +357,12 @@ julia&gt; locate("a", fmindex) |&gt; collect
   4
   6
 
-julia&gt; locate("abra", fmindex) |&gt; collect
+julia> locate("abra", fmindex) |> collect
 2-element Array{Any,1}:
  8
  1
 
-julia&gt; bytestring(restore(fmindex))
+julia> bytestring(restore(fmindex))
 "abracadabra"
 </code></pre></div></div>
 
@@ -469,40 +414,40 @@ $ ls -lh chr22.fa.index
 <p>After construction finished (this will take several minutes), read the index in
 REPL:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using FMIndexes
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> using FMIndexes
 
-julia&gt; fmindex = open(deserialize, "chr22.fa.index");
+julia> fmindex = open(deserialize, "chr22.fa.index");
 </code></pre></div></div>
 
 <p>Now that you can execute queries to search a DNA fragment:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using Bio.Seq
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> using Bio.Seq
 
-julia&gt; count(dna"GACTTTCAC", fmindex)  # this DNA fragment hits at 111 locations
+julia> count(dna"GACTTTCAC", fmindex)  # this DNA fragment hits at 111 locations
 111
 
-julia&gt; count(dna"GACTTTCACTTT", fmindex)  # this hits at 3 locations
+julia> count(dna"GACTTTCACTTT", fmindex)  # this hits at 3 locations
 3
 
-julia&gt; locate(dna"GACTTTCACTTT", fmindex) |&gt; collect  # the loci of these hits
+julia> locate(dna"GACTTTCACTTT", fmindex) |> collect  # the loci of these hits
 3-element Array{Any,1}:
  36253071
  47308573
  34159872
 
-julia&gt; count(dna"GACTTTCACTTTCCC", fmindex)  # found a unique hit!
+julia> count(dna"GACTTTCACTTTCCC", fmindex)  # found a unique hit!
 1
 
-julia&gt; locate(dna"GACTTTCACTTTCCC", fmindex) |&gt; collect
+julia> locate(dna"GACTTTCACTTTCCC", fmindex) |> collect
 1-element Array{Any,1}:
  36253071
 
-julia&gt; @time locate(dna"GACTTTCACTTTCCC", fmindex);  # this can be located in 32 μs!
+julia> @time locate(dna"GACTTTCACTTTCCC", fmindex);  # this can be located in 32 μs!
   0.000032 seconds (5 allocations: 192 bytes)
 </code></pre></div></div>
 
 <p>This locus,
-<a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&amp;position=chr22%3A36253071-36253120&amp;hgsid=446220019_CeC0woSUOd5ov3GLph7a6fs5Uryo">chr22:36253071</a>,
+<a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position=chr22%3A36253071-36253120&hgsid=446220019_CeC0woSUOd5ov3GLph7a6fs5Uryo">chr22:36253071</a>,
 is the starting position of the <em>APOL1</em> gene.</p>
 
 <h2 id="applications">Applications</h2>
@@ -531,120 +476,10 @@ the BioJulia project, we really welcome your contributions!</p>
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>

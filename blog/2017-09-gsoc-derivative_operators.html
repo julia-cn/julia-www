@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
-<head>
-  <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>GSoC 2017: Efficient Discretizations of PDE Operators</title>
-<meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/v2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/v2/css/app.css" />
-<link rel="stylesheet" href="/v2/css/fonts.css" />
-<link rel="stylesheet" href="/v2/css/highlight/github.css" />
-</head>
-
+<?php 
+$title = "GSoC 2017: Efficient Discretizations of PDE Operators";
+$keywords = "";
+$description = "";
+$active_menu = "blog";
+require_once('../_common/head.html'); ?>
 <body>
   
 
-<!-- main menu -->
-<div class="container py-3 py-lg-0">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-menu">
+  <?php require_once('../_common/nav.html'); ?>
 
-    <a class="navbar-brand" href="/" id="logo">
-      <img src="/v2/img/logo.svg" height="55" width="85" />
-    </a>
-
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/">Home</a>
-        </li -->
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/downloads">Download</a>
-        </li>
-        <li class="nav-item flex-md-fill text-md-center">
-          <a class="nav-link" href="//docs.julialang.org">Documentation</a>
-        </li>
-        <li class="nav-item  active  flex-md-fill text-md-center">
-          <a class="nav-link" href="/blog/">Blog</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/community">Community</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/learning">Learning</a>
-        </li>
-        <li class="nav-item  flex-md-fill text-md-center">
-          <a class="nav-link" href="/publications">Research</a>
-        </li>
-        <li class="nav-item donate flex-md-fill text-md-center">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-<!-- end main menu -->
-
-
-<br /><br />
+<br><br>
 
 <div class="container">
 
@@ -79,7 +25,7 @@
   <p class="metadata">
     <span class="timestamp">06 Sep 2017</span>
     
-    &nbsp;|&nbsp;
+     | 
     <span class="author">Shivin Srivastava, Christopher Rackauckas</span>
     
   </p>
@@ -179,8 +125,8 @@ Where $A$ is a linear operator and not the transformation matrix. Thus we will h
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Define A as a DerivativeOperator of 4th order and of 2nd order of accuracy
 
-julia&gt; A = DerivativeOperator{Float64}(4,2,1.0,10,:Dirichlet0,:Dirichlet0)
-julia&gt; A.stencil_coefs
+julia> A = DerivativeOperator{Float64}(4,2,1.0,10,:Dirichlet0,:Dirichlet0)
+julia> A.stencil_coefs
 7-element SVector{7,Float64}:
   -0.166667
    2.0     
@@ -193,7 +139,7 @@ julia&gt; A.stencil_coefs
 
 <p>If we want to apply the operator as a matrix multiplication (sparse or dense) we can easily do so by extracting the <em>matrix of transformation</em> of the linear operator which looks like:-</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; full(A)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia> full(A)
 10×10 Array{Float64,2}:
  9.33333   -6.5        2.0       …   0.0        0.0        0.0     
 -6.5        9.33333   -6.5           0.0        0.0        0.0     
@@ -206,7 +152,7 @@ julia&gt; A.stencil_coefs
  0.0        0.0        0.0          -6.5        9.33333   -6.5     
  0.0        0.0        0.0           2.0       -6.5        9.33333
 
- julia&gt; sparse(A)
+ julia> sparse(A)
  10×10 SparseMatrixCSC{Float64,Int64} with 58 stored entries:
    [1 ,  1]  =  9.33333
    [2 ,  1]  =  -6.5
@@ -236,10 +182,10 @@ julia&gt; A.stencil_coefs
 
 <p>For this example we consider a Dirichlet boundary condition with the initial distribution being parabolic. Since we have fixed the value at boundaries (in this case equal), after a long time we expect the 1D rod to be heated in a linear manner.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    julia&gt; using DiffEqOperators, DifferentialEquations, Plots
-    julia&gt; x = -pi : 2pi/511 : pi;
-    julia&gt; u0 = -(x - 0.5).^2 + 1/12;
-    julia&gt; A = DerivativeOperator{Float64}(2,2,2pi/511,512,:Dirichlet,:Dirichlet;BC=(u0[1],u0[end]));
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    julia> using DiffEqOperators, DifferentialEquations, Plots
+    julia> x = -pi : 2pi/511 : pi;
+    julia> u0 = -(x - 0.5).^2 + 1/12;
+    julia> A = DerivativeOperator{Float64}(2,2,2pi/511,512,:Dirichlet,:Dirichlet;BC=(u0[1],u0[end]));
 </code></pre></div></div>
 
 <p>This is the code to set-up the problem. First we define the domain which is just a plane line divided up into <code class="highlighter-rouge">512</code> segments. Then we define the initial condition, which is a parabolic function of the x-coordinate.</p>
@@ -248,13 +194,13 @@ julia&gt; A.stencil_coefs
 
 <p>Now solving equation as an ODE we have:-</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    julia&gt; prob1 = ODEProblem(A, u0, (0.,10.));
-    julia&gt; sol1 = solve(prob1, dense=false, tstops=0:0.01:10);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    julia> prob1 = ODEProblem(A, u0, (0.,10.));
+    julia> sol1 = solve(prob1, dense=false, tstops=0:0.01:10);
     # try to plot the solution at different time points using
-    julia&gt; plot(x, [sol1(i) for i in 0:1:10])
+    julia> plot(x, [sol1(i) for i in 0:1:10])
 </code></pre></div></div>
 
-<p><img src="/images/blog/2017-09-06-gsoc-derivative_operators/heat_eqn_D1.png" alt="Heat Equation" /></p>
+<p><img src="/images/blog/2017-09-06-gsoc-derivative_operators/heat_eqn_D1.png" alt="Heat Equation"></p>
 
 <p>Notice how the heat distribution ‘flattens’ out with time as expected and finally tends to increase linearly from left to right end.</p>
 
@@ -262,7 +208,7 @@ julia&gt; A.stencil_coefs
 
 <p>Not all PDEs can be solved with central derivatives, for example the <strong>KdV wave equation</strong>. After a few iterations of the ODE solver the wave begins to split ie. it becomes unstable very quickly.</p>
 
-<p><img src="/images/blog/2017-09-06-gsoc-derivative_operators/kdv_derivative.png" alt="KdV using central derivatives" /></p>
+<p><img src="/images/blog/2017-09-06-gsoc-derivative_operators/kdv_derivative.png" alt="KdV using central derivatives"></p>
 
 <p>For these very cases the <a href="https://en.wikipedia.org/wiki/Upwind_scheme">upwind scheme</a> has been devised. It denote a class of numerical discretization methods for solving hyperbolic PDEs. They attempt to discretize hyperbolic PDEs by using differencing biased in the direction determined by the sign of the characteristic speeds. For example the 1D linear advection equation
 <script type="math/tex">\frac{\partial u}{\partial t} + a\frac{\partial u}{\partial x}=0</script>
@@ -281,7 +227,7 @@ $u_i^{n+1} = u_i^n - \Delta t[a^{+}u_x^{-} + a^{-}u_x^{+}]$</p>
 
 <p>The solution of the <strong>KdV equation</strong> using upwind operator looks better.</p>
 
-<p><img src="/images/blog/2017-09-06-gsoc-derivative_operators/kdv_upwind.png" alt="KdV solved using Upwind operators" /></p>
+<p><img src="/images/blog/2017-09-06-gsoc-derivative_operators/kdv_upwind.png" alt="KdV solved using Upwind operators"></p>
 
 <h2 id="future-work">Future Work</h2>
 <p>Although vanilla <code class="highlighter-rouge">DerivativeOperators</code> and the <code class="highlighter-rouge">UpwindOperators</code> form the major part of DiffEqOperators there is still a lot to be done. A major functionality which is half implemented is application of DiffEqOperators on high dimensional spaces. Currently we support mixed and normal derivatives on 2D spaces only. There are open <a href="https://github.com/JuliaDiffEq/DiffEqOperators.jl/issues/20">issues</a> and implementation <a href="https://github.com/JuliaDiffEq/DiffEqOperators.jl/issues/21">ideas</a> on the issues page.</p>
@@ -303,120 +249,10 @@ $u_i^{n+1} = u_i^n - \Delta t[a^{+}u_x^{-} + a^{-}u_x^{+}]$</p>
 </div>
 </div>
 
-<br />
+<br>
 
-<footer class="container-fluid footer-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Download</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/index.html">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/downloads/oldreleases.html">Older</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Documentation</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1/">Julia v1.0</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://docs.julialang.org/en/v1.1-dev/">Julia v1.1-dev</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Packages</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://juliaobserver.com">Julia Observer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://pkg.julialang.org/pulse.html">Ecosystem Pulse</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Community</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://discourse.julialang.org">Discourse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.slack.com/">Slack</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Learning</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/JuliaLanguage/">YouTube Channel</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julialang.org/learning/">Other Resources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 footer-menu-item">
-          <h6>Research</h6>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/publications/">Publications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://julia.mit.edu/">MIT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br />
-  </footer>
+  <?php require_once('../_common/foot.html'); ?>
 
 
-<!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-28835595-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<!-- End Google Analytics -->
-
-<footer class="container-fluid footer-copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 py-2">
-          <p>
-            Julia is a NumFocus project. We thank Fastly for their generous infrastructure support.
-          </p>
-          <p>
-            ©2018 JuliaLang. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-2 py-2">
-          <a class="btn btn-success" href="https://www.flipcause.com/widget/widget_home/MjI1Nw==">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="/v2/js/jquery.min.js"></script>
-<script src="/v2/js/bootstrap.min.js"></script>
-<script src="/v2/js/platform.js"></script>
-<script src="/v2/js/app.js"></script>
-<script src="/v2/js/highlight.pack.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+</body></html>
