@@ -168,10 +168,10 @@
                             构建、部署或嵌入代码
                         </h4>
                         <p>
-                            Julia允许您<a href="https://github.com/JuliaGizmos/WebIO.jl">编写UI</a>、<a href="https://github.com/JuliaLang/PackageCompiler.jl">静态编译</a>代码，甚至将其部署到<a href="https://github.com/JuliaWeb/HTTP.jl">Web服务</a>器上。它还具有强大的类shell功能，用于<a href="https:https://docs.julialangcn.org//en/stable/manual/running-external-programs/">管理其他进程</a>。它提供了类似Lisp的宏和其他<a href="https:https://docs.julialangcn.org//en/stable/manual/metaprogramming/">元编程</a>工具。
+                            Julia允许您<a href="https://github.com/JuliaGizmos/WebIO.jl">编写UI</a>、<a href="https://github.com/JuliaLang/PackageCompiler.jl">静态编译</a>代码，甚至将其部署到<a href="https://github.com/JuliaWeb/HTTP.jl">Web服务</a>器上。它还具有强大的类shell功能，用于<a href="https://docs.julialangcn.org/manual/running-external-programs.html">管理其他进程</a>。它提供了类似Lisp的宏和其他<a href="https://docs.julialangcn.org/manual/metaprogramming.html">元编程</a>工具。
                         </p>
                         <p>
-                            Julia有用于<a href="https:https://docs.julialangcn.org//en/stable/manual/calling-c-and-fortran-code/">C/Fortran</a>、<a href="https://github.com/Keno/Cxx.jl">C++</a>、<a href="https://github.com/JuliaPy/PyCall.jl">Python</a>、<a href="https://github.com/JuliaInterop/RCall.jl">R</a>、<a href="https://github.com/JuliaInterop/JavaCall.jl">Java</a>和许多其他语言的外部函数接口。Julia也可以通过其<a href="https:https://docs.julialangcn.org//en/stable/manual/embedding/">嵌入API</a>嵌入到其他程序中。具体来说，Python程序可以使用<a href="https://github.com/JuliaPy/pyjulia">Pyjua</a>调用Julia。R程序可以对<a href="https://cran.r-project.org/web/packages/JuliaCall/index.html">R的JuliaCall</a>进行同样的操作，这是<a href="https://rpubs.com/dmbates/377897">通过从R调用MixedModels.jl</a>来演示的。
+                            Julia有用于<a href="https://docs.julialangcn.org/manual/calling-c-and-fortran-code.html">C/Fortran</a>、<a href="https://github.com/Keno/Cxx.jl">C++</a>、<a href="https://github.com/JuliaPy/PyCall.jl">Python</a>、<a href="https://github.com/JuliaInterop/RCall.jl">R</a>、<a href="https://github.com/JuliaInterop/JavaCall.jl">Java</a>和许多其他语言的外部函数接口。Julia也可以通过其<a href="https://docs.julialangcn.org/manual/embedding.index">嵌入API</a>嵌入到其他程序中。具体来说，Python程序可以使用<a href="https://github.com/JuliaPy/pyjulia">Pyjua</a>调用Julia。R程序可以对<a href="https://cran.r-project.org/web/packages/JuliaCall/index.html">R的JuliaCall</a>进行同样的操作，这是<a href="https://rpubs.com/dmbates/377897">通过从R调用MixedModels.jl</a>来演示的。
                         </p>
                     </div>
                 </div>
@@ -185,8 +185,7 @@
                                     并行和异构计算
                                 </h4>
                                 <p>
-                                    Julia专为并行性而设计，并为各个级别的并行计算提供内置基元：<b><a href="https:https://docs.julialangcn.org//en/stable/base/simd-types/">指令级并行</a></b>，<b><a href="https:https://docs.julialangcn.org//en/stable/manual/parallel-computing/#Multi-Threading-(Experimental)-1">多线程</a></b>和<b><a href="https:https://docs.julialangcn.org//en/stable/manual/parallel-computing/">分布式计算</a></b>。<a href="https://github.com/jeff-regier/Celeste.jl">Celeste.jl</a>项目在<a href="https://cs.lbl.gov/news-media/news/2016/celeste-enhancements-create-new-opportunities-in-sky-surveys/"></a>NERSC的Cori超级计算机</a>上使用650,000个核心 <a
-                                    href="https://arxiv.org/pdf/1801.10277.pdf">达到了1.5 PetaFLOP/s</a>。
+                                    Julia专为并行性而设计，并为各个级别的并行计算提供内置基元：<b><a href="https://docs.julialangcn.org/base/simd-types.html">指令级并行</a></b>，<b><a href="https://docs.julialangcn.org/manual/parallel-computing.html#Multi-Threading-(Experimental)">多线程</a></b>和<b><a href="https://docs.julialangcn.org/manual/parallel-computing.html">分布式计算</a></b>。<a href="https://github.com/jeff-regier/Celeste.jl">Celeste.jl</a>项目在<a href="https://cs.lbl.gov/news-media/news/2016/celeste-enhancements-create-new-opportunities-in-sky-surveys/"></a>NERSC的Cori超级计算机</a>上使用650,000个核心 <a href="https://arxiv.org/pdf/1801.10277.pdf">达到了1.5 PetaFLOP/s</a>。
                                 </p>
                                 <p>
                                     Julia编译器还可以为各种硬件加速器生成本地代码，例如<a href="https://github.com/JuliaGPU/CUDAnative.jl">GPUs</a>和Xeon Phis。诸如<a href="https://github.com/JuliaParallel/DistributedArrays.jl">DistributedArrays.jl</a>和<a href="https://github.com/JuliaParallel/Dagger.jl">Dagger.jl</a>之类的包为并行性提供了更高级别的抽象方法。
@@ -374,7 +373,7 @@ end
             </div>
             <br />
             <p>
-                Julia已被下载超过200万次，而Julia社区已经开发了超过1,900个Julia软件包。这些包括各种数学库，数据操作工具和用于通用计算的包。除此之外，您还可以轻松使用<a href="https://github.com/JuliaPy/PyCall.jl">Python</a>，<a href="https://github.com/JuliaInterop/RCall.jl">R</a>，<a href="https:https://docs.julialangcn.org//en/stable/manual/calling-c-and-fortran-code/#Calling-C-and-Fortran-Code-1">C/Fortran</a>，<a href="https://github.com/Keno/Cxx.jl">C++</a>和<a href="https://github.com/JuliaInterop/JavaCall.jl">Java</a>中的库。如果你找不到你想要的东西，请在<a href="http://discourse.julialang.org">Discourse</a>上提问，或者直接参与贡献！
+                Julia已被下载超过200万次，而Julia社区已经开发了超过1,900个Julia软件包。这些包括各种数学库，数据操作工具和用于通用计算的包。除此之外，您还可以轻松使用<a href="https://github.com/JuliaPy/PyCall.jl">Python</a>，<a href="https://github.com/JuliaInterop/RCall.jl">R</a>，<a href="https://docs.julialangcn.org/manual/calling-c-and-fortran-code.html">C/Fortran</a>，<a href="https://github.com/Keno/Cxx.jl">C++</a>和<a href="https://github.com/JuliaInterop/JavaCall.jl">Java</a>中的库。如果你找不到你想要的东西，请在<a href="http://discourse.julialang.org">Discourse</a>上提问，或者直接参与贡献！
             </p>
 
             <br /><br />
