@@ -1,88 +1,95 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 
 <?php 
-$title = "A portrait of JuliaCon 2018";
+$title = "JuliaCon 2018年的展望";
 $keywords = "";
 $description = "";
 $active_menu = "blog";
 require_once('../_common/head.html'); ?>
+
 <body>
-  
 
   <?php require_once('../_common/nav.html'); ?>
 
-<br><br>
+  <br><br>
 
-<div class="container">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-12 col-lg-8 offset-lg-2">
-      <h1></h1>
+    <div class="row">
+      <div class="col-12 col-lg-8 offset-lg-2">
+        <article id="blogpost">
+          <h1>JuliaCon 2018年的展望</h1>
 
-<div id="blogpost">
-  <h1>A portrait of JuliaCon 2018</h1>
+          <p class="metadata">
+            <span class="timestamp">2018年9月11日</span> | <span class="author">Jane Herriman</span>
 
-  <p class="metadata">
-    <span class="timestamp">11 Sep 2018</span>
-    
-     | 
-    <span class="author">Jane Herriman</span>
-    
-  </p>
+          </p>
 
-  <p><img src="/images/blog/2018-09-11-juliacon2018/JuliaCon2018_group_photo.jpg" alt="JuliaCon2018 group photo"></p>
+          <p><img src="./static/images/JuliaCon2018_group_photo.jpg" alt="JuliaCon2018成员照"></p>
 
-<h4 id="so-much-went-well">So much went well!</h4>
+          <h4 id="so-much-went-well">一切都很顺利！</h4>
 
-<p>As the venue of the Julia 1.0 release and the largest meeting of the Julia community yet, JuliaCon 2018 was remarkable in multiple ways. It brought together almost 350 attendees representing users and developers of the Julia language who hailed from Africa, Asia, Europe, North America, Australia, and South America.</p>
+          <p>作为Julia 1.0发布的场地和Julia社区最大的会议，JuliaCon 2018在多个方面都非常出色。它聚集了近350名参会者，他们代表来自非洲，亚洲，欧洲，北美，澳大利亚和南美洲的Julia语言的用户和开发者。</p>
 
-<p>With an eye to quality over quantity, we’re happy to report that our attendees were overwhelmingly pleased with the conference: Of the attendees who have responded to our post-conference feedback survey, 98.8% reported they were happy with their decision to come to JuliaCon. On a scale of 1 to 5, 88.3% of responding attendees ranked their feeling of being welcome and included at JuliaCon as a 4 or a 5 (where 5 is the best score); on the same scale, 0% of attendees responded with a 1.</p>
+          <p>考虑到质量而非数量，我们很高兴地报告我们的参会者对会议非常满意：在对我们的会后反馈调查作出回应的参会者中，98.8％的人表示他们对他们决定来到JuliaCon。在1到5的等级中，88.3％的回复参加者将他们的欢迎感排在第一位，并将其列为JuliaCon的4或5（其中5是最佳分数）; 在同样的规模上，0％的参会者回答1。</p>
 
-<p>Furthermore, we were able to provide over $70,000 USD to support conference expenses for attendees including speakers, Google Summer of Code (GSoC) students working on Julia, and users we thought would bring greater diversity to JuliaCon. Individuals receiving financial support came from all six continents represented at the conference.</p>
+          <p>
+            此外，我们能够提供超过 70,000 美元的资金来支持会议开支，包括演讲者，使用Julia参加Google Summer of Code（GSoC）的学生，以及我们认为会给JuliaCon带来更大多样性的用户，以便从各六大洲远道而来的人们能够顺利参加我们的会议。
+          </p>
 
-<p>In particular, the JuliaCon organizing committee was able to bring in a total of $45,000 USD from the Sloan Foundation, the Moore Foundation, and Julia Computing to support JuliaCon 2018 diversity efforts. With these funds, which amounted to 3X the diversity budget for JuliaCon 2017, we were able to support conference expenses for over 25 people who helped increase diversity at JuliaCon 2018.</p>
+          <p>
+            特别是，JuliaCon组委会能够从斯隆基金会，摩尔基金会和Julia Computing公司获得45,000美元的总额，以支持JuliaCon 2018多元化工作。凭借这些资金，相当于JuliaCon 2017多样性预算的3倍，我们能够支持超过25人的会议费用，这些人帮助增加了JuliaCon 2018的多样性。
+          </p>
 
-<h4 id="some-data-from-juliacon-2018-attendees">Some data from JuliaCon 2018 attendees</h4>
+          <h4 id="some-data-from-juliacon-2018-attendees">JuliaCon 2018与参会者的一些数据</h4>
 
-<p>This year, at JuliaCon 2018, 15% of attendees who provided information about their gender at registration self-identified as gender minorities. We made providing this information optional, which left our data less than fully complete. Still, our data allows us to place a lower bound of 8% on the percentage of gender minorities among attendees at JuliaCon 2018. Similarly, 9% of attendees who provided demographic information at registration self-identified as racial or ethnic minorities, and our data indicates that at least 5% of JuliaCon 2018 attendees self-identify as racial or ethnic minorities. In total, about 28% of those attendees providing demographic information at registration self-identified as underrepresented in a computing environment due to factors such as gender, race, ethnicity, socioeconomic status, disability status, sexual orientation, age, or educational background. Not having data for all attendees, we can say that at least 15% of all attendees fit this description.</p>
+          <p>
+            今年，在JuliaCon 2018年，15％在注册时提供有关性别信息的与参会者自称为性别少数群体。我们提供此信息是可选的，这使我们的数据不完全完整。尽管如此，我们的数据允许我们在JuliaCon 2018的参与者中对性别少数群体的百分比设置8％的下限。同样，9％在注册时提供人口统计信息的参与者自我识别为种族或少数民族，以及我们的数据 表明至少有5％的JuliaCon 2018参会者自我认定为种族或少数民族。 总体而言，由于性别，种族，民族，社会经济地位，残疾状况，性取向，年龄或教育背景等因素，在注册时提供人口统计信息的参与者中约有28％自我认定为在计算环境中代表性不足。没有所有参会者的数据，我们可以说至少有15％的参会者符合此描述。
+          </p>
 
-<h4 id="so-what-does-all-this-mean">So what does all this mean?</h4>
+          <h4 id="so-what-does-all-this-mean">那么，这意味着什么？</h4>
 
-<p>Among multi-year attendees of JuliaCon, there appears to be a consensus that JuliaCon 2018 was markedly more diverse than previous JuliaCons. Because this was the first year in which we’ve collected data on the demographics of JuliaCon attendees, making precise claims about how the diversity of the conference has evolved over time is tricky. However, we can say this: best estimates of gender diversity put the percentage of gender minorities at JuliaCon 2017 around 5%. Using only our lower bound on gender diversity from 2018, gender diversity increased by over 50%. If we assume gender did not impact self-reporting, gender diversity may have increased by a factor of 3.</p>
+          <p>在JuliaCon的多年参与者中，似乎已经达成共识，JuliaCon 2018明显比以前的JuliaCon更加多样化。因为这是我们收集JuliaCon参会者人口统计数据的第一年，因此对会议的多样性如何随着时间的推移而发展的确切主张是棘手的。但是，我们可以这样说：对性别多样性的最佳估计表明，2017年JuliaCon的性别少数群体比例约为5％。仅使用2018年性别多样性的下限，性别多样性增加了50％以上。如果我们假设性别不影响自我报告，性别多样性可能会增加3倍。</p>
 
-<p>So, based on the data we do have, our attendees’ impression that JuliaCon 2018 was more diverse than previous JuliaCons seems spot on. This is extremely gratifying. It’s a step in the right direction, and it reflects our community’s investment in making itself more diverse and inclusive. At the same time, these numbers also evidence that we have quite a way to go.</p>
+          <p>因此，根据我们所拥有的数据，我们的参与者的印象是，JuliaCon 2018比以前的JuliaCons更加多样化。这非常令人满意。这是朝着正确方向迈出的一步，它反映了我们社区在使自己更加多样化和包容性方面的投资。与此同时，这些数字也证明我们还有很长的路要走。</p>
 
-<h4 id="what-can-we-do-to-improve">What can we do to improve?</h4>
+          <h4 id="what-can-we-do-to-improve">我们可以做些什么来改进？</h4>
 
-<p>The Tuesday after JuliaCon 2018, the organizing committee had an unusually long meeting in which we discussed our impressions of JuliaCon 2018. As has since been reflected in the feedback given by our attendees, committee members foremost expressed happiness at how much of JuliaCon went right. We were also able to identify multiple ways and areas in which to improve the inclusivity of JuliaCon 2019:</p>
+          <p>
+            在JuliaCon 2018年之后的星期二，组委会进行了一次异常漫长的会议，我们在会上讨论了JuliaCon 2018的印象。正如我们的与会者给出的反馈意见所反映的那样，委员会成员最重要的是表达了JuliaCon的正确程度。 我们还能够确定多种方式和领域，以提高JuliaCon 2019的包容性：
+          </p>
 
-<p>Most obviously, we need to improve not only the diversity of those attending JuliaCon, but of those who represent the Julia community as JuliaCon keynotes, speakers, and session chairs. The choices of keynotes and session chairs are especially influenced by the recruiting efforts of the JuliaCon organizing committee. We thereby have more control and a clearer path to improving the diversity of the conference in these particular ways.</p>
+          <p>
+            最明显的是，我们不仅需要改善参加JuliaCon的人的多样性，还需要改善那些代表Julia社区的人作为JuliaCon主题演讲，发言人和会议主席。主题演讲和会议主席的选择尤其受到JuliaCon组委会招募工作的影响。因此，我们有更多的控制和更清晰的途径以这些特定的方式改善会议的多样性。
+          </p>
 
-<p>Second, we need to train (or in some way, better prepare) the moderators of our Birds of a Feather (BoF) sessions. We noticed unfortunate dynamics in some of our BoF sessions where individuals were repeatedly spoken over and not heard, including, surprisingly, during the BoF dedicated to diversity and inclusion. These sorts of dynamics are preventable with foresight and preparation: especially in multicultural and racially/ethnically/gender imbalanced environments, the terms of engagement in any discussion need to be set clearly up front. For example, when one subset of a discussion group follows a hand-raising policy while another does not, discussion participation quickly skews. We need to prepare BoF moderators to handle such dynamics so that everyone who wants to speak can be heard.</p>
+          <p>
+            其次，我们需要训练（或以某种方式，更好地准备）我们的羽毛之鸟（BoF）会议的主持人。我们在一些BoF会议中发现了不幸的动态，在这些会议中，个人被反复说出而没有被听到，包括令人惊讶的是，在致力于多样性和包容性的BoF期间。这些动态可以通过预见和准备来预防：特别是在多元文化和种族/民族/性别不平衡的环境中，任何讨论中的参与条件都需要明确预先设定。 例如，当讨论组的一个子集遵循手动提升策略而另一个子组则不遵循时，讨论参与很快就会出现偏差。 我们需要准备BoF主持人来处理这种动态，以便能够听到每个想说话的人。
+          </p>
 
-<p>Third, we intend to provide live transcription of all JuliaCon 2019 talks. Live transcription would benefit not only our deaf and hard of hearing members of the Julia community, but also our community’s non-native English speakers.</p>
+          <p>第三，我们打算提供所有JuliaCon 2019谈话的实况转录。实时转录不仅有益于我们的Julia社区的聋人和听力障碍成员，也有利于我们社区的非英语母语人士。</p>
 
-<p>Beyond the above ideas voiced by JuliaCon organizing committee members, we received excellent feedback from our attendees on ways to further improve. Perhaps foremost amongst these were requests to provide more avenues for mentoring/training and community building targeted at two groups. First, we received requests to provide a dedicated session (workshop, dinner, or otherwise) for women and other minorities in CS both to provide mentoring and build community. Second, we received requests to more actively design sessions for non-dev/newer members of the Julia community. Ideas have included introductions to GitHub/package development as well as dinner sign ups that would match newer members of the community with small groups that would extend their networks.</p>
+          <p>除了JuliaCon组委会成员提出的上述想法之外，我们还收到了与会者对进一步改进方法的极好反馈。 其中最重要的可能是提供更多针对两个群体的指导/培训和社区建设的途径。 首先，我们收到了为CS中的女性和其他少数群体提供专门会议（研讨会，晚宴或其他）的请求，以提供指导和建立社区。 其次，我们收到了更积极地为Julia社区的非开发/新成员设计会议的请求。 想法包括介绍GitHub /软件包开发以及晚餐注册，以便与社区的新成员和扩展其网络的小组相匹配。</p>
 
-<h4 id="conclusion">Conclusion</h4>
+          <h4 id="conclusion">结论</h4>
 
-<p>For most of us (myself included!), JuliaCon 2018 was a blast. JuliaCon provides an opportunity for our community to learn about fantastic advances in both the tools provided within the Julia ecosystem and the applications enabled by those tools. Beyond that, JuliaCon provides a venue allowing new members to engage with the rest of the community and veterans to spend quality time together in the flesh, after communicating over slack, discourse, github, and email for the previous year. This year we saw not only community growth, but increased diversity, recognition of our need to continue pushing for inclusivity, and ideas/avenues for how we can achieve greater inclusivity.</p>
+          <p>对于我们大多数人（包括我自己！），JuliaCon 2018是一个爆炸。 JuliaCon为我们的社区提供了一个机会，可以了解Julia生态系统中提供的工具以及这些工具启用的应用程序的出色进展。 除此之外，JuliaCon提供了一个场所，允许新成员与社区的其他成员和退伍军人一起在上一年通过冗余，话语，github和电子邮件进行沟通之后，与他人共度美好时光。 今年，我们不仅看到了社区增长，而且看到了多样性的增加，对继续推动包容性的需求的认识，以及我们如何实现更大包容性的想法/途径。</p>
 
-<p>For those of you interested in contributing to JuliaCon 2019, we welcome you to join the JuliaCon 2019 organizing committee. Organizing will be in full swing by mid-Fall 2019 and we will be seeking volunteers for tasks such as mentoring, proposal reviewing, and session chairing as conference plans comes together over the course of the next year.</p>
+          <p>对于那些有兴趣为JuliaCon 2019做贡献的人，我们欢迎您加入JuliaCon 2019组委会。 组织工作将在2019年秋季中期全面展开，我们将寻找志愿者，负责指导，提案审查和会议主持，因为会议计划将在明年进行。</p>
 
+        </article>
 
-</div>
+      </div>
+    </div>
+  </div>
 
-
-
-</div>
-</div>
-</div>
-
-<br>
+  <br>
 
   <?php require_once('../_common/foot.html'); ?>
 
 
 
-</body></html>
+</body>
+
+</html>
