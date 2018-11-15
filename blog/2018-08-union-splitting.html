@@ -57,7 +57,7 @@ require_once('../_common/head.html'); ?>
           <p>
             假设<code class="highlighter-rouge">ret1</code>可以是两种类型之一，
             <code class="highlighter-rouge">A</code>或<code class="highlighter-rouge">B</code>(即 <code class="highlighter-rouge">Union{A,B}</code>)。
-            在旧版本的朱莉娅中，会发生这样的情况：从 <code class="highlighter-rouge">function1</code>开始，编译器会说“我不知道应该使用<code class="highlighter-rouge">function2</code>的哪种方法。”。
+            在旧版本的Julia中，会发生这样的情况：从 <code class="highlighter-rouge">function1</code>开始，编译器会说“我不知道应该使用<code class="highlighter-rouge">function2</code>的哪种方法。”。
             因此，它不会专门化此后的任何代码；相反，每次执行该块时，它都会使用<code class="highlighter-rouge">ret1</code>的实际类型，并开始研究方法表，执行类型交集，试图找到<code class="highlighter-rouge">function2</code>的一个合适的编译版本。
             类型交集所涉及的计算虽然经过了很好的优化，但仍然要求很高，因此“方法查找”步骤非常缓慢(特别是对于有几十个或数百个方法的函数)。
           </p>
@@ -84,7 +84,7 @@ require_once('../_common/head.html'); ?>
 
           <p>
             这里的差别很大。尽管Julia无法提前知道<code class="highlighter-rouge">ret1</code>的确切类型，但在第一个块中它肯定是<code class="highlighter-rouge">A</code>类型(因为它被选中了)，而在第二个块中它肯定是类型<code class="highlighter-rouge">B</code>(因为这是唯一的其他选项)。
-            因此，朱莉娅可以在编译时<strong>查找<code class="highlighter-rouge">function2</code>和<code class="highlighter-rouge">function3</code>的适当编译方法，而不是在运行时查找</strong>，这使它在实际运行时速度非常快。
+            因此，Julia可以在编译时<strong>查找<code class="highlighter-rouge">function2</code>和<code class="highlighter-rouge">function3</code>的适当编译方法，而不是在运行时查找</strong>，这使它在实际运行时速度非常快。
           </p>
 
           <p>
