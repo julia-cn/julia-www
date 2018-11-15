@@ -1,67 +1,74 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 
 <?php 
-$title = "Union-splitting: what it is, and why you should care";
+$title = "Union-splitting: 这是什么？为什么你应该了解它？";
 $keywords = "";
 $description = "";
 $active_menu = "blog";
 require_once('../_common/head.html'); ?>
+
 <body>
-  
+
 
   <?php require_once('../_common/nav.html'); ?>
 
-<br><br>
+  <br><br>
 
-<div class="container">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-12 col-lg-8 offset-lg-2">
-      <h1></h1>
+    <div class="row">
+      <div class="col-12 col-lg-8 offset-lg-2">
 
-<div id="blogpost">
-  <h1>Union-splitting: what it is, and why you should care</h1>
+        <article id="blogpost">
+          <h1>Union-splitting: 这是什么？为什么你应该了解它？</h1>
 
-  <p class="metadata">
-    <span class="timestamp">09 Aug 2018</span>
-    
-     | 
-    <span class="author"><a href="https://github.com/timholy">Tim Holy</a></span>
-    
-  </p>
+          <p class="metadata">
+            <span class="timestamp">2018年8月9日</span> | <span class="author"><a href="https://github.com/timholy">Tim Holy</a></span>
+          </p>
 
-  <p>Among those who follow Julia’s development closely, one of the (many) new features causing great excitement is something called “Union-splitting.”
-Here at JuliaCon 2018 I’ve found myself explaining this feature repeatedly, so I thought I’d write this blog post to help disseminate this important information more widely.
-Let me start by saying that I’m not the expert here—this is a feature added by Jameson Nash and Jacob Quinn, and enhanced by optimizer improvements by Keno Fisher—but I am one of the many people truly excited about how this is already changing how I write Julia code.</p>
+          <p>
+            令人兴奋的是“Union-splitting”。在JuliaCon 2018，我发现自己反复解释这个功能，所以我想我会写这篇博文来帮助更广泛地传播这些重要信息。
+            首先让我说我不是这里的专家 - 这是詹姆森纳什和雅各布奎因增加的一个功能，并且通过基诺费舍尔的优化改进得到了增强 - 但我是众多真正对此感到兴奋的人之一，因为它改变我写Julia代码的方式。
+          </p>
 
-<p>Here’s the background: in the old days, you had to take great care to make sure that nearly every function you wrote returned a predictable type.
-Experienced Julia programmers regularly reached for a tool, <code class="highlighter-rouge">@code_warntype</code>, to check whether code exhibited the dreaded “type instability.”
-This was code that returned (as determined by Julia’s inference engine) objects either of type <code class="highlighter-rouge">Any</code> or objects of type <code class="highlighter-rouge">Union{Type1, Type2, ...}</code>.
-The first meant that the inference engine was unable to make any specific statements about the return type; the latter meant that inference was able to determine a specific list of possible return types.
-Unfortunately, the compiler wasn’t particularly good at taking advantage of this partial knowledge, and so in practice either of these outcomes predictably implied very bad things for the performance of your code.</p>
+          <p>
+            背景介绍：在以前，您必须非常小心地确保您编写的几乎每个函数都返回一个可预测的类型。
+            有经验的Julia程序员经常使用一个工具<code class="highlighter-rouge">@code_warntype</code>来检查代码是否表现出可怕的“类型不稳定”。这段代码返回了类型为<code class="highlighter-rouge">Any</code>或类型为<code class="highlighter-rouge">Union{Type1, Type2, ...}</code>.的对象(由Julia的推断机决定)。前者意味着推断机无法对返回类型做出任何特定的声明；后者意味着推理能够确定可能返回类型的特定列表。不幸的是，编译器并不特别擅长利用这部分知识，因此在实践中，这些结果都可能会对代码的性能带来非常糟糕的影响。
+          </p>  
+          
+          <p>
+            快速推进到0.7和1.0版本，结果是“相同的”和“完全不同的”。我的意思是，<code class="highlighter-rouge">Any</code>仍然会表明一个可能存在的问题，因为编译器不能做任何优化代码。但通常情况下，<code class="highlighter-rouge">Union{Type1, Type2, ...}</code>并不需要担心，因为它很少或根本不会导致任何类型的性能损失。
+          </p>
 
-<p>Fast forward to 0.7 and 1.0, and the landscape is both “the same” and “completely different.”
-By this I mean that <code class="highlighter-rouge">Any</code> still indicates a likely problem, as the compiler can’t do anything to optimize the code.
-But often, <code class="highlighter-rouge">Union{Type1, Type2, ...}</code> is nothing to worry about, because it causes little or no performance hit of any kind.</p>
+          <p>
+            怎么实现这种申请的效果？简单地说，让我们假设在一个函数中有一个代码块，如下所示：
 
-<p>How does this magic work?
-Very briefly, let’s imagine you have a block of code inside a function that looks like this:</p>
-
-<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ret1</span> <span class="o">=</span> <span class="n">function1</span><span class="x">(</span><span class="n">args</span><span class="o">...</span><span class="x">)</span>
+          <div class="language-julia highlighter-rouge">
+            <div class="highlight">
+              <pre class="highlight"><code>    <span class="n">ret1</span> <span class="o">=</span> <span class="n">function1</span><span class="x">(</span><span class="n">args</span><span class="o">...</span><span class="x">)</span>
     <span class="n">ret2</span> <span class="o">=</span> <span class="n">function2</span><span class="x">(</span><span class="n">ret1</span><span class="x">,</span> <span class="o">...</span><span class="x">)</span>
     <span class="n">ret3</span> <span class="o">=</span> <span class="n">function3</span><span class="x">(</span><span class="n">ret1</span><span class="x">,</span> <span class="n">ret2</span><span class="x">,</span> <span class="o">...</span><span class="x">)</span>
     <span class="o">...</span>
-</code></pre></div></div>
+</code></pre>
+            </div>
+          </div>
 
-<p>Let’s imagine that <code class="highlighter-rouge">ret1</code> can be one of two types, <code class="highlighter-rouge">A</code> or <code class="highlighter-rouge">B</code> (i.e, <code class="highlighter-rouge">Union{A,B}</code>).
-In older versions of Julia, here’s what would happen: starting after <code class="highlighter-rouge">function1</code>, the compiler would say “I can’t tell which method of <code class="highlighter-rouge">function2</code> should be used.”
-So it wouldn’t specialize any of the code
-thereafter; instead, each time this block got executed, it would take the actual type of <code class="highlighter-rouge">ret1</code> and start poring through the method tables,  performing type-intersection trying to find an applicable compiled version of <code class="highlighter-rouge">function2</code>.
-The computations involved in type intersection, while very well optimized, are nevertheless quite demanding, and consequently the “method lookup” step was quite slow (especially for functions that had tens or hundreds of methods).</p>
+          <p>
+            假设<code class="highlighter-rouge">ret1</code>可以是两种类型之一，
+            <code class="highlighter-rouge">A</code>或<code class="highlighter-rouge">B</code>(即 <code class="highlighter-rouge">Union{A,B}</code>)。
+            在旧版本的朱莉娅中，会发生这样的情况：从 <code class="highlighter-rouge">function1</code>开始，编译器会说“我不知道应该使用<code class="highlighter-rouge">function2</code>的哪种方法。”。
+            因此，它不会专门化此后的任何代码；相反，每次执行该块时，它都会使用<code class="highlighter-rouge">ret1</code>的实际类型，并开始研究方法表，执行类型交集，试图找到<code class="highlighter-rouge">function2</code>的一个合适的编译版本。
+            类型交集所涉及的计算虽然经过了很好的优化，但仍然要求很高，因此“方法查找”步骤非常缓慢(特别是对于有几十个或数百个方法的函数)。
+          </p>
 
-<p>In Julia 0.7 and 1.0, the compiler does something quite different: it automatically (without any effort on your part) compiles the block above to something that schematically looks like this:</p>
+          <p>
+            在Julia0.7和1.0中，编译器做了一些完全不同的事情：它会自动(不费吹灰之力)将上面的块编译成如下所示的内容：
+          </p>
 
-<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">ret1</span> <span class="o">=</span> <span class="n">function1</span><span class="x">(</span><span class="n">args</span><span class="o">...</span><span class="x">)</span>    <span class="c"># ret1 isa Union{A,B}</span>
+          <div class="language-julia highlighter-rouge">
+            <div class="highlight">
+              <pre class="highlight"><code>    <span class="n">ret1</span> <span class="o">=</span> <span class="n">function1</span><span class="x">(</span><span class="n">args</span><span class="o">...</span><span class="x">)</span>    <span class="c"># ret1 isa Union{A,B}</span>
     <span class="k">if</span> <span class="n">ret1</span> <span class="nb">isa</span> <span class="n">A</span>
         <span class="n">ret2</span> <span class="o">=</span> <span class="n">function2_specialized_for_A</span><span class="x">(</span><span class="n">ret1</span><span class="x">,</span> <span class="o">...</span><span class="x">)</span>
         <span class="n">ret3</span> <span class="o">=</span> <span class="n">function3_specialized_for_A</span><span class="x">(</span><span class="n">ret1</span><span class="x">,</span> <span class="n">ret2</span><span class="x">,</span> <span class="o">...</span><span class="x">)</span>
@@ -71,45 +78,51 @@ The computations involved in type intersection, while very well optimized, are n
         <span class="n">ret3</span> <span class="o">=</span> <span class="n">function3_specialized_for_B</span><span class="x">(</span><span class="n">ret1</span><span class="x">,</span> <span class="n">ret2</span><span class="x">,</span> <span class="o">...</span><span class="x">)</span>
         <span class="o">...</span>
     <span class="k">end</span>
-</code></pre></div></div>
+</code></pre>
+            </div>
+          </div>
 
-<p>The difference here is huge.
-While Julia can’t know ahead of time the precise type of <code class="highlighter-rouge">ret1</code>, within the first block it definitely is of type <code class="highlighter-rouge">A</code> (because it checked), and within the second block it is definitely of type <code class="highlighter-rouge">B</code> (because that’s the only other option).
-Consequently, Julia can <strong>look up the appropriate compiled methods for <code class="highlighter-rouge">function2</code> and <code class="highlighter-rouge">function3</code> at compile time rather than run time</strong>, and that allows it to be blazingly fast when you actually run it.</p>
+          <p>
+            这里的差别很大。尽管Julia无法提前知道<code class="highlighter-rouge">ret1</code>的确切类型，但在第一个块中它肯定是<code class="highlighter-rouge">A</code>类型(因为它被选中了)，而在第二个块中它肯定是类型<code class="highlighter-rouge">B</code>(因为这是唯一的其他选项)。
+            因此，朱莉娅可以在编译时<strong>查找<code class="highlighter-rouge">function2</code>和<code class="highlighter-rouge">function3</code>的适当编译方法，而不是在运行时查找</strong>，这使它在实际运行时速度非常快。
+          </p>
 
-<p>Now, I hear some of you saying, “but there’s that branch in there, and branches are slow compared to many other CPU instructions.”
-True enough.
-But a single branch is almost inconsequential compared to method lookup; moreover, in cases where Union-splitting gets used, it’s often the case that you would have needed that branch anyway.
-In such cases, the cost is literally zero.</p>
+          <p>
+            现在，我听到你们中的一些人说，“但那里有那个分支，与许多其他CPU指令相比，分支很慢。”真的。但与方法查找相比，单个分支几乎无关紧要; 
+            此外，在使用Union-splitting的情况下，通常情况下您无论如何都需要该分支。在这种情况下，成本实际上为零。
+          </p>
 
-<p>To illustrate why, consider the operation <code class="highlighter-rouge">findfirst(isequal(7), A)</code> for an array <code class="highlighter-rouge">A</code>, which formerly always returned an integer indicating the first index of <code class="highlighter-rouge">A</code> at which it found the value 7.
-One problematic case arises: what if <code class="highlighter-rouge">A</code> doesn’t contain any 7s?
-Previously, we used to return 0, and the receiver had to check <code class="highlighter-rouge">if ret1 == 0</code> to determine whether execution needed to divert to error-handling code.
-Consequently, in properly-written code there was no getting away from needing that branch.
-Worse, if you forgot to check, and <code class="highlighter-rouge">function2</code> didn’t error when you passed it 0, then you would likely get a meaningless answer.
-That is far worse than getting an error, because it’s much harder to track down where wrong results come from.</p>
+          <p>
+            为了说明原因，请考虑数组A的操作<code class="highlighter-rouge">findfirst(isequal(7), A)</code>，该数组以前总是返回一个整数，表示它找到值7的第一个索引。
+            出现一个有问题的情况：如果<code class="highlighter-rouge">A</code>没有 不包含任何7s？ 
+            以前，我们曾经返回0，接收器必须检查 <code class="highlighter-rouge">if ret1 == 0</code>，以确定是否需要转移到错误处理代码。
+            因此，在正确编写的代码中，无需离开需要该分支。
+            更糟糕的是，如果你忘记检查，并且当你传递0时<code class="highlighter-rouge">function2</code>没有错误，那么你可能会得到一个毫无意义的答案。
+            这比得到错误要糟糕得多，因为追踪错误结果的位置要困难得多。
+          </p>
 
-<p>In Julia 0.7 and 1.0, Milan Bouchet-Valat rewrote all of our <code class="highlighter-rouge">find*</code> functions, of which one change (among many) was that <code class="highlighter-rouge">findfirst</code> now returns <code class="highlighter-rouge">nothing</code> when it fails to find the requested value.
-Unlike the old approach of returning 0, this return value is truly unambigous and robust against generalizations of indexing where 0 might be a perfectly valid array index.
-It also gives you more reliable code, because if you forget to check, really there’s not much you can do with <code class="highlighter-rouge">nothing</code> that doesn’t trigger a (very welcome) error.
-And thanks to Union-splitting, it doesn’t cause any kind of performance penalty whatsoever.</p>
+          <p>
+            在Julia 0.7和1.0中，Milan Bouchet-Valat重写了我们所有的 <code class="highlighter-rouge">find*</code> 函数，其中一个更改（在众多中）是<code class="highlighter-rouge">findfirst</code>现在在找不到（<code class="highlighter-rouge">nothing</code>）请求值时返回任何内容。
+            与返回0的旧方法不同，此返回值对于索引的泛化是真正无关紧要且鲁棒的，其中0可能是完全有效的数组索引。它还为您提供了更可靠的代码，因为如果您忘记检查，实际上没有什么可以做任何（<code class="highlighter-rouge">nothing</code>）不会触发（非常受欢迎）错误的事情。
+            并且由于Union-splitting，它不会导致任何性能损失。
+          </p>
 
-<p>So, while Union-splitting might initially sound like some kind of arcane feature of interest only to compiler gurus, the reality is that it changes how you should be designing your code, and it allows more understandable and robust software.
-That’s the kind of feature everyone can appreciate.</p>
+          <p>
+            因此，虽然Union-splitting最初听起来可能只是编译器大师感兴趣的某种神秘特性，但实际情况是，它改变了您应该如何设计代码，并且它允许更多的可理解和健壮的软件。这是每个人都能欣赏的特色。
+          </p>
 
+        </article>
 
-</div>
+      </div>
+    </div>
+  </div>
 
-
-
-</div>
-</div>
-</div>
-
-<br>
+  <br>
 
   <?php require_once('../_common/foot.html'); ?>
 
 
 
-</body></html>
+</body>
+
+</html>
