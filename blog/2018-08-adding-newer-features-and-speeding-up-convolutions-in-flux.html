@@ -1,208 +1,307 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 
 <?php 
-$title = "GSoC 2018: Adding Newer Features and Speeding up Convolutions in Flux";
-$keywords = "";
-$description = "";
+$title = "GSoC 2018：增加更新的功能并加快Flux中的卷积";
+$keywords = "GSoC 2018：增加更新的功能并加快Flux中的卷积";
+$description = "在整个夏天，我一直致力于提高Flux的计算机视觉功能。 我的具体工作是为Flux模型动物园添加更新的模型，实现一些新功能，并提高前一层的速度。 具体来说，我为Convolutions加速了18倍，BatchNorm加速了3倍。";
 $active_menu = "blog";
 require_once('../_common/head.html'); ?>
+
 <body>
-  
 
   <?php require_once('../_common/nav.html'); ?>
 
-<br><br>
+  <br><br>
 
-<div class="container">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-12 col-lg-8 offset-lg-2">
-      <h1></h1>
+    <div class="row">
+      <div class="col-12 col-lg-8 offset-lg-2">
+        
+        <div id="blogpost">
+          <h1>GSoC 2018：增加更新的功能并加快Flux中的卷积</h1>
 
-<div id="blogpost">
-  <h1>GSoC 2018: Adding Newer Features and Speeding up Convolutions in Flux</h1>
+          <p class="metadata">
+            <span class="timestamp">2018年8月13日</span> |  <span class="author"><a href="http://github.com/avik-pal/">Avik Pal</a></span>
+          </p>
 
-  <p class="metadata">
-    <span class="timestamp">13 Aug 2018</span>
-    
-     | 
-    <span class="author"><a href="http://github.com/avik-pal/">Avik Pal</a></span>
-    
-  </p>
+          <p>
+            在整个夏天，我一直致力于提高Flux的计算机视觉功能。我的具体工作是<strong>为Flux模型动物园添加更新的模型</strong>，<strong>实现一些新功能</strong>，<strong>并提高前一层的速度</strong>。
+             具体来说，我为<strong>Convolutions</strong>加速了<strong>18倍</strong>，<strong>BatchNorm</strong>加速了<strong>3倍</strong>。
+          </p>
 
-  <p>Over the summer I have been working at improving the Computer Vision capabilities of Flux. My specific line of work was to <strong>add newer models to the Flux model-zoo</strong>, <strong>implement some new features</strong> and also <strong>improve the speed of the previous layers</strong>. Specifically, I achieved a <strong>18-fold</strong> speed up for the <strong>Convolutions</strong> and around <strong>3-fold</strong> for <strong>BatchNorm</strong>.</p>
+          <h1 id="a-short-summary-of-my-work-during-gsoc-2018">我在GSoC 2018期间的工作简述</h1>
 
-<h1 id="a-short-summary-of-my-work-during-gsoc-2018">A Short Summary of my work during GSoC 2018</h1>
+          <p>我列出了我在这个项目中所做的所有必要的PR。其中一些是合并的，一些是未合并的，有些甚至是正在进行的工作。我们只讨论主要PR，省略错误修复和小补丁。所以他们在这里</p>
 
-<p>I am listing all the essential PRs I had made during this project. Some of them are merged, some are unmerged, and some are even a work in progress. We discuss only major PRs, leaving out bug fixes and small patches. So here they are</p>
+          <ol>
+            <li><a href="https://github.com/FluxML/Flux.jl">Flux.jl</a>
+              <ul>
+                <li><a href="https://github.com/FluxML/Flux.jl/pull/335">增加了对更有效的CUDNN绑定进行卷积的支持</a></li>
+                <li><a href="https://github.com/FluxML/Flux.jl/pull/294">实现CUDNN BatchNorm的包装器并将其与Flux挂钩</a></li>
+                <li><a href="https://github.com/FluxML/Flux.jl/pull/279">允许Flux支持CPU中的Depthwise Convolutions</a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/JuliaGPU/CuArrays.jl">CuArrays.jl</a>
+              <ul>
+                <li><a href="https://github.com/JuliaGPU/CuArrays.jl/pull/96">为在CUDNN Convolutions中分配工作空间提供支持</a></li>
+                <li><a href="https://github.com/JuliaGPU/CuArrays.jl/pull/100">添加CUDNN激活函数的包装器和一些有效卷积的函数</a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/FluxML/Metalhead.jl">Metalhead.jl</a>
+              <ul>
+                <li><a href="https://github.com/FluxML/Metalhead.jl/pull/10">修复新添加的模型的API</a></li>
+                <li><a href="https://github.com/FluxML/Metalhead.jl/pull/14">提高Metalhead模型的准确性</a></li>
+                <li><a href="https://github.com/FluxML/Metalhead.jl/pull/17">Metalhead添加新模型</a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/FluxML/NNlib.jl">NNlib.jl</a>
+              <ul>
+                <li><a href="https://github.com/FluxML/NNlib.jl/pull/42">添加Pure Julia Depthwise Convolutions及其渐变的支持
+                </a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/FluxML/model-zoo">model-zoo</a>
+              <ul>
+                <li><a href="https://github.com/FluxML/model-zoo/pull/33">将VGG模型添加到模型动物园</a></li>
+                <li><a href="https://github.com/FluxML/model-zoo/pull/44">展示使用残差网络作为场景分类器</a></li>
+                <li><a href="https://github.com/FluxML/model-zoo/pull/45">将像Inception Nets这样的流行Imagenet Winning模型放入模型动物园</a></li>
+              </ul>
+            </li>
+          </ol>
 
-<ol>
-  <li><a href="https://github.com/FluxML/Flux.jl">Flux.jl</a>
-    <ul>
-      <li><a href="https://github.com/FluxML/Flux.jl/pull/335">Adds support for a more efficient CUDNN Binding for Convolutions</a></li>
-      <li><a href="https://github.com/FluxML/Flux.jl/pull/294">Implements a wrapper for CUDNN BatchNorm and hooks it up with Flux</a></li>
-      <li><a href="https://github.com/FluxML/Flux.jl/pull/279">Allows Flux to support Depthwise Convolutions in CPU</a></li>
-    </ul>
-  </li>
-  <li><a href="https://github.com/JuliaGPU/CuArrays.jl">CuArrays.jl</a>
-    <ul>
-      <li><a href="https://github.com/JuliaGPU/CuArrays.jl/pull/96">Provide support for allocating workspace in CUDNN Convolutions</a></li>
-      <li><a href="https://github.com/JuliaGPU/CuArrays.jl/pull/100">Adds wrappers for CUDNN Activation Functions and some functions for efficient Convolutions</a></li>
-    </ul>
-  </li>
-  <li><a href="https://github.com/FluxML/Metalhead.jl">Metalhead.jl</a>
-    <ul>
-      <li><a href="https://github.com/FluxML/Metalhead.jl/pull/10">Fix the API of the newly added models</a></li>
-      <li><a href="https://github.com/FluxML/Metalhead.jl/pull/14">Improve the accuracy of the models in Metalhead</a></li>
-      <li><a href="https://github.com/FluxML/Metalhead.jl/pull/17">Add new models to Metalhead</a></li>
-    </ul>
-  </li>
-  <li><a href="https://github.com/FluxML/NNlib.jl">NNlib.jl</a>
-    <ul>
-      <li><a href="https://github.com/FluxML/NNlib.jl/pull/42">Add the support of Pure Julia Depthwise Convolutions and their Gradients</a></li>
-    </ul>
-  </li>
-  <li><a href="https://github.com/FluxML/model-zoo">model-zoo</a>
-    <ul>
-      <li><a href="https://github.com/FluxML/model-zoo/pull/33">Add the VGG models to model-zoo</a></li>
-      <li><a href="https://github.com/FluxML/model-zoo/pull/44">Showcase the use of Residual Networks as a Scene Classifier</a></li>
-      <li><a href="https://github.com/FluxML/model-zoo/pull/45">Put popular Imagenet Winning models like Inception Nets into model-zoo</a></li>
-    </ul>
-  </li>
-</ol>
+          <p>在该项目的过程中开发了以下新包。</p>
 
-<p>The following new packages were developed during the course of this project.</p>
+          <ol>
+            <li><a href="https://github.com/avik-pal/FastStyleTransfer.jl">FastStyleTransfer.jl</a></li>
+            <li><a href="https://github.com/avik-pal/MURA.jl">MURA.jl</a></li>
+            <li><a href="https://github.com/avik-pal/DeepLearningBenchmarks">DeepLearningBenchmarks</a></li>
+            <li><a href="https://github.com/avik-pal/CNNVisualize.jl">CNNVisualize.jl</a></li>
+            <li><a href="https://github.com/avik-pal/DeepDream.jl">DeepDream.jl</a></li>
+          </ol>
 
-<ol>
-  <li><a href="https://github.com/avik-pal/FastStyleTransfer.jl">FastStyleTransfer.jl</a></li>
-  <li><a href="https://github.com/avik-pal/MURA.jl">MURA.jl</a></li>
-  <li><a href="https://github.com/avik-pal/DeepLearningBenchmarks">DeepLearningBenchmarks</a></li>
-  <li><a href="https://github.com/avik-pal/CNNVisualize.jl">CNNVisualize.jl</a></li>
-  <li><a href="https://github.com/avik-pal/DeepDream.jl">DeepDream.jl</a></li>
-</ol>
+          <h1 id="a-walkthrough-of-the-pull-requests">PR漫游</h1>
 
-<h1 id="a-walkthrough-of-the-pull-requests">A Walkthrough of the Pull Requests</h1>
+          <p>让我们逐一检查这些变化。</p>
 
-<p>Let’s go through these changes one by one.</p>
+          <h3 id="add-a-wrapper-for-cudnn-batchnorm">为CUDNN BatchNorm添加包装器</h3>
 
-<h3 id="add-a-wrapper-for-cudnn-batchnorm">Add a wrapper for CUDNN BatchNorm</h3>
+          <p>
+            Flux目前缺少BatchNorm的专用GPU内核。
+            BatchNorm是神经网络最重要的层之一，它们通过处理内部均值协方差转换来加速训练。
+            到目前为止，我们使用Flux CPU代码进行BatchNorm（显然会很慢）。
+            所以这个PR的目的是通过包裹CUDNN Batchnorm层并将其与Flux AD集成来解决这个问题。
+            速度（和内存消耗）改进的一些亮点是1.860秒（1367个分配：50.92 KiB） - > 2.782毫秒（276个分配：10.38 KiB）。
+            我正在对224 * 224 * 100 * 10大小的阵列的BatchNorm（100）的总时间（前向+后向）进行基准测试。
+            这个PR尚未合并。在合并之前，需要将其更新为Julia 1.0（Flux master支持）。
+          </p>
 
-<p>Flux currently lacks a dedicated GPU Kernel for BatchNorm. BatchNorm is one of the most important layers of Neural Networks, and they speed up training by dealing with the internal mean covariance shift. Until now we were using the Flux CPU code for BatchNorm (which obviously will be slow). So this PR aims to solve this problem by wrapping the CUDNN Batchnorm Layer and integrating it with the Flux AD. Some highlights of the speed (and memory consumption) improvements are <code class="highlighter-rouge">1.860 s (1367 allocations: 50.92 KiB)</code> —> <code class="highlighter-rouge">2.782 ms (276 allocations: 10.38 KiB)</code>. I am benchmarking the <strong>total time (forward + backward)</strong> of <strong>BatchNorm(100)</strong> for a <strong>224 * 224 * 100 * 10</strong> sized array. This PR is yet to be merged. It needs to be updated to Julia 1.0 (which is supported by the Flux master) before merging.</p>
+          <h3 id="speed-up-the-cuda-convolutions-in-flux">加速Flux中的CUDA卷积</h3>
 
-<h3 id="speed-up-the-cuda-convolutions-in-flux">Speed up the CUDA Convolutions in Flux</h3>
+          <p>
+            我在Flux和Pytorch之间进行了基准测试（请继续阅读以了解更多信息）。
+            我们继续介绍神经网络，并在Flux Conv Layer中发现了一些问题。
+            主要的瓶颈在于我们正在进行的广播偏见增加。
+            因此，我们使用cudnnAddTensor作为7.1之前的CUDNN版本而不是使用广播偏差添加。
+            对于7.1以上的任何东西，我们转向使用cudnnConvolutionBiasActivationForward，激活始终是身份，最后调度其他激活。
+            使用此更新的速度的主要改进反映在DeepLearningBenchmarks repo中。
+            此外，此PR依赖于CuArrays PR，因此在CuArrays合并之前不能合并。
+            此外，它需要更新才能适应Julia 1.0。
+          </p>
 
-<p>I performed benchmarks between Flux and Pytorch (read on to know more about that). We went on profile the neural networks and found some issues in Flux Conv Layer. The major bottleneck was in the <code class="highlighter-rouge">broadcasted bias addition</code> that we were performing. So instead of using the <code class="highlighter-rouge">broadcasted bias addition</code> we use <code class="highlighter-rouge">cudnnAddTensor</code> for CUDNN Version prior to 7.1. For anything above 7.1, we shift to using <code class="highlighter-rouge">cudnnConvolutionBiasActivationForward</code> with the activation always being <code class="highlighter-rouge">identity</code> and finally dispatch over the other activations. The major improvements to speed using this update reflects in the <code class="highlighter-rouge">DeepLearningBenchmarks</code> repo. Also, this PR depends on a CuArrays PR, so it cannot be merged until the CuArrays has been merged. Also, it requires updates to be able to adapt to Julia 1.0.</p>
+          <h3 id="native-julia-depthwise-convolutions-in-flux-and-nnlib">Flux和NNlib中的天然Julia深度卷积</h3>
 
-<h3 id="native-julia-depthwise-convolutions-in-flux-and-nnlib">Native Julia Depthwise Convolutions in Flux and NNlib</h3>
+          <p>深度可分离卷积对于深度神经网络的移动应用至关重要。
+            MobileNets和Xception Net直接使用这种形式的卷积。
+            因此，深度学习库必须支持开箱即用的这种卷积。
+            首先，这涉及在NNlib中实现代码的CPU版本。
+            然后我们只需要将深度卷积连接到Flux AD中。
+            开箱即用支持还允许在Metalhead.jl和model-zoo中添加一些模型，以便轻松定义。
+            作为此主题未来工作的一部分，需要对此算法进行CUDNN绑定。
+          </p>
 
-<p>Depthwise Separable Convolutions are vital for Mobile Applications of Deep Neural Networks. MobileNets and Xception Net make direct use of this form of Convolution. So it is quite essential for a deep learning library to support such convolutions out of the box. Firstly this involved implementing the CPU version of the code in NNlib. Then we just need to the hook up the depthwise convolution into the Flux AD. Out of box support also allow some of the <em>to be</em> added models in <strong>Metalhead.jl</strong> and <strong>model-zoo</strong> to be easily defined. As a part of some future work on this topic, there needs to be a CUDNN binding for this algorithm.</p>
+          <h3 id="adding-support-for-more-cudnn-convolution-algorithms">添加对更多CUDNN卷积算法的支持</h3>
 
-<h3 id="adding-support-for-more-cudnn-convolution-algorithms">Adding support for more CUDNN Convolution Algorithms</h3>
+          <p>
+              有各种各样的卷积算法。
+              所有这些都使用输入张量的属性和滤波器张量，并具有为高效卷积而开发的非常专业的程序。
+              值得庆幸的是，CUDNN内置了这些专门开发的卷积例程。
+              因此，我们需要将其直接集成到CuArrays中，并公开其API以供其他软件包（如Flux）使用。
+              简单卷积操作的包装器是用CuArrays预先编写的。 所以我们只需要为工作空间分配创建包装器。
+              此PR添加必要的包装器并更改卷积函数定义以公开API以进行算法更改。
+              因此，对于最终用户，唯一的变化是更改关键字参数算法。
+          </p>
 
-<p>There are a variety of Convolution Algorithms around. All these use the properties of the <code class="highlighter-rouge">input tensor</code>, and the <code class="highlighter-rouge">filter tensor</code> and have very specialized routines developed for efficient convolutions. Thankfully CUDNN has these specially developed convolution routines built into it. So we need to integrate it directly into <code class="highlighter-rouge">CuArrays</code> and expose its API for use from other packages like <code class="highlighter-rouge">Flux</code>. The wrappers for a simple convolution operation was pre-written in CuArrays. So we only need to create the wrappers for <code class="highlighter-rouge">workspace allocation</code>. This PR adds the necessary wrappers and changes the convolution function definitions to expose the API for <code class="highlighter-rouge">algorithm change</code>. So for the end user, the only change would be to change the keyword argument <code class="highlighter-rouge">algo</code>.</p>
+          <h3 id="add-wrappers-for-more-convolution-and-activation-functions">添加包装器以获得更多卷积和激活功能</h3>
 
-<h3 id="add-wrappers-for-more-convolution-and-activation-functions">Add wrappers for more Convolution and Activation Functions</h3>
+          <p>
+            在对Flux Convolution Code进行基准测试时，我们找出了Convolution Bias的Backward Pass中出现的一些主要瓶颈。
+            因此，自然的选择是包装有效计算偏差梯度的CUDNN函数。
+            此外，我们能够包含一个函数，用于同时应用激活和添加偏差。
+            要使用此函数，cudnnConvolutionBiasActivationFunction我们需要包装Activation Forward和Backward Pass函数。
+            现在让我们看看我们通过此更新实现了哪种速度改进。
+          </p>
 
-<p>When benchmarking the Flux Convolution Code, we figured out some of the major bottlenecks that were coming out of the <code class="highlighter-rouge">Backward Pass for Convolution Bias</code>. Hence the natural choice was to wrap the CUDNN Function which efficiently calculates the Gradient for Bias. Also, we were able to wrap a function for applying <code class="highlighter-rouge">activation</code> and <code class="highlighter-rouge">adding bias</code> at the same time. To use this function, <code class="highlighter-rouge">cudnnConvolutionBiasActivationFunction</code> we needed to wrap the Activation Forward and Backward Pass functions. Now lets see what kind of speed improvements we achieved with this update.</p>
+          <p align="center">
+            <img src="./static/images/flux_internal_benchmarks.png" width="750"
+              height="500">
+          </p>
 
-<p align="center">
-    <img src="../../../images/blog/2018-08-13-GSoC-Flux-Computer-Vision/flux_internal_benchmarks.png" width="750" height="500">
-</p>
+          <h3 id="fixing-the-api-of-new-metalhead-models">修复新Metalhead模型的API</h3>
 
-<h3 id="fixing-the-api-of-new-metalhead-models">Fixing the API of new Metalhead models</h3>
+          <p>
+            最近，Metalhead添加了一些模型，如Google LeNet和RESNET(特别感谢Ayush Shridhar[@ayush1999]在ONNX.jl上的工作)。
+            但是，此代码是自动生成的，不一定是人类可读的。此外，我们唯一能做的-我们-这些模型-就是做预测。
+            我们不能用它来提取特征。因此，我们从模型动物园移植了一些模型，并手动加载重量到其中。
+            有关Metalhead的更详细用法，请访问<a href="https://avik-pal.github.io/blog/2018-07-01-Computer_Vision_using_Metalhead/">这里</a>。
+          </p>
 
-<p>Some models like GoogleNet and Resnet were added to Metalhead recently (special thanks to <strong>Ayush Shridhar [@ayush1999]</strong> for his work on <strong>ONNX.jl</strong>). However, this code is <strong>generated automatically</strong> and not necessarily human readable. Moreover, the only thing we could do we these models was to perform predictions. We can’t use it for something like feature extraction. So we ported some of my models from the model-zoo and manually load the weights into it. For more detailed usage of Metalhead go <a href="https://avik-pal.github.io/blog/2018-07-01-Computer_Vision_using_Metalhead/">here</a>.</p>
+          <h3 id="improve-the-accuracy-of-metalhead-models">提高Metalhead模型的准确性</h3>
 
-<h3 id="improve-the-accuracy-of-metalhead-models">Improve the accuracy of Metalhead models</h3>
+          <p>
+            现有加载模型到Flux的准确性非常糟糕。
+            我们已经尝试了各种预处理步骤，但大部分都没用。
+            经过一些试验和错误，我们能够找出主要原因。
+            我们使用权重进行交叉关联操作来代替循环操作。
+            目前，这是通过在加载之前手动翻转权重来解决的。
+            作为一个长期解决方案，我们公开参数以在NNlib中的卷积和互相关之间进行选择，并最终在Flux中进行选择。
+          </p>
 
-<p>The accuracy of the existing loaded models into Flux was pretty bad. We had already tried out a variety of preprocessing steps but mostly of no use. After some trial and errors, we were able to figure out the primary reason. We were using the weights for <strong>Cross Correlation Operation</strong> in place of a <strong>Convulution Operation</strong>. For now, this is fixed by manually flipping the weights before loading them. As a long-term solution, we are exposing the parameter to choose between <strong>convolution</strong> and <strong>cross-correlation</strong> in <code class="highlighter-rouge">NNlib</code> and eventually in <code class="highlighter-rouge">Flux</code>.</p>
+          <h3 id="add-bleeding-edge-computer-vision-models-in-metalhead">在Metalhead中添加前沿的计算机视觉模型</h3>
 
-<h3 id="add-bleeding-edge-computer-vision-models-in-metalhead">Add bleeding edge Computer Vision models in Metalhead</h3>
+          <p>
+            该项目的这一部分仍处于起步阶段。
+            这项工作的大部分工作已经完成（但主要分散在模型动物园）。
+            模型动物园的目标主要是允许用户在其代码中导入各种模型。
+            模型可能未经过培训（目前大多数模型都是这样）。
+            因此，主要动机是如果我们想要训练一个ResNeXt模型，我们就不必重新定义已经由某人完成的事情。
+            我们应该能够毫不费力地加载模型。
+          </p>
 
-<p>This part of the project is still in its infancy. Most of the work for this is done (but it is mainly scattered in model-zoo). The model zoo is  essentially is targeted to allow users to import all sorts of models in their code. The models might be untrained (which most of the models are currently are). So the primary motivation is that if we want to train a <code class="highlighter-rouge">ResNeXt</code> model, we don’t have to redefine something which has already been done by someone. We should be able to load the model without any effort.</p>
-
-<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">VGG19</span><span class="x">()</span> <span class="c"># This fetches an untrained VGG19 model</span>
+          <div class="language-julia highlighter-rouge">
+            <div class="highlight">
+              <pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">VGG19</span><span class="x">()</span> <span class="c"># This fetches an untrained VGG19 model</span>
 <span class="n">model_trained</span> <span class="o">=</span> <span class="n">trained</span><span class="x">(</span><span class="n">VGG19</span><span class="x">)</span> <span class="c"># Get the trained VGG19 model. This is the same as previously calling VGG19()</span>
 <span class="n">trained</span><span class="x">(</span><span class="n">VGG11</span><span class="x">)</span> <span class="c"># We get an error as we don't currently have a trained VGG11 model but VGG11() works fine</span>
-</code></pre></div></div>
+</code></pre>
+            </div>
+          </div>
 
-<h1 id="brief-description-of-the-packages">Brief Description of the Packages</h1>
+          <h1 id="brief-description-of-the-packages">包的简要说明</h1>
 
-<h3 id="deepdreamjl">DeepDream.jl</h3>
+          <h3 id="deepdreamjl">DeepDream.jl</h3>
 
-<p>This package provides a simple API to generate <a href="https://en.wikipedia.org/wiki/DeepDream">dreams</a> on the desired image. You need to provide the image, choose what type of dream you want and which model to use. This package relies on Flux and Metalhead for its trained models.</p>
+          <p>
+            该软件包提供了一个简单的API，可以在所需的图像上生成你的<a href="https://en.wikipedia.org/wiki/DeepDream">想法</a>。
+            您需要提供图像，选择您想要的想法类型以及要使用的模型。
+            该套装依靠Flux和Metalhead的训练模型。
+          </p>
 
-<p align="center">
-    <img src="../../../images/blog/2018-08-13-GSoC-Flux-Computer-Vision/deepdream.jpg" width="750" height="750">
-</p>
+          <p align="center">
+            <img src="./static/images/deepdream.jpg" width="750" height="750">
+          </p>
 
-<p>The above image was generated using <code class="highlighter-rouge">guided deepdream</code>.</p>
+          
+          <p>上面的图像是用 <code class="highlighter-rouge">深度之梦</code> 导航生成的。</p>
 
-<h3 id="cnnvisualizejl">CNNVisualize.jl</h3>
+          <h3 id="cnnvisualizejl">CNNVisualize.jl</h3>
 
-<p>Over the years several visualization algorithms have been developed to understand the functioning of neural networks. This package aims to implement such algorithms. Most of these, are going to work out of the box for Metalhead. This is currently a work in progress package, however, most of it is complete.</p>
+          <p>多年来，为了理解神经网络的功能，已经开发了几种可视化算法。这个软件包旨在实现这样的算法。其中的大部分，都将为Metalhead开箱即用。
+            这是目前正在进行的工作包，但是，它的大部分已经完成。</p>
 
-<p>Here’s a small demo of the package</p>
+          <p>下面是这个程序包的一个小演示</p>
 
-<script src="https://gist.github.com/avik-pal/7bea8a2f004268963dae431776215746.js"></script>
+          <script src="https://gist.github.com/avik-pal/7bea8a2f004268963dae431776215746.js"></script>
 
-<h3 id="faststyletransferjl">FastStyleTransfer.jl</h3>
+          <h3 id="faststyletransferjl">FastStyleTransfer.jl</h3>
 
-<p>This is the implementation of the paper <strong><a href="https://arxiv.org/pdf/1603.08155">Perceptual Losses for Real-Time Style Transfer and Super-Resolution</a></strong>. There are some obvious deviations from the paper. We used the best layer implementations that were currently available in Flux. As for the exact architecture it is still in developement. We provide three pre-trained models with this package. The API has been kept as simple as possible.</p>
+          <p>
+            这是<strong><a href="https://arxiv.org/pdf/1603.08155">实时样式转移和超分辨率的文章感知损失的实现</a></strong>。
+            这篇论文有一些明显的偏差。
+            我们使用了Flux目前可用的最佳层实现。
+            至于确切的架构，它仍处于发展阶段。
+            我们提供三种预先训练的模型。 API保持尽可能简单。
+          </p>
 
-<p>Below is a small example of style transfer on MonaLisa</p>
+          <p>以下是MonaLisa的一个小样式转移示例</p>
 
-<p align="center">
-    <img src="../../../images/blog/2018-08-13-GSoC-Flux-Computer-Vision/styletransfer.jpg" width="750" height="750">
-</p>
+          <p align="center">
+            <img src="./static/images/styletransfer.jpg" width="750" height="750">
+          </p>
 
-<h1 id="overview-of-the-work-done-in-gsoc-2018">Overview of the Work done in GSoC 2018</h1>
+          <h1 id="overview-of-the-work-done-in-gsoc-2018">GSoC 2018中完成的工作概述</h1>
 
-<p>As you can see from the above PR descriptions a lot of my work has been around benchmarking Flux models and making speed ups wherever possible. The initial part of my job was to add some new computer vision models to the Flux model-zoo. So we added models like <code class="highlighter-rouge">VGGNets</code>, <code class="highlighter-rouge">ResNets</code>, <code class="highlighter-rouge">DenseNets</code>, etc. to the Flux model-zoo. Also, we were able to port some of these models to the <code class="highlighter-rouge">Metalhead</code> package which is specially designed to address Computer Vision problems. After lots of experimentation and help from some people of the JuliaLang community, we were able to fix some of the accuracy problems we were encountering. Next, we went on to develop a package to perform FastStyleTransfer. It allows users to easily <code class="highlighter-rouge">train</code> their models and also <code class="highlighter-rouge">stylize</code> images with great ease. We was also able to train some of the densenet models and recreate the results of the MURA paper.</p>
+          <p>从上面的PR描述中可以看出，我的很多工作都是围绕Flux模型进行基准测试，并尽可能地加速。 我的工作的最初部分是为Flux模型动物园添加一些新的计算机视觉模型。 因此我们在Flux模型动物园中添加了VGGNets，ResNets，DenseNets等模型。 此外，我们能够将其中一些模型移植到Metalhead软件包中，该软件包专门用于解决计算机视觉问题。 经过JuliaLang社区的一些人的大量实验和帮助，我们能够解决我们遇到的一些准确性问题。 接下来，我们继续开发一个包来执行FastStyleTransfer。 它允许用户轻松地训练他们的模型，并且可以非常轻松地对图像进行风格化。 我们还能够训练一些密集网络模型并重新创建MURA论文的结果。</p>
 
-<p>Next up was to perform benchmarks for the current implementations in Flux and solve the bottlenecks wherever possible. So we wrote the benchmarking scripts for Flux and Pytorch and performed heads on comparison between them. For the first time, it turned out that Pytorch is much faster than Flux. However, we were able to find the reason for this slow speed. Turned out it was because of the lack of a specialized kernel for broadcasted addition and its backward pass. So the immediate solution was to <code class="highlighter-rouge">wrap some of the CUDNN Functions</code> and integrate them with Flux. Doing this actually brings down the time taken by those layers a lot. Currently, we are at-par with Pytorch wrt the time for each of the individual layers.</p>
+          <p>接下来是为Flux中的当前实现执行基准测试，并尽可能地解决瓶颈问题。 因此，我们为Flux和Pytorch编写了基准测试脚本，并对它们进行了比较。 事实证明，Pytorch第一次比Flux快得多。 但是，我们能够找到这种速度慢的原因。 事实证明，这是因为缺少一个专门用于广播加法的内核及其后向传球。 因此，直接的解决方案是包装一些CUDNN函数并将它们与Flux集成。 这样做实际上减少了这些层所花费的时间。 目前，我们与Pytorch的每个层都有时间。</p>
 
-<h1 id="experience-at-juliacon">Experience at JuliaCON</h1>
+          <h1 id="experience-at-juliacon">JuliaCON的经验</h1>
 
-<p>I was able to attend JuliaCon 2018 in London. Thanks to <strong>The Julia Project</strong> and <strong>NumFOCUS</strong> for funding this trip. I got the opportunity to present a <a href="http://home.iitk.ac.in/~avikpal/JuliaCon%20Poster.pdf">poster</a> on the work I had done during my GSoC. It was the first conference I was attending, so it was indeed quite a unique experience. I was able to share my work with other people and even got some valuable advice regarding it. Also, I discovered some new cool open-sourced projects that I would like to contribute to in the future. Finally, it’s always a pleasure to meet the people I have been interacting with in Slack.</p>
+          <p>
+            我能够在伦敦参加JuliaCon 2018。 感谢 <strong>Julia Project</strong>和 <strong> NumFOCUS </strong>为这次旅行提供资金。
+            我有机会就我在GSoC期间所做的工作发表了一张<a href="http://home.iitk.ac.in/~avikpal/JuliaCon%20Poster.pdf">海报</a>。
+            这是我参加的第一次会议，所以这确实是一次非常独特的体验。 我能够与其他人分享我的工作，甚至得到了一些有价值的建议。 此外，我发现了一些新的很酷的开源项目，我希望将来能够为此做出贡献。 最后，在Slack与我交往的人们见面总是很愉快的。
+          </p>
 
-<h1 id="why-use-julia-and-flux-for-deep-learning">Why use Julia and Flux for Deep Learning?</h1>
+          <h1 id="why-use-julia-and-flux-for-deep-learning">为什么要使用Julia和Flux进行深度学习？</h1>
 
-<p>There is a <a href="https://julialang.org/blog/2017/12/ml&pl">brilliant post</a> on how Julia can play its part as a Language for Machine Learning. That post summarizes the reasons from the viewpoint of people highly experienced in the field of Machine Learning. Here I shall be presenting the reasons from a layman’s point of view.</p>
+          <p>
+            关于 Julia 如何发挥其作为机器学习语言的作用，有一篇精彩的文章。
+            该<a href="https://julialang.org/blog/2017/12/ml&pl">帖子</a>从机器学习领域经验丰富的人的角度总结了原因。
+            在这里，我将从外行人的角度介绍原因。
+          </p>
 
-<p>Just think about implementing a standard Computer Vision model in one of the popular frameworks, like Pytorch or Tensorflow. It’s pretty simple, right? Just call the necessary layers using their API, and you’re done. Now imagine having to define something that is not present in their standard library. You need to first write your custom layer (both forward and backward passes, in case you are wondering) in C++ and if that was not hard enough you go about to define the GPU Kernel for that code in CUDA C. Now you integrate this layer (obviously in Python) with Pytorch or Tensorflow as per their particular API. And good luck debugging the SegFaults that you get.</p>
+          <p>只需考虑在一个流行的框架中实现标准的计算机视觉模型，如Pytorch或Tensorflow。 这很简单，对吧？ 只需使用他们的API调用必要的图层，您就完成了。 现在想象一下，必须定义标准库中不存在的东西。 您需要首先在C ++中编写自定义图层（前提和后向传递，以防万一），如果这不够难，您可以在CUDA C中为该代码定义GPU内核。现在，您可以集成此图层 （显然在Python中）根据Pytorch或Tensorflow的特定API。 祝你调试SegFaults好运。</p>
 
-<p>Now let’s see how you do that in Flux. You start by writing the layer in Julia and its CUDA GPU version using <strong>CUDAnative</strong> (cheers to <strong>Tim Besand [@maleadt]</strong> for his excellent work). As for integration into the Flux AD you simply use the <code class="highlighter-rouge">@grad</code> macro. It’s that simple!</p>
+          <p>现在让我们看看你如何在Flux中做到这一点。
+            首先，使用CUDAnative在Julia及其CUDA GPU版本中编写图层（为Tim Besand[@maleadt]的出色工作喝彩）。
+            至于集成到Flux AD中，您只需使用@grad宏。
+            就这么简单！</p>
 
-<p>One complaint you might be having is the unavailability of a lot of trained models. However, thanks to <strong>ONNX.jl</strong> and <strong>Keras.jl</strong> the problem is more or less resolved. Both of these are the work of <strong>Ayush Shridhar</strong>. Using these you can use models trained using Pytorch or CNTK, as long as they are stored in ONNX format. Also, now you have a wide range of Reinforcement Learning Models like <strong>AlphaGo.jl</strong> (by <strong>Tejan Karmali</strong>) written using Flux besides the Computer Vision models in <strong>model-zoo</strong> and <strong>Metalhead.jl</strong>.</p>
+          <p>您可能遇到的一个抱怨是许多训练有素的模型无法使用。
+            但是，由于ONNX.jl和Keras.jl，问题或多或少得到了解决。
+            这两个都是Ayush Shridhar的作品。
+            使用这些模型，您可以使用使用Pytorch或CNTK训练的模型，只要它们以ONNX格式存储即可。
+            此外，现在您还拥有各种强化学习模型，如AlphaGo.jl（Tejan Karmali），
+            除了模型动物园和Metalhead.jl中的计算机视觉模型外，还使用Flux编写。</p>
 
-<h1 id="future-works-for-the-project">Future Works for the Project</h1>
+          <h1 id="future-works-for-the-project">该项目的未来工作</h1>
 
-<p>This Project has deviated highly from what I had initially proposed but its mostly for good. The things implemented as a part of this project should surely help in the faster training of Deep Neural Networks in Flux and also help create more complicated models using Flux. That being said an exciting thing for the future of this Project would be to complete the addition of <strong>Object Classification models</strong> in Metalhead as proposed in this <a href="https://github.com/FluxML/Metalhead.jl/issues/16">issue</a>. Another interesting thing to have would be some <strong>Object Detection</strong> models built using Flux in one place. Also, we should continue to solve the current bottlenecks that are left to be addressed. We should keep adding the benchmarks to <a href="https://github.com/avik-pal/DeepLearningBenchmarks">DeepLearningBenchmarks</a> which is vital for the identification of bottlenecks.</p>
+          <p>
+            这个项目与我最初提出的建议有很大的偏差，但主要是好的。
+            作为该项目的一部分实现的东西肯定有助于更快地训练Flux中的深度神经网络，并且还有助于使用Flux创建更复杂的模型。
+            对于本项目的未来而言，令人兴奋的事情是在本期中提出的Metalhead中完成<strong>对象分类模型</strong>的添加的<a href="https://github.com/FluxML/Metalhead.jl/issues/16">问题</a>。
+            另一个有趣的事情是在一个地方使用Flux构建的一些<strong>物体检测</strong>模型。
+            此外，我们应该继续解决目前尚未解决的瓶颈问题。
+            我们应该继续为 <a href="https://github.com/avik-pal/DeepLearningBenchmarks">DeepLearningBenchmarks</a> 添加基准，这对于识别瓶颈至关重要。
+          </p>
 
-<h1 id="acknowledgements">Acknowledgements</h1>
+          <h1 id="acknowledgements">鸣谢</h1>
 
-<p>Firstly, I should thank <strong>Google</strong> for organizing Google Summer of Code which gave me this excellent opportunity to work with the Open Source Community. Also, I thank <strong>NumFOCUS</strong> and <strong>JuliaLang</strong> for selecting me to work on this project. Next, I would thank my mentors <strong>Viral Shah</strong> and <strong>Mine Innes</strong> for their constant support and guiding me through my project. Finally, let me thank the brilliant <strong>JuliaLang Community</strong> for clearing my doubts and being an excellent source for learning.</p>
+          <p>
+            首先，我要感谢Google组织Google Summer of Code，这给了我与开源社区合作的绝佳机会。
+            另外，我感谢NumFOCUS和JuliaLang选择我参与这个项目。
+            接下来，我要感谢我的导师Viral Shah和Mine Innes的不断支持，并指导我完成我的项目。
+            最后，让我感谢杰出的JuliaLang社区清除我的疑虑并成为学习的绝佳来源。
+          </p>
 
-<hr>
+          <hr>
 
-<p align="center">
-    <img src="../../../images/blog/2018-08-13-GSoC-Flux-Computer-Vision/gsoc_logo.png" width="700">
-</p>
+          <p align="center">
+            <img src="./static/images/gsoc_logo.png" width="700">
+          </p>
 
+        </div>
 
-</div>
+      </div>
+    </div>
+  </div>
 
-
-
-</div>
-</div>
-</div>
-
-<br>
+  <br>
 
   <?php require_once('../_common/foot.html'); ?>
 
+</body>
 
-
-</body></html>
+</html>
