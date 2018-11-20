@@ -1,172 +1,217 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 
 <?php 
-$title = "GSoC 2018: Reinforcement Learning and Generative models using Flux";
+$title = "GSOC 2018：使用Flux强化学习和生成模型";
 $keywords = "";
 $description = "";
 $active_menu = "blog";
 require_once('../_common/head.html'); ?>
+
 <body>
-  
+
 
   <?php require_once('../_common/nav.html'); ?>
 
-<br><br>
+  <br><br>
 
-<div class="container">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-12 col-lg-8 offset-lg-2">
-      <h1></h1>
+    <div class="row">
+      <div class="col-12 col-lg-8 offset-lg-2">
 
-<div id="blogpost">
-  <h1>GSoC 2018: Reinforcement Learning and Generative models using Flux</h1>
+        <article id="blogpost">
+          <h1>GSOC 2018：使用Flux强化学习和生成模型</h1>
 
-  <p class="metadata">
-    <span class="timestamp">06 Aug 2018</span>
-    
-     | 
-    <span class="author"><a href="https://github.com/tejank10">Tejan Karmali</a></span>
-    
-  </p>
+          <p class="metadata">
+            <span class="timestamp">2018年8月6日</span> | <span class="author"><a href="https://github.com/tejank10">Tejan Karmali</a></span>
 
-  <p>Hello, world!</p>
+          </p>
 
-<p>In this post I’m going to briefly summarize about the machine learning models I have worked on during this summer for GSoC. I worked towards enriching model zoo of <a href="https://github.com/FluxML">Flux.jl</a>, a machine learning library written in <a href="https://github.com/julia/julialang">Julia</a>. My project covered Reinforcement Learning and computer vision models.</p>
+          <p>Hello, world!</p>
 
-<p>The project is spread over these 4 codebases</p>
-<ol>
-  <li><a href="https://github.com/tejank10/Flux-baselines">Flux-baselines</a></li>
-  <li><a href="https://github.com/tejank10/AlphaGo.jl">AlphaGo.jl</a></li>
-  <li><a href="https://github.com/tejank10/model-zoo/tree/GAN">GAN models</a></li>
-  <li><a href="https://github.com/tejank10/model-zoo/tree/DNI">DNI model</a></li>
-</ol>
+          <p>
+            在这篇文章中，我将简要总结一下我在今年夏天为GSOC工作的机器学习模型。我致力于丰富用<a href="https://github.com/julia/julialang">Julia</a>编写的机器学习库<a
+              href="https://github.com/FluxML">Flux.jl</a>的模型动物园。我的项目包括强化学习和计算机视觉模型。
+          </p>
 
-<p>In the process, I could achieve most of my targets. I had to skip a few of them, and also made some unplanned models. Below, I discuss about these issues repository wise.</p>
+          <p>该项目分布在这4个代码库中。</p>
+          <ol>
+            <li><a href="https://github.com/tejank10/Flux-baselines">Flux-baselines</a></li>
+            <li><a href="https://github.com/tejank10/AlphaGo.jl">AlphaGo.jl</a></li>
+            <li><a href="https://github.com/tejank10/model-zoo/tree/GAN">GAN 模型</a></li>
+            <li><a href="https://github.com/tejank10/model-zoo/tree/DNI">DNI 模型</a></li>
+          </ol>
 
-<h3 id="1-flux-baselines">1. <a href="https://github.com/tejank10/Flux-baselines">Flux-baselines</a></h3>
-<p>Flux baselines is a collection of various Deep Reinforcement Learning models. This includes Deep Q Networks, Actor-Critic and DDPG.</p>
+          <p>在这个过程中，我可以实现我的大部分目标。我不得不跳过其中的几个，也做了一些没有计划的模型。下面，我将从资源库的角度来讨论这些问题。</p>
 
-<p>Basic structure of an RL probem is as folowd: There is an environment, let’s say game of pong is our environment. The environment may contain many ojects which interact with each other. In pong there are 3 objects: a ball and 2 paddles. The environment has a <em>state</em>. It is the current situation present in the environment in terms of various features of the objects in it. These features could be position, velocity, color etc. pertaining to the objects in the it. An actions needs to be chosed to play a move in the environment and obtain the next state. Actions will be chosen till the game ends. An RL model basically finds the actions that needs to be chosen.</p>
+          <h3 id="1-flux-baselines">1. <a href="https://github.com/tejank10/Flux-baselines">Flux-baselines</a></h3>
 
-<p>Over past few years, deep q learning has gained  lot of popularity. After the paper by Deep Mind about the Human level control sing reinforcement learning, there was no looking back. It combined the advanced in RL as well as deep learning to get an AI player which had superhuman performance. I made the basic <a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/dqn.jl">DQN</a> and <a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/double-dqn.jl">Double DQN</a> during the pre-GSoC phase, followed by <a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/duel-dqn.jl">Duel DQN</a> in the first week on GSoC.</p>
+          <p>
+            通量基线是各种深层强化学习模型的集合。这包括DeepQ网络公司、Actor-Critic公司和DDPG公司。
+          </p>
 
-<p>The idea used in the <a href="https://github.com/tejank10/Flux-baselines/blob/master/actor-critic/a2c.jl">A2C model</a> is different from the one in DQN. A2C falls in the class of “Actor-Critic” models. In AC models we have 2 neural networks, policy network and value network. policy network accepts the state of the game and returns a probability distribution over the action space. Value Nework takes the state and action chosen using policy network as input and determines how suitable is that action for that state.</p>
+          <p>
+            一个RL问题的基本结构如下：有一个环境，比方说乒乓球游戏就是我们的环境。环境可能包含许多相互作用的对象。在乒乓球中有三个物体：一个球和两个球拍。环境是有状态的。就环境中物体的各种特征而言，这就是环境中的现状。这些特征可以是位置、速度、颜色等。用于修饰或说明it中的对象。需要选择操作才能在环境中进行移动并获得下一个状态。直到比赛结束，我们都会选择行动。RL模型基本上可以找到需要选择的操作。
+          </p>
 
-<p><a href="https://github.com/tejank10/Flux-baselines/tree/master/ddpg">DDPG</a> is particularly useful when the actions which needs to be chosed are spread over a continuous space. one possible solution you may have in mind is that what if we discretize the action space? If we discretize it narrowly we end up with a large number of actions. If we discretize it sparsely then we lose important data.</p>
+          <p>
+            在过去的几年里，深度强化学习得到了很大的普及。
+            论文通过深思熟虑后对人的水平控制进行强化学习，没有回首。
+            它将RL中的先进技术与深度学习相结合，得到了一个具有超人性能的AI球员。
+            我在GSOC前阶段做了基本<a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/dqn.jl">DQN</a>和<a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/double-dqn.jl">双DQN</a>，然后在GSOC上做了<a
+              href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/duel-dqn.jl"></a>Duel DQN</a>。
+          </p>
 
-<p><img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/ddpg.png" alt="DDPG">
-<br>
-                                                 DDPG: Score vs Episodes</p>
+          <p>
+            <a href="https://github.com/tejank10/Flux-baselines/blob/master/actor-critic/a2c.jl">A2C模型</a>的思想不同于DQN模型。
+            A2C属于“演员-评论家”型。在AC模型中，我们有两种神经网络：策略网络和价值网络。
+            策略网络接受游戏状态并返回操作空间上的概率分布。
+            Value Nework将使用策略网络选择的状态和操作作为输入，并确定该操作是否适合该状态。
+          </p>
 
-<p>Some of these models have been deployed on Flux’s <a href="https://fluxml.ai/experiments">website</a>. <a href="https://fluxml.ai/experiments/cartPole/">CartPole example</a> has been trained on Deep Q Networks. An Atari-Pong example will also be added in a few days. It is trained on Duel-DQN. <a href="https://www.youtube.com/watch?v=L3pqMUDVrT0">Here</a> is a demo of Pong trained using Flux.</p>
-<h4 id="targets-achieved">Targets achieved</h4>
-<ol>
-  <li><a href="https://github.com/tejank10/Flux-baselines/blob/master/actor-critic/a2c.jl">Advantage Actor-Critic</a></li>
-  <li><a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/duel-dqn.jl">Duel DQN</a></li>
-</ol>
+          <p>
+            当需要选择的动作分布在一个连续的空间上时，<a href="https://github.com/tejank10/Flux-baselines/tree/master/ddpg">DDPG</a>特别有用。
+            您可能想到的一个可能的解决方案是，如果我们将操作空间离散化会怎样？
+            如果我们把它缩小到很小的范围，我们最终会有大量的行动。
+            如果我们分散它，那么我们就丢失了重要的数据。
+          </p>
 
-<h4 id="extra-mile">Extra mile</h4>
-<ol>
-  <li><a href="https://github.com/tejank10/Flux-baselines/tree/master/ddpg">DDPG</a></li>
-  <li><a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/prioritized-replay-dqn.jl">Prioritized DQN</a></li>
-</ol>
+          <p>
+            <img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/ddpg.png" alt="DDPG">
+            <br>
+            DDPG: Score 对比 Episodes
+          </p>
 
-<h4 id="future-work">Future Work</h4>
-<ol>
-  <li>Add more variety of models, especially the ones which have come up in the last 18 momnths.</li>
-  <li>Create an interface to easily train and test any environment from <a href="https://github.com.JuliaML/OpenAIGym.jl">OpenAIGym.jl</a>.</li>
-</ol>
+          <p>
+            其中一些模型已经部署在Flux的<a href="https://fluxml.ai/experiments">网站</a>上。
+            <a href="https://fluxml.ai/experiments/cartPole/">CartPole示例</a>已接受过深度Q网络方面的培训。几天后还将添加一个Atari-Pong示例。
+            它是在DUEL-DQN上训练的。<a href="https://www.youtube.com/watch?v=L3pqMUDVrT0">以下</a>是使用Flux进行培训的Pong演示。
+          </p>
+          
+          <h4 id="targets-achieved">已实现的目标</h4>
+          <ol>
+            <li><a href="https://github.com/tejank10/Flux-baselines/blob/master/actor-critic/a2c.jl">Advantage
+                Actor-Critic</a></li>
+            <li><a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/duel-dqn.jl">Duel DQN</a></li>
+          </ol>
 
-<h3 id="2-alphagojl">2. <a href="https://github.com/tejank10/AlphaGo.jl">AlphaGo.jl</a></h3>
-<p>This mini-project of the GSoC phase 2 was the most challenging part. AlphaGo Zero is a breakthrough AI by Google DeepMind. It is an AI to play Go, which is considered to be one of most challeenging games in the world, mainly  due to number of states it can lead to. AlphaGo Zero defeated the best Go player in the world. AlphaFo.jl’s objective is achieve the results produced by AlphaGo Zero algorithm over Go, and achieve similar results on any zero-sum game.</p>
+          <h4 id="extra-mile">拓展</h4>
+          <ol>
+            <li><a href="https://github.com/tejank10/Flux-baselines/tree/master/ddpg">DDPG</a></li>
+            <li><a href="https://github.com/tejank10/Flux-baselines/blob/master/dqn/prioritized-replay-dqn.jl">Prioritized
+                DQN</a></li>
+          </ol>
 
-<p>Now, we have a package to train AlphaGo zero model in Julia! And it is really simple to train the model. We just have to pass the training parameters, the environment on which we want to train the model and then play with it.
-For more info in the AlphaGo.jl refer to the <a href="https://tejank10.github.io/jekyll/update/2018/07/08/GSoC-Phase-2.html">blog post</a>.</p>
+          <h4 id="future-work">未来的工作</h4>
+          <ol>
+            <li>添加更多不同的模型，特别是在过去18个月中出现的模型。</li>
+            <li>创建一个接口，以便从 <a href="https://github.com.JuliaML/OpenAIGym.jl">OpenAIGym.jl</a> 轻松地训练和测试任何环境。</li>
+          </ol>
 
-<h4 id="targets-achieved-1">Targets achieved</h4>
-<ol>
-  <li>Game of Go</li>
-  <li>Monte Carlo tree search</li>
-</ol>
+          <h3 id="2-alphagojl">2. <a href="https://github.com/tejank10/AlphaGo.jl">AlphaGo.jl</a></h3>
+          <p>
+            GSOC第二阶段的这个小型项目是最具挑战性的部分。AlphaGoZero是GoogleDeepMind的一项突破性人工智能。围棋是一种人工智能，它被认为是世界上最大的围棋之一，这主要是因为它可以导致的状态的数量。AlphaGoZero击败了世界上最好的围棋选手。alphaFo.jl的目标是在GO上实现AlphaGo Zero算法产生的结果，并在任何零和游戏中获得类似的结果。
+          </p>
 
-<h4 id="targets-couldnt-achieve">Targets couldn’t achieve</h4>
-<ol>
-  <li>Couldn’t train the model well</li>
-</ol>
+          <p>
+            现在，我们有一个在Julia训练AlphaGo零模型的包！训练模型非常简单。
+            我们只需要传递训练参数，我们想要训练模型的环境，然后再使用它。
+            有关AlphaGo.jl的更多信息，请参阅<a href="https://tejank10.github.io/jekyll/update/2018/07/08/GSoC-Phase-2.html">博客文章</a>。
+          </p>
 
-<h4 id="extra-mile-1">Extra Mile</h4>
-<ol>
-  <li>Game of Gomoku to test the algorithm (since it is easier game)</li>
-</ol>
+          <h4 id="targets-achieved-1">已实现的目标</h4>
+          <ol>
+            <li>围棋</li>
+            <li>蒙特卡罗树搜索</li>
+          </ol>
 
-<h4 id="future-work-1">Future work</h4>
-<ol>
-  <li>Train a model on any game</li>
-  <li>AlphaChess</li>
-</ol>
+          <h4 id="targets-couldnt-achieve">目标无法实现</h4>
+          <ol>
+            <li>不能很好的训练模型</li>
+          </ol>
 
-<h3 id="3-generative-adversarial-networks">3. <a href="https://github.com/tejank10/model-zoo/tree/GAN/vision/mnist">Generative Adversarial Networks</a></h3>
-<p>GANs have been extremely suceessful in learning the underlying representation of any data. By doing so, it can reproduce some fake data. For example the GANs trained on MNIST Human handwritten digits dataset can produce some fake images which look very similar to those in the MNIST. These neural nets have great application in image editing. It can remove certain features from the image, add some new ones; depending on the dataset. The GANs contain of two networks: generator and discriminator. Generator’s objective os to generate fake images awhereas the discriminator’s objective is to differentiate between the fake images generted by thhe generator and the real images in the  dataset.</p>
+          <h4 id="extra-mile-1">拓展</h4>
+          <ol>
+            <li>Gomoku游戏的算法测试(因为游戏比较简单)</li>
+          </ol>
 
-<p><img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/lsgan.gif" alt="LSGAN" width="170px">
-<img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/dcgan.gif" alt="DCGAN" width="170px">
-<img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/giphy.gif" alt="WGAN" width="170px">
-<img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/made.gif" alt="MADE" width="170px">
-<br>
-               LSGAN                               DCGAN                               WGAN                               MADE</p>
+          <h4 id="future-work-1">今后的工作</h4>
+          <ol>
+            <li>在任何游戏中训练模型</li>
+            <li>AlphaChess</li>
+          </ol>
 
-<h4 id="targets-acheived">Targets acheived</h4>
-<ol>
-  <li><a href="https://github.com/FluxML/Flux.jl/pull/311"><code class="highlighter-rouge">ConvTranspose</code> layer</a></li>
-  <li><a href="https://github.com/tejank10/model-zoo/blob/GAN/vision/mnist/dcgan.jl">DCGAN</a></li>
-</ol>
+          <h3 id="3-generative-adversarial-networks">3. <a href="https://github.com/tejank10/model-zoo/tree/GAN/vision/mnist">生成性对抗网络</a></h3>
+          <p>
+            GANS在学习任何数据的底层表示方面都非常成功。通过这样做，它可以复制一些假数据。例如，在MNIST人类手写数字数据集上训练的GANS可以生成一些与MNIST中的图像非常相似的假图像。这些神经网络在图像编辑中有着广泛的应用。它可以从图像中删除某些功能，添加一些新功能；具体取决于数据集。GANS包括两个网络：产生器和鉴别器。生成器的目标是生成伪图像，而鉴别器的目标是将生成器生成的假图像与数据集中的真实图像区分开来。
+          </p>
 
-<h4 id="extra-mile-2">Extra Mile</h4>
-<ol>
-  <li><a href="https://github.com/tejank10/model-zoo/blob/GAN/vision/mnist/lsgan.jl">LSGAN</a></li>
-  <li><a href="https://github.com/tejank10/model-zoo/blob/GAN/vision/mnist/wgan.jl">WGAN</a></li>
-</ol>
+          <p><img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/lsgan.gif" alt="LSGAN"
+              width="170px">
+            <img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/dcgan.gif" alt="DCGAN"
+              width="170px">
+            <img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/giphy.gif" alt="WGAN"
+              width="170px">
+            <img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/made.gif" alt="MADE"
+              width="170px">
+            <br>
+                           LSGAN                               DCGAN                               WGAN                               MADE</p>
 
-<h4 id="future-work-2">Future work</h4>
-<ol>
-  <li>More models of GAN like infoGAN, BEGAN, CycleGAN</li>
-  <li>Some cool animations with GANs</li>
-  <li>Data pipeline for training and producing images with dataset, and GAN type as input.</li>
-</ol>
+          <h4 id="targets-acheived">已实现的目标</h4>
+          <ol>
+            <li><a href="https://github.com/FluxML/Flux.jl/pull/311"><code class="highlighter-rouge">ConvTranspose</code>
+                layer</a></li>
+            <li><a href="https://github.com/tejank10/model-zoo/blob/GAN/vision/mnist/dcgan.jl">DCGAN</a></li>
+          </ol>
 
-<h3 id="4-decoupled-neural-interface">4. <a href="https://github.com/tejank10/model-zoo/tree/DNI/vision/mnist/dni.jl">Decoupled Neural Interface</a></h3>
+          <h4 id="extra-mile-2">拓展</h4>
+          <ol>
+            <li><a href="https://github.com/tejank10/model-zoo/blob/GAN/vision/mnist/lsgan.jl">LSGAN</a></li>
+            <li><a href="https://github.com/tejank10/model-zoo/blob/GAN/vision/mnist/wgan.jl">WGAN</a></li>
+          </ol>
 
-<p>Decoupled Neural Interface is a new technique to train the momdel. It does not use the backpropagation from the output layer right upto the input layer. Instead it uses a trick to “estimate” the gradient. It has a small linear layer neural network to predict the gradients, instead of running the backpropagation rather than finding the true gradients. The advantage of such a model is that it can be parallelized. This technique results in slight dip in the accuracy, but we have improved speed if we have parallelized the layers in the network.</p>
+          <h4 id="future-work-2">今后的工作</h4>
+          <ol>
+            <li>更多的GAN模型，如infoGan，CycleGan开始</li>
+            <li>Gans中的一些很酷的动画</li>
+            <li>用于训练和生成带有数据集的图像的数据管道，并以GAN类型作为输入。</li>
+          </ol>
 
-<p><img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/loss.png" alt="loss" width="362.5px">
-<img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/acc.png" alt="loss" width="362.5px"></p>
+          <h3 id="4-decoupled-neural-interface">4. <a href="https://github.com/tejank10/model-zoo/tree/DNI/vision/mnist/dni.jl">解耦神经接口
+          </a></h3>
 
-<h4 id="targets-achieved-2">Targets achieved:</h4>
-<ul>
-  <li><a href="https://github.com/tejank10/model-zoo/tree/DNI/vision/mnist/dni.jl">DNI model</a></li>
-</ul>
+          <p>去耦神经网络接口是一种新的训练模型的技术。它不使用从输出层一直到输入层的反向传播。相反，它使用了一个技巧来“估计”梯度。它有一个小的线性层神经网络来预测梯度，而不是运行反向传播而不是找到真正的梯度。这种模型的优点是可以并行化。这种技术在精度上略有下降，但如果将网络中的各层进行并行化，则可以提高速度。</p>
 
-<h2 id="conclusion">Conclusion</h2>
+          <p><img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/loss.png" alt="loss"
+              width="362.5px">
+            <img src="https://raw.githubusercontent.com/tejank10/tejank10.github.io/master/assets/acc.png" alt="loss"
+              width="362.5px"></p>
 
-<p>During the past three months, I learn a lot about Reinforcement Learning and AlphaGo in particular. I experienced training an RL model for days, finally saw it working well! I encountered the issues faced in training the models and learnt to overcome them. All in all, as an aspiring ML engineer these three months have been the most productive months. I am glad that I could meet most of my objectives. I have worked on some extra models to make up for the objectives I could not meet.</p>
+          <h4 id="targets-achieved-2">已实现的目标：</h4>
+          <ul>
+            <li><a href="https://github.com/tejank10/model-zoo/tree/DNI/vision/mnist/dni.jl">DNI 模型</a></li>
+          </ul>
 
-<h2 id="acknowledgements">Acknowledgements</h2>
-<p>I really would like to thank my mentor <a href="https://github.com/MikeInnes">Mike Innes</a> for guiding me throughtout the project, and <a href="https://github.om/jekbradbury">James Bradbury</a> for his valuable inputs for improving the code in the Reinforcement Learning models. I also would like to thank <a href="https://github.com/roboneet">Neethu Mariya Joy</a> for deploying the trained models on th web. And last but not the least, The Julia Project and NumFOCUS: for sponsoring me and all other JSoC students for JuliaCon’18 London.</p>
+          <h2 id="conclusion">收尾</h2>
 
+          <p>在过去的三个月里，我学到了很多关于强化学习，尤其是AlphaGo的知识。我训练了几天的RL模型，终于看到它工作得很好！我遇到了培训模型所面临的问题，并学会了如何克服它们。总而言之，作为一名有抱负的ML工程师，这三个月是最有成效的几个月。我很高兴我能达到我的大部分目标。我已经做了一些额外的模型，以弥补我不能达到的目标。</p>
 
-</div>
+          <h2 id="acknowledgements">鸣谢</h2>
+          <p>
+            我真的要感谢我的导师<a href="https://github.com/MikeInnes">Mike Innes</a>指导我完成了整个项目，还感谢<a href="https://github.om/jekbradbury">James Bradbury</a>为改进强化学习模型中的代码提供了宝贵的投入。我还要感谢<a href="https://github.com/roboneet">Neethu Mariya Joy</a>在网络上部署了经过培训的模型。最后但并非最不重要的是，朱莉娅项目和NumFOCUS：赞助我和所有其他JSOC学生朱莉亚康‘18伦敦。
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
 
-
-
-</div>
-</div>
-</div>
-
-<br>
+  <br>
 
   <?php require_once('../_common/foot.html'); ?>
 
 
 
-</body></html>
+</body>
+
+</html>
